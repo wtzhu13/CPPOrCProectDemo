@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <fstream>
+#include <set>
 #include "competitor.h"
 using namespace std;
 
@@ -17,8 +18,9 @@ public:
     vector<int> vPreContest;
     vector<int> vIntermediaryHeat;
     vector<int> vVictory;
-    map<int, Competitor> m_Speaker;
+    map<int, Competitor> mSpeaker;
     int competitorNum;
+    int turn;
     speechManager(/* args */);
     void showMenu();
     void exitSys();
@@ -26,6 +28,7 @@ public:
     void test();
     void initSys();
     void createCompetitor();
+    void drawLosts();
     ~speechManager();
 };
 

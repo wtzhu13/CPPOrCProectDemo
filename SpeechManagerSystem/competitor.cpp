@@ -1,9 +1,8 @@
 #include "competitor.h"
 
-Competitor::Competitor(string name, int id)
+Competitor::Competitor(string name)
 {
     this->name = name;
-    this->id = id;
 }
 
 Competitor::~Competitor()

@@ -7,8 +7,7 @@ speechManager::speechManager(/* args */)
 }
 
 speechManager::~speechManager()
-{
-}
+{}
 
 /*******************************************
 * 函数名：void speechManager::initSys()
@@ -18,10 +17,12 @@ speechManager::~speechManager()
 ********************************************/
 void speechManager::initSys()
 {
+	// 清空容器
 	this->vPreContest.clear();  
 	this->vIntermediaryHeat.clear();
 	this->vVictory.clear();
-	this->m_Speaker.clear();
+	this->mSpeaker.clear();
+	this->turn = 1;
 }
 
 /*******************************************
@@ -86,13 +87,17 @@ void speechManager::getCompetitorNum()
 ********************************************/
 void speechManager::test()
 {
-	this->getCompetitorNum();
-	cout << this->competitorNum << endl;
+	this->drawLosts();
+	for (vector<int>::iterator it = vPreContest.begin(); it != vPreContest.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
 }
 
 /*******************************************
 * 函数名：void speechManager::createCompetitor()
-* 功能：创建员工
+* 功能：创建员工,并将员工姓名和ID存入map中
 * 参数：
 * 返回值：
 ********************************************/
@@ -100,7 +105,7 @@ void speechManager::createCompetitor()
 {
 	ifstream ifs;
 	string name;
-	int index = 0;
+	int index = 10001;
 	ifs.open(COMPETITOELISTPATH, ios::in);
 	if (!ifs.is_open())
 	{
@@ -108,8 +113,32 @@ void speechManager::createCompetitor()
 	}
 	while (ifs >> name)
 	{
+		// 将参赛人员与ID匹配放入map中
+		this->mSpeaker.insert(pair<int, Competitor>(index, Competitor(name)));
 		index++;
 	}
 	this->competitorNum = index;
 	ifs.close();
+}
+
+/*******************************************
+* 函数名：void speechManager::drawLosts()
+* 功能：通过抽签决定参赛顺序
+* 参数：
+* 返回值：
+********************************************/
+void speechManager::drawLosts()
+{
+	cout << "第 << " << this->turn << " >> 轮比赛选手正在抽签"<<endl;
+	cout << "---------------------" << endl;
+	cout << "抽签后演讲顺序如下：" << endl;
+	if (turn == 1)
+	{
+		random_shuffle(vPreContest.begin(), vPreContest.end());
+		for (vector<int>::iterator it = vPreContest.begin(); it != vPreContest.end(); it++)
+		{
+			cout << *it << " ";
+		}
+		cout << endl;	
+	}	
 }

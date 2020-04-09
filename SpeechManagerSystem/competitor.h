@@ -7,9 +7,8 @@ class Competitor
 {
 public:
     string name;
-    int id;
     int score;
-    Competitor(string name, int id);
+    Competitor(string name);
     ~Competitor();
 };
 
