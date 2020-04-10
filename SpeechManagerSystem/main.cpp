@@ -5,9 +5,8 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     speechManager sm;
-    sm.test();      // 测试功能debug用
-    sm.showMenu();
-    
+    // sm.test();      // 测试功能debug用
+    sm.showMenu();  
     cout << "请输入选择" << endl;
     int choice;
     cin >> choice;
@@ -19,7 +18,8 @@ int main(int argc, char const *argv[])
                 sm.exitSys();
                 break;
             case 1:
-                /* code */
+                sm.startCompetition();
+                return 0;
                 break;
             case 2:
                 /* code */

@@ -85,15 +85,16 @@ void speechManager::getCompetitorNum()
 * 参数：
 * 返回值：
 ********************************************/
-void speechManager::test()
-{
-	this->drawLosts();
-	for (vector<int>::iterator it = vPreContest.begin(); it != vPreContest.end(); it++)
-	{
-		cout << *it << " ";
-	}
-	cout << endl;
-}
+// void speechManager::test()
+// {
+// 	this->createCompetitor();
+// 	for (vector<int>::iterator it = vPreContest.begin(); it != vPreContest.end(); it++)
+// 	{
+// 		cout << *it << " ";
+// 	}
+// 	cout << endl;	
+// 	this->drawLosts();
+// }
 
 /*******************************************
 * 函数名：void speechManager::createCompetitor()
@@ -115,6 +116,7 @@ void speechManager::createCompetitor()
 	{
 		// 将参赛人员与ID匹配放入map中
 		this->mSpeaker.insert(pair<int, Competitor>(index, Competitor(name)));
+		this->vPreContest.push_back(index);
 		index++;
 	}
 	this->competitorNum = index;
@@ -124,8 +126,8 @@ void speechManager::createCompetitor()
 /*******************************************
 * 函数名：void speechManager::drawLosts()
 * 功能：通过抽签决定参赛顺序
-* 参数：
-* 返回值：
+* 参数：无
+* 返回值：无
 ********************************************/
 void speechManager::drawLosts()
 {
@@ -134,11 +136,46 @@ void speechManager::drawLosts()
 	cout << "抽签后演讲顺序如下：" << endl;
 	if (turn == 1)
 	{
-		random_shuffle(vPreContest.begin(), vPreContest.end());
+		random_shuffle(vPreContest.begin(), vPreContest.end()); // 将参赛人员顺序打乱
+		int count = 1;
+		bool flag = true;
+		cout << "第一组人员：";
 		for (vector<int>::iterator it = vPreContest.begin(); it != vPreContest.end(); it++)
 		{
-			cout << *it << " ";
+			if (count <= 6)
+			{	
+				cout << *it << " ";
+			}
+			else
+			{
+				if (flag)
+				{
+					cout << "\n第二组人员：";
+					flag = false;
+				}				
+				cout << *it << " ";
+			}
+			count++;		
 		}
 		cout << endl;	
+		return;
 	}	
+}
+
+/*******************************************
+* 函数名：void speechManager::startCompetition()
+* 功能：开始比赛
+* 参数：无
+* 返回值：无
+********************************************/
+void speechManager::startCompetition()
+{
+	this->createCompetitor();
+	cout << "参赛人员：";
+	for (vector<int>::iterator it = vPreContest.begin(); it != vPreContest.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;	  
+	this->drawLosts();
 }

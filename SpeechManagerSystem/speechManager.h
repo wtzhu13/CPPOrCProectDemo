@@ -5,6 +5,7 @@
 #include <map>
 #include <fstream>
 #include <set>
+#include <algorithm>
 #include "competitor.h"
 using namespace std;
 
@@ -29,6 +30,7 @@ public:
     void initSys();
     void createCompetitor();
     void drawLosts();
+    void startCompetition();
     ~speechManager();
 };
 
