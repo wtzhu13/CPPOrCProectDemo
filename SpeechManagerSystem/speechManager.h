@@ -26,6 +26,9 @@ public:
     map<int, Competitor> mSpeaker;
     int competitorNum;
     int turn;
+    bool fileIsEmpty;
+    map<int, vector<string> > m_Record;
+
     speechManager(/* args */);
     void showMenu();
     void exitSys();
@@ -43,6 +46,7 @@ public:
     void promoted(vector<int> & contestant, vector<int> & vV);
     void writeCSV();
     void loadRecord();
+    void clearFile();
     ~speechManager();
 };
 

@@ -374,3 +374,94 @@ void speechManager::writeCSV()
     
 	cout << "记录已经保存" << endl;
 }
+
+/*******************************************
+* 函数名：
+* 功能：
+* 参数：
+* 返回值：
+********************************************/
+void speechManager::loadRecord()
+{
+	ifstream ifs("speech.csv", ios::in); //输入流对象 读取文件
+
+	if (!ifs.is_open())
+	{
+		this->fileIsEmpty = true;
+		cout << "文件不存在！" << endl;
+		ifs.close();
+		return;
+	}
+
+	char ch;
+	ifs >> ch;
+	if (ifs.eof())
+	{
+		cout << "文件为空!" << endl;
+		this->fileIsEmpty = true;
+		ifs.close();
+		return;
+	}
+
+	//文件不为空
+	this->fileIsEmpty = false;
+
+	ifs.putback(ch); //读取的单个字符放回去
+
+	string data;
+	int index = 0;
+	vector<string>v;
+	while (ifs >> data)
+	{
+		// cout << data << endl;
+		int pos = -1;
+		int start = 0;
+
+		while (true)
+		{
+			pos = data.find(",", start); //从0开始查找 ','
+			if (pos == -1)
+			{
+				break; //找不到break返回
+			}
+			string tmp = data.substr(start, pos - start); //找到了,进行分割 参数1 起始位置，参数2 截取长度
+			// cout << tmp << endl;
+			// cout << endl;
+			v.push_back(tmp);
+			start = pos + 1;
+		}
+
+		this->m_Record.insert(make_pair(index, v));
+		index++;
+	}	
+	ifs.close();
+	if (fileIsEmpty)
+	{
+		cout << "当前没有数据" << endl;
+		return;
+	}
+	
+	for (map<int, vector<string> >::iterator i = m_Record.begin(); i != m_Record.end(); i++)
+	{
+		cout << "id\tname score\tid name socre\tid\tname score" << endl;
+		for (vector<string>::iterator i = v.begin(); i != v.end(); i++)
+		{
+			cout << *i << "  ";
+		}
+	}
+	cout << endl;
+}
+
+/*******************************************
+* 函数名：
+* 功能：清空文件内容
+* 参数：
+* 返回值：
+********************************************/
+void speechManager::clearFile()
+{
+	ofstream ofs;
+	ofs.open("speech.csv", ios::out);
+	ofs.close();
+	cout << "数据已清空" << endl;
+}
