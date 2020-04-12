@@ -1,20 +1,13 @@
-#pragma once
-#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <fstream>
-#include <set>
-#include <algorithm>
-#include <deque>
-#include <iomanip>
-#include "competitor.h"
-using namespace std;
+# 演讲比赛管理系统第一版
 
-#define COMPETITOELISTPATH "competitorList.txt"
-
-class speechManager
-{
+### 功能介绍
+通过数字选择所要执行的功能：
+    0.退出管理程序 
+    1.开始比赛
+    2.读取往届比赛记录  
+    3.删除本地记录
+    
+### 主要API
 private:
     vector<int> vPreContest;    // 参赛人员名单
     vector<int> vFirstGroup;    // 第一轮第一组人员名单
@@ -48,16 +41,4 @@ public:
     void loadRecord();
     void clearFile();
     ~speechManager();
-};
-
-// 创建仿函数用于排序
-class MyCompare
-{
-public:
-    bool operator()(const Competitor &p1, const Competitor &p2)
-    {
-        return p1.score > p2.score;
-    }
-};
-
 

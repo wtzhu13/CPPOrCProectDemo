@@ -6,17 +6,10 @@ some projects for you to practice your programming skills which used C or CPP, y
 ### workerManagerSystem
 一个简易的员工信息管理平台，通过C++实现。
 
+主要通过C++面向对象的方式实现功能，可以有助于理解类和对象的概念
 
-------------- 第1比赛结果：------------- 
-编号10007       姓名KangKang    得分76
-编号10011       姓名Jasen       得分85
-编号10008       姓名Bob         得分76
-编号10005       姓名Fred        得分74
-编号10001       姓名Tom         得分79
-编号10009       姓名Hellen      得分73
-编号10010       姓名Jone        得分85
-编号10012       姓名Marry       得分82
-编号10002       姓名Jack        得分90
-编号10004       姓名Jerry       得分83
-编号10003       姓名Lily        得分73
-编号10006       姓名Mike        得分79
+### SpeechManagerSystem
+
+一个简单的演讲比赛系统，主要通过C++面向对象和STL实现，用于联系STL相关知识
+
+主要功能开始比赛，可以生成参赛人员并给员工打分并显示晋级名单，最终获胜名单保存在本地CSV表格中，可以查看本地记录，并可清楚以往记录。
