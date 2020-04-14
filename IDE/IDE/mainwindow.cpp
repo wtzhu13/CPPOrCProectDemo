@@ -1,0 +1,124 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QDebug>
+#include <QTextCodec>   // 字符编码转换头文件
+#include <QFileDialog>  // 文件对话框
+#include <string.h>
+
+#define cout qDebug()
+
+// 定义一个枚举类型
+enum MyCode
+{
+    utf_8, GBK
+};
+enum MyCode flag;
+
+// 字符编码指针
+QTextCodec *codec;
+
+// 构造函数，主要做初始化工作
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+
+    // 初始化，默认为UTF_8
+    flag = utf_8;
+    // 字符编码指针初始化
+    codec = QTextCodec::codecForName("GBK");
+
+}
+
+// 析构函数，对象结束前（窗口关闭）自动调用析构函数，做清理工作
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+// UTF_8转换函数
+void MainWindow::on_actionUTF_8_triggered()
+{
+    // 按下转换按键，为UTF_8
+    flag = utf_8;
+    ui->label->setText("当前以UTF-8显示，切换编码后请重新打开文件");
+}
+
+// GBK转换函数
+void MainWindow::on_actionGBK_triggered()
+{
+    // 按下按键转换为GBK
+    flag = GBK;
+    ui->label->setText("当前以GBK显示，切换编码后请重新打开文件");
+}
+
+// 打开文件的处理函数
+void MainWindow::on_actionOPEN_triggered()
+{
+    // 打开文件，获取文件路径
+    QString path = QFileDialog::getOpenFileName();
+    cout << "path=" << path;
+    if(path.isEmpty())
+    {
+        // 没有选择路径直接退出
+        return;
+    }
+    // 字符编码转换
+    char *fileName = codec->fromUnicode(path).data();
+    // 打开文件并读取内容,并放进编辑区
+    FILE *fp = fopen(fileName, "rb");
+    if(fp == NULL)
+    {
+        cout << "on_actionOPEN_triggered() fopen err";
+        return;
+    }
+
+    char buf[1024*5];
+    QString str = "";
+
+    // 读取文件
+    while (1) {
+        memset(buf, 0, sizeof (buf));
+        fgets(buf, sizeof (buf), fp);
+
+        // 根据标志位改变字符编码方式
+        if(flag == utf_8)
+        {
+            str += buf;
+        }
+        else if(flag == GBK)
+        {
+            str += codec->toUnicode(buf);
+        }
+        if(feof(fp))
+        {
+            break;
+        }
+    }
+
+    // 将文件内容放进编辑区
+    ui->textEdit->setText(str);
+
+    // 关闭文件
+    fclose(fp);
+    fp = NULL;
+
+}
+
+// 另存为处理
+void MainWindow::on_actionSAVE_AS_triggered()
+{
+    // 选择另存为的路径，为UTF8编码,返回类型为QString类型
+//    QString path = QFileDialog::getSaveFileName();
+//    if(path.isEmpty())
+//    {
+//        //
+//        return;
+//    }
+    // 需要将路径转换为GBK编码，并且为char * 类型
+
+    // 打开文件，获取编辑区内容（QString需要转为char *类型），将编辑区内容写入指定路径
+
+    // 关闭文件
+}

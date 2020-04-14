@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>980</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>IED</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/images/a9f7716a1a25d7a4b2e5dc73bae4d860.png</normaloff>:/images/a9f7716a1a25d7a4b2e5dc73bae4d860.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>581</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>当前以UTF-8显示</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>981</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="lineWrapMode">
+     <enum>QTextEdit::NoWrap</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>980</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menufile">
+    <property name="title">
+     <string>FILE</string>
+    </property>
+    <addaction name="actionNEW"/>
+    <addaction name="actionOPEN"/>
+    <addaction name="actionSAVE"/>
+    <addaction name="actionSAVE_AS"/>
+    <addaction name="actionQUITE"/>
+   </widget>
+   <widget class="QMenu" name="menuedit">
+    <property name="title">
+     <string>EDIT</string>
+    </property>
+    <addaction name="actionundo"/>
+    <addaction name="actioncopy"/>
+    <addaction name="actionpaste"/>
+    <addaction name="actioncut"/>
+   </widget>
+   <widget class="QMenu" name="menubuild">
+    <property name="title">
+     <string>BUILD</string>
+    </property>
+    <addaction name="actioncomplie"/>
+   </widget>
+   <widget class="QMenu" name="menucode">
+    <property name="title">
+     <string>CODE</string>
+    </property>
+    <addaction name="actionUTF_8"/>
+    <addaction name="actionGBK"/>
+   </widget>
+   <addaction name="menufile"/>
+   <addaction name="menuedit"/>
+   <addaction name="menubuild"/>
+   <addaction name="menucode"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNEW">
+   <property name="text">
+    <string>NEW</string>
+   </property>
+  </action>
+  <action name="actionOPEN">
+   <property name="text">
+    <string>OPEN</string>
+   </property>
+  </action>
+  <action name="actionSAVE">
+   <property name="text">
+    <string>SAVE</string>
+   </property>
+  </action>
+  <action name="actionSAVE_AS">
+   <property name="text">
+    <string>SAVE AS</string>
+   </property>
+  </action>
+  <action name="actionQUITE">
+   <property name="text">
+    <string>QUITE</string>
+   </property>
+  </action>
+  <action name="actionundo">
+   <property name="text">
+    <string>undo</string>
+   </property>
+  </action>
+  <action name="actioncopy">
+   <property name="text">
+    <string>copy</string>
+   </property>
+  </action>
+  <action name="actionpaste">
+   <property name="text">
+    <string>paste</string>
+   </property>
+  </action>
+  <action name="actioncut">
+   <property name="text">
+    <string>cut</string>
+   </property>
+  </action>
+  <action name="actionUTF_8">
+   <property name="text">
+    <string>UTF-8</string>
+   </property>
+  </action>
+  <action name="actionGBK">
+   <property name="text">
+    <string>GBK</string>
+   </property>
+  </action>
+  <action name="actioncomplie">
+   <property name="text">
+    <string>complie</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
