@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <stdio.h>
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,18 @@ private slots:
 
     void on_actionSAVE_AS_triggered();
     
+    void on_actionQUITE_triggered();
+
+    void on_actionNEW_triggered();
+
+    void on_actionSAVE_triggered();
+
+    void on_actioncopy_triggered();
+
+    void on_actionpaste_triggered();
+
+    void on_actioncut_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

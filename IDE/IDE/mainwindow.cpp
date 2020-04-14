@@ -110,15 +110,66 @@ void MainWindow::on_actionOPEN_triggered()
 void MainWindow::on_actionSAVE_AS_triggered()
 {
     // 选择另存为的路径，为UTF8编码,返回类型为QString类型
-//    QString path = QFileDialog::getSaveFileName();
-//    if(path.isEmpty())
-//    {
-//        //
-//        return;
-//    }
+    QString path = QFileDialog::getSaveFileName();
+    if(path.isEmpty())
+    {
+        // 如果没有选择路径直接退出
+        return;
+    }
     // 需要将路径转换为GBK编码，并且为char * 类型
+    const char *fileName = codec->fromUnicode(path).data();
+    cout << fileName;
 
-    // 打开文件，获取编辑区内容（QString需要转为char *类型），将编辑区内容写入指定路径
+    // 打开文件并读取内容,并放进编辑区
+    FILE *fp = fopen(fileName, "wb");
+    if(fp == NULL)
+    {
+        cout << "on_actionSAVE_AS_triggered open file err";
+    }
+
+    // 获取编辑区的内容，返回QString
+    QString str = ui->textEdit->toPlainText();
+
+    // 将QString转换为char * 类型
+    const char *buf = str.toStdString().data();
+    fputs(buf, fp);
 
     // 关闭文件
+    fclose(fp);
+}
+
+// 退出系统
+void MainWindow::on_actionQUITE_triggered()
+{
+    exit(0);
+}
+
+// 创建新文件
+void MainWindow::on_actionNEW_triggered()
+{
+
+}
+
+// 保存文件
+void MainWindow::on_actionSAVE_triggered()
+{
+
+}
+
+// 复制
+void MainWindow::on_actioncopy_triggered()
+{
+
+}
+
+// 粘贴
+void MainWindow::on_actionpaste_triggered()
+{
+
+}
+
+// 剪切
+void MainWindow::on_actioncut_triggered()
+{
+
 }
