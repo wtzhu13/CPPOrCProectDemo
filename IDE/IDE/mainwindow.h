@@ -36,6 +36,10 @@ private slots:
 
     void on_actioncut_triggered();
 
+    void on_actionundo_triggered();
+
+    void on_actioncomplie_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

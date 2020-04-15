@@ -7,6 +7,8 @@
 
 #define cout qDebug()
 
+QString path;   // 定义一个全局变量存放地址
+
 // 定义一个枚举类型
 enum MyCode
 {
@@ -57,7 +59,7 @@ void MainWindow::on_actionGBK_triggered()
 void MainWindow::on_actionOPEN_triggered()
 {
     // 打开文件，获取文件路径
-    QString path = QFileDialog::getOpenFileName();
+    path = QFileDialog::getOpenFileName();
     cout << "path=" << path;
     if(path.isEmpty())
     {
@@ -110,7 +112,7 @@ void MainWindow::on_actionOPEN_triggered()
 void MainWindow::on_actionSAVE_AS_triggered()
 {
     // 选择另存为的路径，为UTF8编码,返回类型为QString类型
-    QString path = QFileDialog::getSaveFileName();
+    path = QFileDialog::getSaveFileName();
     if(path.isEmpty())
     {
         // 如果没有选择路径直接退出
@@ -147,29 +149,86 @@ void MainWindow::on_actionQUITE_triggered()
 // 创建新文件
 void MainWindow::on_actionNEW_triggered()
 {
-
+    // 新建文件首先输入地址
+    path = QFileDialog::getSaveFileName();
+    ui->textEdit->setText("");
 }
 
 // 保存文件
 void MainWindow::on_actionSAVE_triggered()
 {
+    // 如果刚打开编辑器开始写东西，此时path为空就需要通过getSaveFileName获取一个路径
+    if(path.isEmpty())
+    {
+        path = QFileDialog::getSaveFileName();
+    }
+    const char *fileName = codec->fromUnicode(path).data();
+    // 打开文件并读取内容,并放进编辑区
+    FILE *fp = fopen(fileName, "wb");
+    if(fp == NULL)
+    {
+        cout << "on_actionSAVE_triggered open file err";
+    }
 
+    // 获取编辑区的内容，返回QString
+    QString str = ui->textEdit->toPlainText();
+
+    // 将QString转换为char * 类型
+    const char *buf = str.toStdString().data();
+    fputs(buf, fp);
+
+    // 关闭文件
+    fclose(fp);
 }
 
 // 复制
 void MainWindow::on_actioncopy_triggered()
 {
-
+    ui->textEdit->copy();
 }
 
 // 粘贴
 void MainWindow::on_actionpaste_triggered()
 {
-
+    ui->textEdit->paste();
 }
 
 // 剪切
 void MainWindow::on_actioncut_triggered()
 {
+    ui->textEdit->cut();
+}
 
+// 撤销
+void MainWindow::on_actionundo_triggered()
+{
+    ui->textEdit->undo();
+}
+
+// 编译代码并运行
+void MainWindow::on_actioncomplie_triggered()
+{
+    if(path.isEmpty())
+    {
+        // 如果没有路径则需要保存一下才能运行
+        this->on_actionSAVE_triggered();
+    }
+
+    QString demo = path;
+
+    // 生成的目标文件名
+    demo.replace(".c", "");
+    cout << demo;
+    QString cmd = QString("gcc %1 - o %2").arg(path).arg(demo);
+    int ret = system(codec->fromUnicode(cmd).data());
+    cout << ret;
+    if(ret != 0)
+    {
+        cmd = QString("cmd /k gcc %1 -o %2").arg(path).arg(demo);
+        system(codec->fromUnicode(cmd).data());
+        return;
+    }
+    QString target = QString("cmd /k %1").arg(demo);
+    cout << target;
+    system(codec->fromUnicode(target).data());
 }
