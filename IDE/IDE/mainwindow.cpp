@@ -218,17 +218,20 @@ void MainWindow::on_actioncomplie_triggered()
 
     // 生成的目标文件名
     demo.replace(".c", "");
-    cout << demo;
-    QString cmd = QString("gcc %1 - o %2").arg(path).arg(demo);
+
+    // gcc filename.c -o filename
+    QString cmd = QString("gcc %1 -o %2").arg(path).arg(demo);
+
+    // system执行成返回0
     int ret = system(codec->fromUnicode(cmd).data());
-    cout << ret;
     if(ret != 0)
     {
+        // cmd /k 停留在终端
         cmd = QString("cmd /k gcc %1 -o %2").arg(path).arg(demo);
         system(codec->fromUnicode(cmd).data());
         return;
     }
     QString target = QString("cmd /k %1").arg(demo);
-    cout << target;
     system(codec->fromUnicode(target).data());
+    system("cmd");
 }
