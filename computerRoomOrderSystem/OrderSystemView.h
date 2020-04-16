@@ -12,6 +12,9 @@ public:
     void showMainMenu();
     void loginUserName();
     void loginPassWord();
+    void showAdminMenu(string name);
+    void showAddUsrMenu();
+    void showUsrInfoMenu();
     ~OrderSystemView();
 };
 

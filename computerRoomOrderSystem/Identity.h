@@ -7,6 +7,7 @@ class Identity
 private:
     /* data */
 public:
+ string name;
     Identity(){};
     virtual ~Identity(){};
 };
