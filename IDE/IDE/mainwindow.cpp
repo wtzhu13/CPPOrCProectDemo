@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+//    setWindowFlags(Qt::FramelessWindowHint);
     // 初始化，默认为UTF_8
     flag = utf_8;
     // 字符编码指针初始化
