@@ -125,26 +125,4 @@ void Administrator::showUsrInfo()
     }   
 }
 
-/*******************************************
-* 函数名：int Administrator::judgeFileEmpty(string path)
-* 功能：判断文件是否为空
-* 参数：文件地址
-* 返回值：-1读文件失败，1文件为空，0文件不为空
-********************************************/
-int Administrator::judgeFileEmpty(string path)
-{
-    ifstream ifs;
-    ifs.open(path, ios::in);	
-	if (!ifs.is_open())
-	{
-		cout << "文件打开失败" << endl;
-		return -1;
-	}
-	char ch;
-	ifs >> ch;
-	if (ifs.eof())	// 如果数组为空，则workerAray = NULL并退出
-	{
-		return 1;
-	}
-    return 0;
-}
+

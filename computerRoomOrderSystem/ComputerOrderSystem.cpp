@@ -20,10 +20,10 @@ void ComputerOrderSystem::startSys()
         switch (choice)
         {
             case 1:
-                /* code */
+                this->stuSys();
                 break;
             case 2:
-                /* code */
+                this->teacherSys();
                 break;
             case 3:
                 this->adminSys();
@@ -103,15 +103,16 @@ void ComputerOrderSystem::adminSys()
 * 参数：string name, int id, string path
 * 返回值：bool,用户名和密码都正确返回true，否则返回false
 ********************************************/
-bool ComputerOrderSystem::judgeExist(string name, int id, string path)
+bool ComputerOrderSystem::judgeExist(string name, int pwd, string path)
 {
     ifstream ifs;
     ifs.open(path, ios::in);
     string fName;
-    int fId;
-    while (ifs >> fName && ifs >> fId)
+    int fPwd, fId;
+    while (ifs >> fId && ifs >> fName && ifs >> fPwd)
     {
-        if (fName == name && fId == id)
+        cout << fId << fName << fPwd << endl;
+        if (fName == name && fPwd == pwd)
         {
             ifs.close();
             // 如果文件中存在该用户名和密码则返回true，并退出遍历
@@ -121,4 +122,52 @@ bool ComputerOrderSystem::judgeExist(string name, int id, string path)
     ifs.close();
     // 文件遍历完了还没有匹配的则返回false
     return false;   
+}
+
+/*******************************************
+* 函数名：
+* 功能：
+* 参数：
+* 返回值：
+********************************************/
+void ComputerOrderSystem::stuSys()
+{
+    osv.loginUserName();
+    string name;
+    cin >> name;
+    osv.loginPassWord();
+    int pwd;
+    cin >> pwd;
+    if (this->judgeExist(name, pwd, STUFILE))
+    {
+        cout << "登录成功！" << endl;
+    }
+    else
+    {
+        cout << "用户名或密码不正确" << endl;
+    }  
+}
+
+/*******************************************
+* 函数名：
+* 功能：
+* 参数：
+* 返回值：
+********************************************/
+void ComputerOrderSystem::teacherSys()
+{
+    osv.loginUserName();
+    string name;
+    cin >> name;
+    osv.loginPassWord();
+    int pwd;
+    cin >> pwd;
+    if (this->judgeExist(name, pwd, TEACHERFILE))
+    {
+        cout << "登录成功！" << endl;
+    }
+    else
+    {
+        cout << "用户名或密码不正确" << endl;
+    }  
 }
