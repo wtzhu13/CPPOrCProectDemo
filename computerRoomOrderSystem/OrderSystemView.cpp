@@ -39,9 +39,9 @@ void OrderSystemView::showMainMenu()
 * 参数：
 * 返回值：
 ********************************************/
-void OrderSystemView::loginUserName()
+void OrderSystemView::loginUserId()
 {
-	cout << "请输入用户名：" << endl;
+	cout << "请输入用户名ID：" << endl;
 }
 
 /*******************************************

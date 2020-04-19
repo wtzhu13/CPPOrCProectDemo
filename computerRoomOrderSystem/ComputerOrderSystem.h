@@ -23,7 +23,7 @@ public:
     void adminSys();    // 管理员系统
     void stuSys();      // 学生子系统
     void teacherSys();  // 老师子系统
-    bool judgeExist(string name, int pwd, string path);  // 判断用户名和密码是否存在
+    bool judgeExist(string * name, int id, int pwd, string path);  // 判断用户名和密码是否存在
     int judgeFileEmpty(string path);
     ~ComputerOrderSystem();
 };

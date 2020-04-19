@@ -3,8 +3,6 @@
 #include "OrderSystemView.h"
 using namespace std;
 
-
-
 class Student
 {
 private:

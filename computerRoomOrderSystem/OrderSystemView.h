@@ -10,7 +10,7 @@ private:
 public:
     OrderSystemView(/* args */);
     void showMainMenu();
-    void loginUserName();
+    void loginUserId();
     void loginPassWord();
     void showAdminMenu(string name);
     void showAddUsrMenu();

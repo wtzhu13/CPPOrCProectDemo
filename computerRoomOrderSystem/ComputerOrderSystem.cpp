@@ -57,13 +57,14 @@ void ComputerOrderSystem::exitSys()
 ********************************************/
 void ComputerOrderSystem::adminSys()
 {
-    osv.loginUserName();
-    string name;
-    cin >> name;
+    osv.loginUserId();
+    int id;
+    cin >> id;
     osv.loginPassWord();
     int pwd;
     cin >> pwd;
-    if (this->judgeExist(name, pwd, "adminConfig.cfg"))
+    string name ;
+    if (this->judgeExist(&name, id, pwd, "adminConfig.cfg"))
     {
         Administrator ad(name);
         while (1)
@@ -103,7 +104,7 @@ void ComputerOrderSystem::adminSys()
 * 参数：string name, int id, string path
 * 返回值：bool,用户名和密码都正确返回true，否则返回false
 ********************************************/
-bool ComputerOrderSystem::judgeExist(string name, int pwd, string path)
+bool ComputerOrderSystem::judgeExist(string * name, int id, int pwd, string path)
 {
     ifstream ifs;
     ifs.open(path, ios::in);
@@ -111,9 +112,10 @@ bool ComputerOrderSystem::judgeExist(string name, int pwd, string path)
     int fPwd, fId;
     while (ifs >> fId && ifs >> fName && ifs >> fPwd)
     {
-        cout << fId << fName << fPwd << endl;
-        if (fName == name && fPwd == pwd)
+        // cout << fId << fName << fPwd << endl;
+        if (fId == id && fPwd == pwd)
         {
+            * name = fName;
             ifs.close();
             // 如果文件中存在该用户名和密码则返回true，并退出遍历
             return true;
@@ -132,13 +134,14 @@ bool ComputerOrderSystem::judgeExist(string name, int pwd, string path)
 ********************************************/
 void ComputerOrderSystem::stuSys()
 {
-    osv.loginUserName();
-    string name;
-    cin >> name;
+    osv.loginUserId();
+    int id;
+    cin >> id;
     osv.loginPassWord();
     int pwd;
     cin >> pwd;
-    if (this->judgeExist(name, pwd, STUFILE))
+    string name;
+    if (this->judgeExist(&name, id, pwd, STUFILE))
     {
         cout << "登录成功！" << endl;
     }
@@ -156,13 +159,14 @@ void ComputerOrderSystem::stuSys()
 ********************************************/
 void ComputerOrderSystem::teacherSys()
 {
-    osv.loginUserName();
-    string name;
-    cin >> name;
+    osv.loginUserId();
+    int id;
+    cin >> id;
     osv.loginPassWord();
     int pwd;
     cin >> pwd;
-    if (this->judgeExist(name, pwd, TEACHERFILE))
+    string name;
+    if (this->judgeExist(& name, id, pwd, TEACHERFILE))
     {
         cout << "登录成功！" << endl;
     }
