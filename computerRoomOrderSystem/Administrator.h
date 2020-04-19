@@ -5,11 +5,6 @@
 #include "OrderSystemView.h"
 using namespace std;
 
-#define STUFILE "stuInfo.txt"
-#define TEACHERFILE "teacherInfo.txt"
-#define ROMMINFOFILE "roomInfo.txt"
-#define ORDERFILE "order.txt"
-
 class Administrator : Identity
 {
 private:

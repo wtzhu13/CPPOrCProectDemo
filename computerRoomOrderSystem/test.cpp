@@ -2,15 +2,15 @@
 #include <string>
 using namespace std;
 
-void func(string * name)
+void func(string & name)
 {
-    * name = "tom";
+    name = "tom";
 }
 
 int main()
 {
-    string name = "1";
-    func(&name);
+    string name;
+    func(name);
     cout << name << endl;
     return 0;
 }

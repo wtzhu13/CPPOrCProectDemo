@@ -64,7 +64,7 @@ void ComputerOrderSystem::adminSys()
     int pwd;
     cin >> pwd;
     string name ;
-    if (this->judgeExist(&name, id, pwd, "adminConfig.cfg"))
+    if (this->judgeExist(&name, id, pwd, ADMININFOFILE))
     {
         Administrator ad(name);
         while (1)
@@ -86,7 +86,6 @@ void ComputerOrderSystem::adminSys()
                 break;
             case 0: // 注销并退回到主菜单
                 return;
-                break;
             default:
                 break;
             }
@@ -127,8 +126,8 @@ bool ComputerOrderSystem::judgeExist(string * name, int id, int pwd, string path
 }
 
 /*******************************************
-* 函数名：
-* 功能：
+* 函数名：void ComputerOrderSystem::stuSys()
+* 功能：学生子系统
 * 参数：
 * 返回值：
 ********************************************/
@@ -143,7 +142,33 @@ void ComputerOrderSystem::stuSys()
     string name;
     if (this->judgeExist(&name, id, pwd, STUFILE))
     {
-        cout << "登录成功！" << endl;
+        cout << "欢迎学生" << name << "登录" << endl;
+        Student stu(name, id);
+        while (1)
+        {
+            osv.showStuMenu();
+            int choice;
+            cin >> choice;
+            switch (choice)
+            {
+            case 1:
+                stu.appointment();
+                break;
+            case 2:
+                stu.checkAppointment();
+                break;
+            case 3:
+                stu.checkAllAppointment();
+                break; 
+            case 4:
+                stu.cancelOrder();
+                break;
+            case 0:
+                return;       
+            default:
+                break;
+            }
+        }        
     }
     else
     {
@@ -152,8 +177,8 @@ void ComputerOrderSystem::stuSys()
 }
 
 /*******************************************
-* 函数名：
-* 功能：
+* 函数名：void ComputerOrderSystem::teacherSys()
+* 功能：教师子系统
 * 参数：
 * 返回值：
 ********************************************/
@@ -168,7 +193,7 @@ void ComputerOrderSystem::teacherSys()
     string name;
     if (this->judgeExist(& name, id, pwd, TEACHERFILE))
     {
-        cout << "登录成功！" << endl;
+        cout << "欢迎老师" << name << "登录" << endl;
     }
     else
     {

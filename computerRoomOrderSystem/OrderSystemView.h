@@ -3,10 +3,16 @@
 #include <string>
 using namespace std;
 
+#define TEACHERFILE "teacherInfo.txt"
+#define STUFILE "stuInfo.txt"
+#define ROMMINFOFILE "roomInfo.txt"
+#define ADMININFOFILE "adminConfig.cfg"
+#define ORDERFILE "order.log"
+
 class OrderSystemView
 {
 private:
-    /* data */
+    
 public:
     OrderSystemView(/* args */);
     void showMainMenu();
@@ -15,6 +21,10 @@ public:
     void showAdminMenu(string name);
     void showAddUsrMenu();
     void showUsrInfoMenu();
+    void showStuMenu();
+    void showAppointmenDate();
+    void showAppointmenTime();
+    void showAppointmenRoom();
     ~OrderSystemView();
 };
 
