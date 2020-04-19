@@ -78,10 +78,10 @@ void ComputerOrderSystem::adminSys()
                 ad.showUsrInfo();
                 break;
             case 3:
-                /* code */
+                ad.showRoomInfo();
                 break;
             case 4:
-                /* code */
+                ad.clearOrder();
                 break;
             case 0: // 注销并退回到主菜单
                 return;

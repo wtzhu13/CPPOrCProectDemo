@@ -56,7 +56,50 @@ void Administrator::addUser()
     int pwd;
     cout << "请输入密码：" << endl;
     cin >> pwd;
-    this->saveUsrInfo(path, id, name, pwd);
+
+    // 判断账户是否存在
+    switch (this->judgeAccountExit(path, id))
+    {
+    case -1:
+        cout << "文件打开失败！" << endl;
+        break;
+    case 0:
+        this->saveUsrInfo(path, id, name, pwd);
+        break;
+    case 1:
+        cout << "该账户已存在" << endl;
+        break;
+    default:
+        break;
+    }   
+}
+
+/*******************************************
+* 函数名：int Administrator::judgeAccountExit(string path, int id)
+* 功能：添加账户是判断用户是否存在
+* 参数：
+* 返回值：-1:文件打开失败 0:账户不存在 1:账户已存在
+********************************************/
+int Administrator::judgeAccountExit(string path, int id)
+{
+    ifstream ifs;
+    ifs.open(path, ios::in);
+    if (!ifs.is_open())
+    {
+        return -1;
+    }
+    int fId, fPwd;
+    string fName;
+    while (ifs >> fId)
+    {
+        // ID不可以重复，姓名和密码可能相同，所以只需判断ID是否在文件中存在
+        if (fId == id)
+        {
+            return 1;
+        }      
+    }    
+    ifs.close();
+    return 0;
 }
 
 /*******************************************
@@ -74,8 +117,8 @@ void Administrator::saveUsrInfo(string path, int id, string name, int pwd)
 }
 
 /*******************************************
-* 函数名：
-* 功能：
+* 函数名：void Administrator::showUsrInfo()
+* 功能：查看账号信息
 * 参数：
 * 返回值：
 ********************************************/
@@ -103,6 +146,7 @@ void Administrator::showUsrInfo()
     int ret = this->judgeFileEmpty(path);
     if (!ret)
     {
+        // 如果文件不为空则将数据读出来并显示
         ifstream ifs;
         ifs.open(path, ios::in);
         if (!ifs.is_open())
@@ -117,12 +161,49 @@ void Administrator::showUsrInfo()
     }  
     else if (ret == 1)
     {
+        // 文件为空则提示
         cout << "暂无数据，请先添加" << endl;
     }
     else
     {
+        // 文件打开失败直接退出
         return;
     }   
 }
 
+/*******************************************
+* 函数名：void Administrator::showRoomInfo()
+* 功能：查看机房信息
+* 参数：
+* 返回值：
+********************************************/
+void Administrator::showRoomInfo()
+{
+    ifstream ifs;
+    ifs.open(ROMMINFOFILE, ios::in);
+    if (!ifs.is_open())
+    {
+        cout << "文件打开失败" << endl;
+    }
+    int roomId, roomCap;
+    while (ifs >> roomId && ifs >> roomCap)
+    {
+        cout << "机房" << roomId << "\t容量" << roomCap << "人" << endl;
+    }
+    ifs.close();
+}
+
+/*******************************************
+* 函数名：
+* 功能：
+* 参数：
+* 返回值：
+********************************************/
+void Administrator::clearOrder()
+{
+    ofstream ofs;
+    ofs.open(ORDERFILE, ios::out);
+    ofs.close();
+    cout << "预约信息已清空！" << endl;
+}
 

@@ -8,6 +8,7 @@ using namespace std;
 
 #define TEACHERFILE "teacherInfo.txt"
 #define STUFILE "stuInfo.txt"
+#define ROMMINFOFILE "roomInfo.txt"
 
 class ComputerOrderSystem
 {
