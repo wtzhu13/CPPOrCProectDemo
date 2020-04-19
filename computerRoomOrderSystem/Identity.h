@@ -1,31 +1,28 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include "OrderSystemView.h"
 using namespace std;
+
+enum AppointmentState
+{
+    audit, 
+    cancle,
+    success,
+    fail
+};
 
 class Identity
 {
 private:
     /* data */
 public:
- string name;
-    Identity(){};
-    int judgeFileEmpty(string path)
-    {
-        ifstream ifs;
-        ifs.open(path, ios::in);	
-        if (!ifs.is_open())
-        {
-            cout << "文件打开失败" << endl;
-            return -1;
-        }
-        char ch;
-        ifs >> ch;
-        if (ifs.eof())	// 如果数组为空，则workerAray = NULL并退出
-        {
-            return 1;
-        }
-        return 0;
-    }
-    virtual ~Identity(){};
+    string name;
+    unsigned int roomMargin[3];
+    Identity();
+    int judgeFileEmpty(string path);
+    void getroomMargin();
+    void getRoomGross(unsigned int roomGross[]);
+    void getAppointmentCount(unsigned int appointment[]);
+    virtual ~Identity();
 };

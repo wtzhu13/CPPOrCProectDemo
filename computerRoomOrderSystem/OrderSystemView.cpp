@@ -166,7 +166,11 @@ void OrderSystemView::showAppointmenTime()
 * 参数：
 * 返回值：
 ********************************************/
-void OrderSystemView::showAppointmenRoom()
+void OrderSystemView::showAppointmenRoom(unsigned int num[])
 {
 	cout << "机房信息" << endl;
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "机房" << i+1 << "剩余容量："<< num[i] << endl;
+	}	
 }

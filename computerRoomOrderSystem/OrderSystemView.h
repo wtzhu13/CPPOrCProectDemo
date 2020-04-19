@@ -24,7 +24,7 @@ public:
     void showStuMenu();
     void showAppointmenDate();
     void showAppointmenTime();
-    void showAppointmenRoom();
+    void showAppointmenRoom(unsigned int num[]);
     ~OrderSystemView();
 };
 

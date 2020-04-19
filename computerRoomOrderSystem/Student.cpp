@@ -51,16 +51,28 @@ void Student::appointment()
     cin >> choiceDate;
     osv.showAppointmenTime();
     cin >> choiceTime;
-    osv.showAppointmenRoom();
+    this->getroomMargin();
+    osv.showAppointmenRoom(this->roomMargin);
     cin >> choiceRoom;
     logNum ++;
 
     // 将预约信息保存至本地
     ofstream ofs;
     ofs.open(ORDERFILE, ios::app);
-    ofs << logNum << " " << choiceDate << " " << choiceTime << this->id
+    ofs << logNum << " " << choiceDate << " " << choiceTime << " " << this->id
         << " " << this->name << " " << choiceRoom << " " << this->appointmentState << endl;
     ofs.close();
+}
+
+/*******************************************
+* 函数名：
+* 功能：查看同时段改同学的预约情况
+* 参数：
+* 返回值：
+********************************************/
+void Student::checkSameTimeAppointment()
+{
+
 }
 
 /*******************************************

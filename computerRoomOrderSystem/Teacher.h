@@ -4,7 +4,7 @@
 #include "Identity.h"
 using namespace std;
 
-class Teacher : Identity
+class Teacher
 {
 private:
     /* data */

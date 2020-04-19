@@ -2,9 +2,9 @@
 #include <string>
 using namespace std;
 
-void func(string & name)
+int * func()
 {
-    name = "tom";
+    
 }
 
 int main()
