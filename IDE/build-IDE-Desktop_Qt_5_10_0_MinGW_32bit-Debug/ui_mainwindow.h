@@ -21,6 +21,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -41,8 +42,9 @@ public:
     QAction *actionGBK;
     QAction *actioncomplie;
     QWidget *centralWidget;
-    QLabel *label;
+    QVBoxLayout *verticalLayout;
     QTextEdit *textEdit;
+    QLabel *label;
     QMenuBar *menuBar;
     QMenu *menufile;
     QMenu *menuedit;
@@ -55,10 +57,17 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(980, 650);
+        MainWindow->resize(972, 650);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Adobe \351\273\221\344\275\223 Std R"));
+        font.setPointSize(10);
+        font.setBold(true);
+        font.setWeight(75);
+        MainWindow->setFont(font);
         QIcon icon;
         icon.addFile(QStringLiteral(":/images/a9f7716a1a25d7a4b2e5dc73bae4d860.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
+        MainWindow->setAutoFillBackground(false);
         actionNEW = new QAction(MainWindow);
         actionNEW->setObjectName(QStringLiteral("actionNEW"));
         actionOPEN = new QAction(MainWindow);
@@ -85,21 +94,42 @@ public:
         actioncomplie->setObjectName(QStringLiteral("actioncomplie"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(0, 0, 581, 21));
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(0, 30, 981, 611));
+        QFont font1;
+        font1.setPointSize(9);
+        font1.setBold(true);
+        font1.setItalic(false);
+        font1.setWeight(75);
+        textEdit->setFont(font1);
+        textEdit->setMouseTracking(false);
         textEdit->setLayoutDirection(Qt::LeftToRight);
+        textEdit->setAutoFillBackground(true);
         textEdit->setFrameShape(QFrame::Box);
         textEdit->setFrameShadow(QFrame::Plain);
         textEdit->setLineWidth(1);
         textEdit->setLineWrapMode(QTextEdit::NoWrap);
+
+        verticalLayout->addWidget(textEdit);
+
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        QFont font2;
+        font2.setPointSize(8);
+        font2.setBold(false);
+        font2.setWeight(50);
+        label->setFont(font2);
+
+        verticalLayout->addWidget(label);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 980, 23));
+        menuBar->setGeometry(QRect(0, 0, 972, 22));
         menufile = new QMenu(menuBar);
         menufile->setObjectName(QStringLiteral("menufile"));
         menuedit = new QMenu(menuBar);
