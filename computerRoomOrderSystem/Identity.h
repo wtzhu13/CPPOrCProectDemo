@@ -12,6 +12,15 @@ enum AppointmentState
     fail
 };
 
+enum AppointmentDate
+{
+    Monday, 
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday
+};
+
 class Identity
 {
 private:
