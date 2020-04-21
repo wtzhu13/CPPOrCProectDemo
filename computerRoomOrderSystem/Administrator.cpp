@@ -88,7 +88,7 @@ int Administrator::judgeAccountExit(string path, int id)
     {
         return -1;
     }
-    int fId, fPwd;
+    int fId;
     string fName;
     while (ifs >> fId)
     {

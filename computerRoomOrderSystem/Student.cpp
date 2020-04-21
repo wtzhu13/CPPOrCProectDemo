@@ -112,7 +112,59 @@ int Student::checkSameTimeAppointment(int date, int time, int stuId)
 ********************************************/
 void Student::checkAppointment()
 {
-
+    vMyAppointment.clear();
+    
+    cout << "预约信息：" << id << endl;
+    ifstream ifs;
+    ifs.open(ORDERFILE, ios::in);
+    if (!ifs.is_open())
+    {
+        cout << "文件打开失败" << endl;
+    }
+    int fId, fDate, fTime, fStuId, fRoomId, fState;
+    string fName;
+    int tempFlag = 0;
+    while (ifs >> fId && ifs >> fDate
+    && ifs >> fTime && ifs >> fStuId
+    && ifs >> fName && ifs >> fRoomId
+    && ifs >> fState)   //  提取每条日志的各种状态
+    {
+        tempFlag = 0;
+        AppointInfo tempAppointInfo;    // 临时存放每一条日志信息
+        tempAppointInfo.date = fDate;
+        tempAppointInfo.time = fTime;
+        tempAppointInfo.roomId = fRoomId;
+        tempAppointInfo.state = fState; 
+        if (fStuId == this->id) // id相同就可以加入容器
+        {
+            for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
+         it != this->vMyAppointment.end(); it++) 
+            {
+                // 同一个人在同意时间的预约状态只能有一个
+                if (it->date == fDate && it->time == fTime && it->roomId == fRoomId)
+                {
+                    it->state = fState;
+                    tempFlag = 1;
+                    break;
+                }                             
+	        } 
+            if (!tempFlag)
+            {
+                vMyAppointment.push_back(tempAppointInfo);
+            }                      
+        } 
+    }
+    ifs.close();
+    cout << vMyAppointment.size() << endl;
+    for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
+         it != this->vMyAppointment.end(); it++) 
+            {
+                cout << globalDate[it->date-1] << " "
+                     << globalTime[it->time-1] << " "
+                     << it->roomId << "号机房 "
+                     << globalState[it->state] << endl;
+	        }   
+    
 }
 
 /*******************************************

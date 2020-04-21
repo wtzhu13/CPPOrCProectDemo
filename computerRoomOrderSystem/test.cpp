@@ -1,16 +1,21 @@
-#include <iostream>
-#include <string>
-using namespace std;
-
-int * func()
+# include "test.h"
+void func()
 {
+    for (int i = 0; i < 5; i++)
+    {
+        cout << globalDate[i] << endl;
     
+    }
 }
 
 int main()
 {
     string name;
-    func(name);
-    cout << name << endl;
+    for (int i = 0; i < 5; i++)
+    {
+        cout << globalDate[i] << endl;
+    
+    }
+    func();
     return 0;
 }

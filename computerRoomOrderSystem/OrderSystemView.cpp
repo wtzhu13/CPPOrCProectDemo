@@ -16,7 +16,7 @@ OrderSystemView::~OrderSystemView()
 ********************************************/
 void OrderSystemView::showMainMenu()
 {
-    cout << "======================  欢迎来到CAUC客机房预约系统  =====================" 
+    cout << "======================  欢迎来到CAUC机房预约系统  =====================" 
          << endl;
 	cout << endl << "请输入您的身份" << endl;
 	cout << "\t\t -------------------------------\n";
@@ -171,6 +171,7 @@ void OrderSystemView::showAppointmenRoom(unsigned int num[])
 	cout << "机房信息" << endl;
 	for (int i = 0; i < 3; i++)
 	{
-		cout << "机房" << i+1 << "剩余容量："<< num[i] << endl;
+		cout << i << ".机房" << i+1 << "剩余容量："<< num[i] << endl;
 	}	
+	cout << "请选择机房：" << endl;
 }
