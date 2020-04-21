@@ -1,10 +1,14 @@
 # IDE
 
+**建议：**建议先观看功能演示，然后根据功能演示想想思路，然后看博文中的思路，最后再看博文代码，最后再看完整代码，这样效果会更好。
+
+
+
 **功能介绍：**一款基于QT的简易c语言编辑器，可以编辑，编译和运行。
 
-**环境配置：**编译运行功能的前提是windows平台上已经安装gcc并配置到系统环境变量中，这个的配置方式可自行百度，很多帖子有讲。或直接安装QT，便于阅读源码。同时，安装QT自带会安装gcc，将其配置到环境变量中即可
+**环境配置：**编译运行功能的前提是windows平台上已经安装`gcc`并配置到系统环境变量中，这个的配置方式可自行百度，很多帖子有讲。或直接安装QT，便于阅读源码。同时，安装QT自带会安装`gcc`，将其配置到环境变量中即可
 
-[主题运行效果可观看成品展示]()
+[整体运行效果可观看成品展示](https://www.bilibili.com/video/BV1MC4y1x78z)
 
 
 
@@ -12,7 +16,7 @@
 
 在创建工程的时候勾选上UI选项，会自动生成一个`mainWindow`，在菜单栏中点击添加菜单功能，然后在ui文件中通过拖拽控件布局。布局完成后，在布局下方找到对应控件名称并右键转到槽，工程会自动在`mainwindow.cpp`中生成对应的槽函数，在槽函数中即可实现各自功能。槽函数的命名为`on_action控件名_triggered`。
 
-
+![](D:../configImages/QT_UI.png)
 
 
 
@@ -22,13 +26,13 @@
 
 **思路：**通过`QFileDialog::getOpenFileName()`函数获取文件路径。然后通过`fopen`打开路径对应的文件，并通过一个临时变量`str`存放文件中的内容，最后通过`ui->textEdit->setText()`函数将临时变量中的内容展示在文本编辑控件中。最后关闭文件。
 
-**注意：**通过`QFileDialog::getOpenFileName()`函数获取的文件路径是`QString`类型的数据，所以在给`fopen`使用前需要转换为`char *`类型。`QT`中使用UTF-8编码，所以如果文件使用GBK编码，需要转换编码方式。
+**注意：**通过`QFileDialog::getOpenFileName()`函数获取的文件路径是`QString`类型的数据，所以在给`fopen`使用前需要转换为`char *`类型。`QT`中使用`UTF-8`编码，所以如果文件使用`GBK`编码，需要转换编码方式。
 
-**API说明：**
+**`API`说明：**
 
 - `QFileDialog::getOpenFileName()` 通过可视化方式获取路径
 - `codec->fromUnicode(path).data()`改变编码方式并转换数据类型
-- `codec->toUnicode(buf)`  转换为UTF-8编码
+- `codec->toUnicode(buf)`  转换为`UTF-8`编码
 - `ui->textEdit->setText(str)`  向文本编辑框放入待编辑内容
 
 **代码实现：**
@@ -95,7 +99,7 @@ void MainWindow::on_actionOPEN_triggered()
 
 **注意：**依旧是编码方式，还有`QString`和`char *`类型的不同
 
-**API说明：**
+**`API`说明：**
 
 - `QFileDialog::getSaveFileName()` 通过可视化方式获取保存路径
 - `str.toStdString().data()`  将`QString`转换为char * 类型
@@ -144,7 +148,7 @@ void MainWindow::on_actionSAVE_AS_triggered()
 
 **注意：**依旧是编码方式，还有`QString`和`char *`类型的不同。
 
-**API说明：**无特殊`API`用到的上面已经介绍过。
+**`API`说明：**无特殊`API`用到的上面已经介绍过。
 
 **代码实现：**
 
@@ -184,7 +188,7 @@ void MainWindow::on_actionSAVE_triggered()
 
 **注意：**执行以上的两部都需要在终端执行，直接调用system函数即可。如果编译出错，那么就不能继续执行，需终端停留在报错页面，使用`cmd /k`可实现终端停留
 
-**API说明：**
+**`API`说明：**
 
 - `replace()` `QString`中的函数,替换字符串中指定字符串。
 - `QString("gcc %1 -o %2").arg(arg1).arg(arg2)`  `QString`格式化
@@ -228,13 +232,11 @@ void MainWindow::on_actioncomplie_triggered()
 
 #### 改变字符编码
 
-**思路：**通过`codec->fromUnicode(path)`或`codec->toUnicode(buf)`两个API实现编码转换功能。由于字符编码需要在好几个槽函数中使用，所以思考定义一个全局变量，通过这个全局变量的状态来判断如何转换。通过`ui->label->setText`在左下角实时显示当前的编码方式。
+**思路：**通过`codec->fromUnicode(path)`或`codec->toUnicode(buf)`两个`API`实现编码转换功能。由于字符编码需要在好几个槽函数中使用，所以思考定义一个全局变量，通过这个全局变量的状态来判断如何转换。通过`ui->label->setText`在左下角实时显示当前的编码方式。
 
 **注意：**别的槽函数使用，所以需要使用全局变量。
 
-**API说明：**
-
-**API说明：**
+**`API`说明：**
 
 - `replace()` `QString`中的函数,替换字符串中指定字符串。
 - `QString("gcc %1 -o %2").arg(arg1).arg(arg2)`  `QString`格式化
@@ -266,7 +268,7 @@ void MainWindow::on_actionGBK_triggered()
 
 **思路：**直接调用QT自带的相应的功能函数。
 
-**API说明：**
+**`API`说明：**
 
 - ` ui->textEdit->copy()` 复制
 - `ui->textEdit->paste()` 粘贴
@@ -314,3 +316,4 @@ void MainWindow::on_actionQUITE_triggered()
 
 
 **彩蛋：**这个项目中还包含其他一些练手小项目，后续会慢慢更新，不断往里添加。
+
