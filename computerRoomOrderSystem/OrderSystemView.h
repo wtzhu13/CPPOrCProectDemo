@@ -1,6 +1,8 @@
 # pragma once
 #include <iostream>
 #include <string>
+#include <vector>
+#include "global.h"
 using namespace std;
 
 #define TEACHERFILE "teacherInfo.txt"
@@ -8,10 +10,6 @@ using namespace std;
 #define ROMMINFOFILE "roomInfo.txt"
 #define ADMININFOFILE "adminConfig.cfg"
 #define ORDERFILE "order.log"
-
-// string globalDate[] = {"周一", "周二", "周三", "周四", "周五"};
-// string globalTime[] = {"上午", "下午"};
-// string globalState[] = {"审核中", "取消", "通过", "拒绝"};
 
 class OrderSystemView
 {
@@ -29,6 +27,7 @@ public:
     void showAppointmenDate();
     void showAppointmenTime();
     void showAppointmenRoom(unsigned int num[]);
+    void showPersonalAppointment(vector<AppointInfo> v);
     ~OrderSystemView();
 };
 

@@ -46,9 +46,11 @@ void Student::initStuSys()
 void Student::appointment()
 {
     // 获取预约信息
+    cout << "请输入申请预约的时间：" << endl;
     osv.showAppointmenDate();
     int choiceDate, choiceTime, choiceRoom;
     cin >> choiceDate;
+    cout << "请输入申请预约的时间段：" << endl;
     osv.showAppointmenTime();
     cin >> choiceTime;
     this->getroomMargin();
@@ -112,9 +114,20 @@ int Student::checkSameTimeAppointment(int date, int time, int stuId)
 ********************************************/
 void Student::checkAppointment()
 {
-    vMyAppointment.clear();
-    
+    vMyAppointment.clear(); 
     cout << "预约信息：" << id << endl;
+    this->getPersonalLog();   
+    osv.showPersonalAppointment(this->vMyAppointment);
+}
+
+/*******************************************
+* 函数名：
+* 功能：获取个人的记录
+* 参数：
+* 返回值：
+********************************************/
+void Student::getPersonalLog()
+{
     ifstream ifs;
     ifs.open(ORDERFILE, ios::in);
     if (!ifs.is_open())
@@ -150,22 +163,13 @@ void Student::checkAppointment()
 	        } 
             if (!tempFlag)
             {
-                vMyAppointment.push_back(tempAppointInfo);
+                this->vMyAppointment.push_back(tempAppointInfo);
             }                      
         } 
     }
-    ifs.close();
-    cout << vMyAppointment.size() << endl;
-    for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
-         it != this->vMyAppointment.end(); it++) 
-            {
-                cout << globalDate[it->date-1] << " "
-                     << globalTime[it->time-1] << " "
-                     << it->roomId << "号机房 "
-                     << globalState[it->state] << endl;
-	        }   
-    
+    ifs.close(); 
 }
+
 
 /*******************************************
 * 函数名：
@@ -180,11 +184,77 @@ void Student::checkAllAppointment()
 
 /*******************************************
 * 函数名：
-* 功能：
+* 功能：取消预约，取消的只能是状态为审核中，通过审核的
 * 参数：
 * 返回值：
 ********************************************/
 void Student::cancelOrder()
 {
+    vMyAppointment.clear();
+    // 获取一下记录
+    this->getPersonalLog();
+    vector<AppointInfo> canBeCancle;
+    AppointInfo canBeCancleInfo;
+    cout << "您的可取消预约：" << endl;
+    for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
+        it != this->vMyAppointment.end(); it++) 
+        {
+            if (it->state == audit || it->state == success)
+            {
+                canBeCancleInfo.date = it->date;
+                canBeCancleInfo.time = it->time;
+                canBeCancleInfo.roomId = it->roomId;
+                canBeCancleInfo.state = it->state;
+                canBeCancle.push_back(canBeCancleInfo);
+                
+            }                                              
+        } 
+    for (vector<AppointInfo>::iterator it = canBeCancle.begin();
+        it != canBeCancle.end(); it++) 
+        {
+            cout << globalDate[it->date-1] << " "
+                 << globalTime[it->time-1] << " "
+                 << it->roomId << "号机房 "
+                 << globalState[it->state] << endl;
+        }
+    cout << "请输入日期" << endl;
+    osv.showAppointmenDate();
+    int inputDate;
+    cin >> inputDate;
+    cout << "请输入时间" << endl;
+    osv.showAppointmenTime();
+    int inputTime;
+    cin >> inputTime;
+    cout << "请输入机房" << endl;
+    int inputRoomId;
+    cin >> inputRoomId;
 
-}
+    /***
+     * 
+     * 需要添加一个输入的判断，判断输入是否和可取消的吻合
+     * 
+     */
+
+
+    for (vector<AppointInfo>::iterator it = canBeCancle.begin();
+        it != canBeCancle.end(); it++) 
+        {
+            if (it->date == inputDate && it->time == inputTime
+            && it->roomId == inputRoomId)
+            {
+                it->state = cancle;
+            }  
+        }
+    for (vector<AppointInfo>::iterator it = canBeCancle.begin();
+        it != canBeCancle.end(); it++) 
+        {
+            cout << globalDate[it->date-1] << " "
+                 << globalTime[it->time-1] << " "
+                 << it->roomId << "号机房 "
+                 << globalState[it->state] << endl;
+        }
+    /***
+     * 
+     * 需要添加一个保存到本地的功能
+     * 
+     */

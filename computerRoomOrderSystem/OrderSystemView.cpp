@@ -139,7 +139,6 @@ void OrderSystemView::showStuMenu()
 void OrderSystemView::showAppointmenDate()
 {
 	cout << "机房开放时间为周一至周五！" << endl;
-	cout << "请输入申请预约的时间：" << endl;
 	cout << "1、周一" << endl;
 	cout << "2、周二" << endl;
 	cout << "3、周三" << endl;
@@ -155,7 +154,6 @@ void OrderSystemView::showAppointmenDate()
 ********************************************/
 void OrderSystemView::showAppointmenTime()
 {
-	cout << "请输入申请预约的时间段：" << endl;
 	cout << "1、上午" << endl;
 	cout << "2、下午" << endl;
 }
@@ -174,4 +172,22 @@ void OrderSystemView::showAppointmenRoom(unsigned int num[])
 		cout << i << ".机房" << i+1 << "剩余容量："<< num[i] << endl;
 	}	
 	cout << "请选择机房：" << endl;
+}
+
+/*******************************************
+* 函数名：
+* 功能：显示个人的预约
+* 参数：
+* 返回值：
+********************************************/
+void OrderSystemView::showPersonalAppointment(vector<AppointInfo> v)
+{
+	for (vector<AppointInfo>::iterator it = v.begin();
+         it != v.end(); it++) 
+            {
+                cout << globalDate[it->date-1] << " "
+                     << globalTime[it->time-1] << " "
+                     << it->roomId << "号机房 "
+                     << globalState[it->state] << endl;
+	        }   
 }

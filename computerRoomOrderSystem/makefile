@@ -1,2 +1,2 @@
 app : main.cpp OrderSystemView.cpp ComputerOrderSystem.cpp Administrator.cpp Student.cpp Teacher.cpp Identity.cpp global.cpp
-	g++11 main.cpp OrderSystemView.cpp ComputerOrderSystem.cpp Administrator.cpp Student.cpp Teacher.cpp Identity.cpp global.cpp -o app
+	g++ main.cpp OrderSystemView.cpp ComputerOrderSystem.cpp Administrator.cpp Student.cpp Teacher.cpp Identity.cpp global.cpp -o app
