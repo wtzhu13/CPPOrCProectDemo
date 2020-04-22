@@ -47,7 +47,7 @@ void Student::appointment()
 
     // 检查相同时间段是否有过预约
     int ret = this->checkSameTimeAppointment(choiceDate, choiceTime, this->id);
-    cout << "相同时间有预约为1：" << ret <<endl;
+    // cout << "相同时间有预约为1：" << ret <<endl;
 
     if (!ret)
     {
@@ -70,23 +70,16 @@ void Student::appointment()
 ********************************************/
 int Student::checkSameTimeAppointment(int date, int time, int stuId)
 {
-    ifstream ifs;
-    ifs.open(ORDERFILE, ios::in);
-    int fId, fData, fTime, fStuId, fRoomId, fState;
-    string fName;
-    while (ifs >> fId && ifs >> fData
-    && ifs >> fTime && ifs >> fStuId
-    && ifs >> fName && ifs >> fRoomId
-    && ifs >> fState)   //  提取每条日志的各种状态
+    this->getPersonalLog(1);
+    for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
+         it != this->vMyAppointment.end(); it++) 
     {
         // 相同时间，相同ID，且状态不是取消，则不能再次申请
-        if (fStuId == stuId && fData == date && fTime == time && fState != cancle)
+        if (it->stuId == stuId && it->date == date && it->time == time && it->state != 1)
         {
-            ifs.close();
             return 1;
         }       
     }
-    ifs.close();
     return 0;
 }
 
@@ -98,6 +91,11 @@ int Student::checkSameTimeAppointment(int date, int time, int stuId)
 ********************************************/
 void Student::checkAppointment()
 {
+    if (this->judgeFileEmpty(ORDERFILE))
+    {
+        cout << "暂无预约！" << endl;
+        return;
+    }   
     vMyAppointment.clear(); 
     cout << "预约信息：" << id << endl;
     this->getPersonalLog(1);   
@@ -186,25 +184,28 @@ void Student::filterSelfLog(AppointInfo tempAppointInfo)
 ********************************************/
 void Student::filterAllfLog(AppointInfo tempAppointInfo)
 {
-    int tempFlag = 0;
-    if (tempAppointInfo.stuId == this->id) // id相同就可以加入容器
+    
+    int tempFlag = 0;   
+    for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
+            it != this->AllAppointment.end(); it++) 
+    {
+        
+        // 同一个人在同意时间的预约状态只能有一个
+        if (it->date == tempAppointInfo.date &&
+            it->time == tempAppointInfo.time && 
+            it->roomId == tempAppointInfo.roomId &&
+            it->stuId == tempAppointInfo.stuId)
         {
-            for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
-         it != this->vMyAppointment.end(); it++) 
-            {
-                // 同一个人在同意时间的预约状态只能有一个
-                if (it->date == tempAppointInfo.date && it->time == tempAppointInfo.time && it->roomId == tempAppointInfo.roomId)
-                {
-                    it->state = tempAppointInfo.state;
-                    tempFlag = 1;
-                    break;
-                }                             
-	        } 
-            if (!tempFlag)
-            {
-                this->AllAppointment.push_back(tempAppointInfo);
-            }                      
-        } 
+            it->state = tempAppointInfo.state;
+            tempFlag = 1;
+            break;
+        }                             
+    } 
+    if (!tempFlag)
+    {
+        this->AllAppointment.push_back(tempAppointInfo);
+    }                      
+    
 }
 
 /*******************************************
@@ -215,10 +216,24 @@ void Student::filterAllfLog(AppointInfo tempAppointInfo)
 ********************************************/
 void Student::checkAllAppointment()
 {
+    if (this->judgeFileEmpty(ORDERFILE))
+    {
+        cout << "暂无预约！" << endl;
+        return;
+    } 
     AllAppointment.clear(); 
-    cout << "预约信息：" << id << endl;
-    this->getPersonalLog(2);   
-    osv.showPersonalAppointment(this->AllAppointment);
+    cout << "预约信息：" << endl;
+    this->getPersonalLog(2);
+    for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
+            it != this->AllAppointment.end(); it++)
+    {
+        cout << globalDate[it->date-1] << " "
+            << globalTime[it->time-1] << " "
+            << it->roomId << "号机房 " << " "
+            << "ID:" << it->stuId << " "
+            << "姓名:" << it->stuName << " "
+            << globalState[it->state] << endl;
+    }  
 }
 
 /*******************************************
@@ -260,6 +275,12 @@ void Student::cancelOrder()
                 countLog++;
             }                                              
         } 
+    if (canBeCancle.size() == 0)
+    {
+        cout << "无可删除预约" << endl;
+        return;
+    }
+    
     // cout << "countlog:" << countLog << endl;
     // 改变制定的预约的状态为取消
     vector<AppointInfo>::iterator itcancleChoice = this->setStateToCancel(countLog, canBeCancle);

@@ -23,6 +23,15 @@ enum AppointmentState
     fail
 };
 
+enum AppointmentDate
+{
+    Monday, 
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday
+};
+
 #define TEACHERFILE "teacherInfo.txt"
 #define STUFILE "stuInfo.txt"
 #define ROMMINFOFILE "roomInfo.txt"

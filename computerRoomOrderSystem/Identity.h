@@ -4,15 +4,6 @@
 #include "OrderSystemView.h"
 using namespace std;
 
-enum AppointmentDate
-{
-    Monday, 
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday
-};
-
 class Identity
 {
 private:
