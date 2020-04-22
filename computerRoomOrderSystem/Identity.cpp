@@ -79,39 +79,143 @@ void Identity::getRoomGross(unsigned int roomGross[])
 * 功能：获取已预约的信息
 * 参数：
 * 返回值：
+* 待改进，目前计算的一整天的剩余量，应该一天还分上午和下午，所以有六个数
 ********************************************/
 void Identity::getAppointmentCount(unsigned int appointment[])
 {
+    this->getPersonalLog(2);
+    for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
+            it != this->AllAppointment.end(); it++)
+    {
+            switch (it->roomId)
+            {
+            case 1:
+                if (it->state == audit || it->state == success) // 在审核中或者成功预约则为占位
+                {
+                    appointment[0]++;
+                }           
+                break;
+            case 2:
+                if (it->state == audit || it->state == success)
+                {
+                    appointment[1]++;
+                } 
+                break;
+            case 3:
+                if (it->state == audit || it->state == success)
+                {
+                    appointment[2]++;
+                } 
+                break;
+            default:
+                break;
+            }
+    }
+}
+
+/*******************************************
+* 函数名：
+* 功能：获取个人的记录
+* 参数：
+* 返回值：
+********************************************/
+void Identity::getPersonalLog(int flag)
+{
     ifstream ifs;
     ifs.open(ORDERFILE, ios::in);
-    int logNum, date, time, stuId, roomId, state;
-    string name;
-    while (ifs >> logNum && ifs >>date && ifs >>time
-        && ifs >> stuId && ifs >> name && ifs >> roomId 
-        && ifs >> state)
+    if (!ifs.is_open())
     {
-        switch (roomId)
+        cout << "文件打开失败" << endl;
+    }
+    int fId, fDate, fTime, fStuId, fRoomId, fState;
+    string fName;
+    // int tempFlag = 0;
+    while (ifs >> fId && ifs >> fDate
+    && ifs >> fTime && ifs >> fStuId
+    && ifs >> fName && ifs >> fRoomId
+    && ifs >> fState)   //  提取每条日志的各种状态
+    {
+        // tempFlag = 0;
+        AppointInfo tempAppointInfo;    // 临时存放每一条日志信息
+        tempAppointInfo.date = fDate;
+        tempAppointInfo.time = fTime;
+        tempAppointInfo.stuId = fStuId;
+        tempAppointInfo.stuName = fName;
+        tempAppointInfo.roomId = fRoomId;
+        tempAppointInfo.state = fState; 
+        switch (flag)
         {
         case 1:
-            if (state == audit || state == success) // 在审核中或者成功预约则为占位
-            {
-                appointment[0]++;
-            }           
+            this->filterSelfLog(tempAppointInfo);
             break;
         case 2:
-            if (state == audit || state == success)
-            {
-                appointment[1]++;
-            } 
-            break;
-        case 3:
-            if (state == audit || state == success)
-            {
-                appointment[2]++;
-            } 
+            this->filterAllfLog(tempAppointInfo);
             break;
         default:
             break;
-        }
+        }        
     }
+    ifs.close(); 
 }
+
+/*******************************************
+* 函数名：
+* 功能：过滤本人记录
+* 参数：
+* 返回值：
+********************************************/
+void Identity::filterSelfLog(AppointInfo tempAppointInfo)
+{
+    int tempFlag = 0;
+    if (tempAppointInfo.stuId == this->id) // id相同就可以加入容器
+        {
+            for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
+         it != this->vMyAppointment.end(); it++) 
+            {
+                // 同一个人在同意时间的预约状态只能有一个
+                if (it->date == tempAppointInfo.date && it->time == tempAppointInfo.time && it->roomId == tempAppointInfo.roomId)
+                {
+                    it->state = tempAppointInfo.state;
+                    tempFlag = 1;
+                    break;
+                }                             
+	        } 
+            if (!tempFlag)
+            {
+                this->vMyAppointment.push_back(tempAppointInfo);
+            }                      
+        } 
+}
+
+/*******************************************
+* 函数名：
+* 功能：查看所有人预约
+* 参数：
+* 返回值：
+********************************************/
+void Identity::filterAllfLog(AppointInfo tempAppointInfo)
+{
+    
+    int tempFlag = 0;   
+    for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
+            it != this->AllAppointment.end(); it++) 
+    {
+        
+        // 同一个人在同意时间的预约状态只能有一个
+        if (it->date == tempAppointInfo.date &&
+            it->time == tempAppointInfo.time && 
+            it->roomId == tempAppointInfo.roomId &&
+            it->stuId == tempAppointInfo.stuId)
+        {
+            it->state = tempAppointInfo.state;
+            tempFlag = 1;
+            break;
+        }                             
+    } 
+    if (!tempFlag)
+    {
+        this->AllAppointment.push_back(tempAppointInfo);
+    }                      
+    
+}
+

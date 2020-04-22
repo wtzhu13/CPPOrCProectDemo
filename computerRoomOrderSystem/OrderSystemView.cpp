@@ -182,6 +182,12 @@ void OrderSystemView::showAppointmenRoom(unsigned int num[])
 ********************************************/
 void OrderSystemView::showPersonalAppointment(vector<AppointInfo> v)
 {
+	if (v.size() == 0)
+	{
+		cout << "无预约记录" << endl;
+		return;
+	}
+	
 	for (vector<AppointInfo>::iterator it = v.begin();
          it != v.end(); it++) 
             {
