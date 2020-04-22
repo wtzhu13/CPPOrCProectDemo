@@ -10,6 +10,8 @@ typedef struct AppointInfo
     int date;   // 预约日期
     int time;   // 预约时间
     int roomId; // 预约机房号
+    int stuId;
+    string stuName;
     int state;  // 预约状态
 }AppointInfo;
 

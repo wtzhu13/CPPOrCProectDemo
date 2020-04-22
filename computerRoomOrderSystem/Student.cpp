@@ -100,7 +100,7 @@ void Student::checkAppointment()
 {
     vMyAppointment.clear(); 
     cout << "预约信息：" << id << endl;
-    this->getPersonalLog();   
+    this->getPersonalLog(1);   
     osv.showPersonalAppointment(this->vMyAppointment);
 }
 
@@ -110,7 +110,7 @@ void Student::checkAppointment()
 * 参数：
 * 返回值：
 ********************************************/
-void Student::getPersonalLog()
+void Student::getPersonalLog(int flag)
 {
     ifstream ifs;
     ifs.open(ORDERFILE, ios::in);
@@ -120,27 +120,53 @@ void Student::getPersonalLog()
     }
     int fId, fDate, fTime, fStuId, fRoomId, fState;
     string fName;
-    int tempFlag = 0;
+    // int tempFlag = 0;
     while (ifs >> fId && ifs >> fDate
     && ifs >> fTime && ifs >> fStuId
     && ifs >> fName && ifs >> fRoomId
     && ifs >> fState)   //  提取每条日志的各种状态
     {
-        tempFlag = 0;
+        // tempFlag = 0;
         AppointInfo tempAppointInfo;    // 临时存放每一条日志信息
         tempAppointInfo.date = fDate;
         tempAppointInfo.time = fTime;
+        tempAppointInfo.stuId = fStuId;
+        tempAppointInfo.stuName = fName;
         tempAppointInfo.roomId = fRoomId;
         tempAppointInfo.state = fState; 
-        if (fStuId == this->id) // id相同就可以加入容器
+        switch (flag)
+        {
+        case 1:
+            this->filterSelfLog(tempAppointInfo);
+            break;
+        case 2:
+            this->filterAllfLog(tempAppointInfo);
+            break;
+        default:
+            break;
+        }        
+    }
+    ifs.close(); 
+}
+
+/*******************************************
+* 函数名：
+* 功能：过滤本人记录
+* 参数：
+* 返回值：
+********************************************/
+void Student::filterSelfLog(AppointInfo tempAppointInfo)
+{
+    int tempFlag = 0;
+    if (tempAppointInfo.stuId == this->id) // id相同就可以加入容器
         {
             for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
          it != this->vMyAppointment.end(); it++) 
             {
                 // 同一个人在同意时间的预约状态只能有一个
-                if (it->date == fDate && it->time == fTime && it->roomId == fRoomId)
+                if (it->date == tempAppointInfo.date && it->time == tempAppointInfo.time && it->roomId == tempAppointInfo.roomId)
                 {
-                    it->state = fState;
+                    it->state = tempAppointInfo.state;
                     tempFlag = 1;
                     break;
                 }                             
@@ -150,10 +176,36 @@ void Student::getPersonalLog()
                 this->vMyAppointment.push_back(tempAppointInfo);
             }                      
         } 
-    }
-    ifs.close(); 
 }
 
+/*******************************************
+* 函数名：
+* 功能：查看所有人预约
+* 参数：
+* 返回值：
+********************************************/
+void Student::filterAllfLog(AppointInfo tempAppointInfo)
+{
+    int tempFlag = 0;
+    if (tempAppointInfo.stuId == this->id) // id相同就可以加入容器
+        {
+            for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
+         it != this->vMyAppointment.end(); it++) 
+            {
+                // 同一个人在同意时间的预约状态只能有一个
+                if (it->date == tempAppointInfo.date && it->time == tempAppointInfo.time && it->roomId == tempAppointInfo.roomId)
+                {
+                    it->state = tempAppointInfo.state;
+                    tempFlag = 1;
+                    break;
+                }                             
+	        } 
+            if (!tempFlag)
+            {
+                this->AllAppointment.push_back(tempAppointInfo);
+            }                      
+        } 
+}
 
 /*******************************************
 * 函数名：
@@ -163,7 +215,10 @@ void Student::getPersonalLog()
 ********************************************/
 void Student::checkAllAppointment()
 {
-
+    AllAppointment.clear(); 
+    cout << "预约信息：" << id << endl;
+    this->getPersonalLog(2);   
+    osv.showPersonalAppointment(this->AllAppointment);
 }
 
 /*******************************************
@@ -178,11 +233,8 @@ void Student::cancelOrder()
     vMyAppointment.clear();
 
     // 获取一下记录
-    this->getPersonalLog();
+    this->getPersonalLog(1);
     vector<AppointInfo> canBeCancle;
-    // set<int> dateSet;
-    // set<int> timeSet;
-    // set<int> roomSet;
     AppointInfo canBeCancleInfo;    // 临时存放可取消的信息结构体
     int countLog = 0;
     
@@ -193,14 +245,14 @@ void Student::cancelOrder()
         {
             if (it->state == audit || it->state == success)
             {
+                // 审核中和通过的可以取消，放进vector容器中
                 canBeCancleInfo.date = it->date;
-                // dateSet.insert(it->date);   // 可取消的日期放进集合，消除重复的，便于右面提示
                 canBeCancleInfo.time = it->time;
-                // timeSet.insert(it->time);   // 可取消的时间放进集合，消除重复的，便于右面提示
                 canBeCancleInfo.roomId = it->roomId;
-                // roomSet.insert(it->roomId); // 可取消的房间放进集合，消除重复的，便于右面提示
                 canBeCancleInfo.state = it->state;
                 canBeCancle.push_back(canBeCancleInfo);
+
+                // 符合要求的同事交互出来
                 cout << countLog + 1 << "." << globalDate[it->date-1] << " "
                  << globalTime[it->time-1] << " "
                  << it->roomId << "号机房 "
@@ -211,12 +263,11 @@ void Student::cancelOrder()
     // cout << "countlog:" << countLog << endl;
     // 改变制定的预约的状态为取消
     vector<AppointInfo>::iterator itcancleChoice = this->setStateToCancel(countLog, canBeCancle);
-    logNum++;
+    logNum++;   // 取消操作存入日志中，日志书加一
     if (itcancleChoice == canBeCancle.end())
     {
         return;
     }
-    
 
     // 保存到本地
     // cout << this->logNum << endl;
@@ -241,18 +292,21 @@ vector<AppointInfo>::iterator Student::setStateToCancel(int countLog, vector<App
     // cout << countLog << endl;
     int cancelChoice;
     cin >> cancelChoice;
+
+    // 输入0则退出并返回末尾
     if (cancelChoice == 0)
     {
         return canBeCancle.end();
     }
     
+    // 对输入进行判断。避免错误码
     while (cancelChoice <0 || cancelChoice > countLog)
     {
         cout << "输入错误，请再次请选择取消的预约编号：" << endl;
         cin >> cancelChoice;
     }   
     vector<AppointInfo>::iterator itcancleChoice = canBeCancle.begin();  
-    advance(itcancleChoice, cancelChoice - 1);
+    advance(itcancleChoice, cancelChoice - 1);  // 提升迭代器，使得只想制定位置
     itcancleChoice->state = 1;
     return itcancleChoice;
 }
