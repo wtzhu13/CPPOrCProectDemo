@@ -5,12 +5,6 @@
 #include "global.h"
 using namespace std;
 
-#define TEACHERFILE "teacherInfo.txt"
-#define STUFILE "stuInfo.txt"
-#define ROMMINFOFILE "roomInfo.txt"
-#define ADMININFOFILE "adminConfig.cfg"
-#define ORDERFILE "order.log"
-
 class OrderSystemView
 {
 private:

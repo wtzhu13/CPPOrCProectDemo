@@ -5,8 +5,9 @@ Student::Student(string name, int id)
     this->name = name;
     this->id = id;
     this->logNum = 0;
+    this->logNum = getLogNum();
+    cout << this->logNum << endl;
     this->appointmentState = audit;
-    this->initStuSys();
 }
 
 Student::~Student()
@@ -21,20 +22,7 @@ Student::~Student()
 ********************************************/
 void Student::initStuSys()
 {
-    // 获取申请机房日志
-    ifstream ifs;
-    ifs.open(ORDERFILE, ios::in);
-    if (!ifs.is_open())
-    {
-        cout << "预约文件打开失败" << endl;
-    }
-    char buf[1024] = { 0 };
-    while (ifs.getline(buf,sizeof(buf)))
-    {
-        //有多少行就有多少条记录
-        this->logNum ++;
-    }
-   ifs.close(); 
+    
 }
 
 /*******************************************
@@ -66,11 +54,7 @@ void Student::appointment()
         cout << "您已成功申请预约！" << endl;
         logNum ++;
         // 将预约信息保存至本地
-        ofstream ofs;
-        ofs.open(ORDERFILE, ios::app);
-        ofs << logNum << " " << choiceDate << " " << choiceTime << " " << this->id
-            << " " << this->name << " " << choiceRoom << " " << this->appointmentState << endl;
-        ofs.close();
+        saveLog(logNum, choiceDate, choiceTime, this->id, this->name, choiceRoom, this->appointmentState);
     }
     else
     {
@@ -190,11 +174,19 @@ void Student::checkAllAppointment()
 ********************************************/
 void Student::cancelOrder()
 {
+    // cout << this->logNum << endl;
     vMyAppointment.clear();
+
     // 获取一下记录
     this->getPersonalLog();
     vector<AppointInfo> canBeCancle;
-    AppointInfo canBeCancleInfo;
+    // set<int> dateSet;
+    // set<int> timeSet;
+    // set<int> roomSet;
+    AppointInfo canBeCancleInfo;    // 临时存放可取消的信息结构体
+    int countLog = 0;
+    
+    // 获取可以被取消的记录，放进vector容器中
     cout << "您的可取消预约：" << endl;
     for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
         it != this->vMyAppointment.end(); it++) 
@@ -202,59 +194,66 @@ void Student::cancelOrder()
             if (it->state == audit || it->state == success)
             {
                 canBeCancleInfo.date = it->date;
+                // dateSet.insert(it->date);   // 可取消的日期放进集合，消除重复的，便于右面提示
                 canBeCancleInfo.time = it->time;
+                // timeSet.insert(it->time);   // 可取消的时间放进集合，消除重复的，便于右面提示
                 canBeCancleInfo.roomId = it->roomId;
+                // roomSet.insert(it->roomId); // 可取消的房间放进集合，消除重复的，便于右面提示
                 canBeCancleInfo.state = it->state;
                 canBeCancle.push_back(canBeCancleInfo);
-                
+                cout << countLog + 1 << "." << globalDate[it->date-1] << " "
+                 << globalTime[it->time-1] << " "
+                 << it->roomId << "号机房 "
+                 << globalState[it->state] << endl;
+                countLog++;
             }                                              
         } 
-    for (vector<AppointInfo>::iterator it = canBeCancle.begin();
-        it != canBeCancle.end(); it++) 
-        {
-            cout << globalDate[it->date-1] << " "
-                 << globalTime[it->time-1] << " "
-                 << it->roomId << "号机房 "
-                 << globalState[it->state] << endl;
-        }
-    cout << "请输入日期" << endl;
-    osv.showAppointmenDate();
-    int inputDate;
-    cin >> inputDate;
-    cout << "请输入时间" << endl;
-    osv.showAppointmenTime();
-    int inputTime;
-    cin >> inputTime;
-    cout << "请输入机房" << endl;
-    int inputRoomId;
-    cin >> inputRoomId;
+    // cout << "countlog:" << countLog << endl;
+    // 改变制定的预约的状态为取消
+    vector<AppointInfo>::iterator itcancleChoice = this->setStateToCancel(countLog, canBeCancle);
+    logNum++;
+    if (itcancleChoice == canBeCancle.end())
+    {
+        return;
+    }
+    
 
-    /***
-     * 
-     * 需要添加一个输入的判断，判断输入是否和可取消的吻合
-     * 
-     */
+    // 保存到本地
+    // cout << this->logNum << endl;
+    saveLog(logNum, itcancleChoice->date, itcancleChoice->time, this->id, this->name, itcancleChoice->roomId, cancle);
+    
+    cout << "您已成功取消：" << endl;
+    cout << globalDate[itcancleChoice->date-1] << " "
+            << globalTime[itcancleChoice->time-1] << " "
+            << itcancleChoice->roomId << "号机房 "
+            << globalState[1] << endl;
+}
 
+/*******************************************
+* 函数名：
+* 功能：取消预约，取消的只能是状态为审核中，通过审核的
+* 参数：int countLog, vector<AppointInfo>
+* 返回值：vector<AppointInfo>::iterator
+********************************************/
+vector<AppointInfo>::iterator Student::setStateToCancel(int countLog, vector<AppointInfo> & canBeCancle)
+{
+    cout << "请选择取消的预约编号，0退出：" << endl;
+    // cout << countLog << endl;
+    int cancelChoice;
+    cin >> cancelChoice;
+    if (cancelChoice == 0)
+    {
+        return canBeCancle.end();
+    }
+    
+    while (cancelChoice <0 || cancelChoice > countLog)
+    {
+        cout << "输入错误，请再次请选择取消的预约编号：" << endl;
+        cin >> cancelChoice;
+    }   
+    vector<AppointInfo>::iterator itcancleChoice = canBeCancle.begin();  
+    advance(itcancleChoice, cancelChoice - 1);
+    itcancleChoice->state = 1;
+    return itcancleChoice;
+}
 
-    for (vector<AppointInfo>::iterator it = canBeCancle.begin();
-        it != canBeCancle.end(); it++) 
-        {
-            if (it->date == inputDate && it->time == inputTime
-            && it->roomId == inputRoomId)
-            {
-                it->state = cancle;
-            }  
-        }
-    for (vector<AppointInfo>::iterator it = canBeCancle.begin();
-        it != canBeCancle.end(); it++) 
-        {
-            cout << globalDate[it->date-1] << " "
-                 << globalTime[it->time-1] << " "
-                 << it->roomId << "号机房 "
-                 << globalState[it->state] << endl;
-        }
-    /***
-     * 
-     * 需要添加一个保存到本地的功能
-     * 
-     */

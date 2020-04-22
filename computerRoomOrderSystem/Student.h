@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <set>
 #include "global.h"
 #include "OrderSystemView.h"
 #include "Identity.h"
@@ -26,6 +27,7 @@ public:
     void getPersonalLog();   // 获取个人记录
     void checkAllAppointment(); // 查看所有人预约
     void cancelOrder();      // 取消预约
+    vector<AppointInfo>::iterator setStateToCancel(int countLog, vector<AppointInfo> & canBeCancle);
     ~Student();
 };
 

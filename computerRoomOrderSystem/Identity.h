@@ -4,14 +4,6 @@
 #include "OrderSystemView.h"
 using namespace std;
 
-enum AppointmentState
-{
-    audit, 
-    cancle,
-    success,
-    fail
-};
-
 enum AppointmentDate
 {
     Monday, 

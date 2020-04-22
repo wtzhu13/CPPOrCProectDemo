@@ -169,7 +169,7 @@ void OrderSystemView::showAppointmenRoom(unsigned int num[])
 	cout << "机房信息" << endl;
 	for (int i = 0; i < 3; i++)
 	{
-		cout << i << ".机房" << i+1 << "剩余容量："<< num[i] << endl;
+		cout << i+1 << ".机房" << i+1 << "剩余容量："<< num[i] << endl;
 	}	
 	cout << "请选择机房：" << endl;
 }
