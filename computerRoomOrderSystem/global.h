@@ -44,4 +44,5 @@ extern string globalState[];
 
 extern void saveLog(int logNumSave, int dateSave, int timeSave, int stuIdSave, string nameSave, int roomSave, int StateSave);
 extern int getLogNum();
+extern void waitKeyBoard();
 

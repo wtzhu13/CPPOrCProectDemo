@@ -43,13 +43,19 @@ void Identity::getroomMargin()
 {
     // 获取机房总量
     unsigned int roomGross[3] = {0};
-    unsigned int appointment[3] = {0};
+    unsigned int appointment[5][2][3] = {0};
     this->getRoomGross(roomGross);
     this->getAppointmentCount(appointment);
-    for (int i = 0; i < 3; i++)
+    for (int a = 0; a < 5; a++)
     {
-        roomMargin[i] = roomGross[i] - appointment[i];
-    }
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                roomMargin[a][i][j] = roomGross[j] - appointment[a][i][j];
+            }
+        }
+    }  
 }
 
 /*******************************************
@@ -81,34 +87,61 @@ void Identity::getRoomGross(unsigned int roomGross[])
 * 返回值：
 * 待改进，目前计算的一整天的剩余量，应该一天还分上午和下午，所以有六个数
 ********************************************/
-void Identity::getAppointmentCount(unsigned int appointment[])
+void Identity::getAppointmentCount(unsigned int appointment[5][2][3])
 {
     this->getPersonalLog(2);
     for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
             it != this->AllAppointment.end(); it++)
     {
-            switch (it->roomId)
+            // switch (it->roomId)
+            // {
+            // case 1:
+            //     if (it->state == audit || it->state == success) // 在审核中或者成功预约则为占位
+            //     {
+            //         if (it->time = 1) // 上午
+            //         {
+            //             appointment[0][0]++;
+            //         }
+            //         else              // 下午
+            //         {
+            //             appointment[1][0]++;
+            //         }
+                    
+                    
+            //     }           
+            //     break;
+            // case 2:
+            //     if (it->state == audit || it->state == success)
+            //     {
+            //         if (it->time = 1) // 上午
+            //         {
+            //             appointment[0][1]++;
+            //         }
+            //         else              // 下午
+            //         {
+            //             appointment[1][1]++;
+            //         }
+            //     } 
+            //     break;
+            // case 3:
+            //     if (it->state == audit || it->state == success)
+            //     {
+            //         if (it->time = 1) // 上午
+            //         {
+            //             appointment[0][2]++;
+            //         }
+            //         else              // 下午
+            //         {
+            //             appointment[1][2]++;
+            //         }
+            //     } 
+            //     break;
+            // default:
+            //     break;
+            // }
+            if (it->state == audit || it->state == success)
             {
-            case 1:
-                if (it->state == audit || it->state == success) // 在审核中或者成功预约则为占位
-                {
-                    appointment[0]++;
-                }           
-                break;
-            case 2:
-                if (it->state == audit || it->state == success)
-                {
-                    appointment[1]++;
-                } 
-                break;
-            case 3:
-                if (it->state == audit || it->state == success)
-                {
-                    appointment[2]++;
-                } 
-                break;
-            default:
-                break;
+                appointment[it->date - 1][it->time - 1][it->roomId - 1]++;
             }
     }
 }

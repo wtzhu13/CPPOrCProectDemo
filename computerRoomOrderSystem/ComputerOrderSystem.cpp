@@ -31,7 +31,9 @@ void ComputerOrderSystem::startSys()
             case 0:
                 this->exitSys();    //  退出系统
                 break;
-            default:
+            default:                
+                system("clear");
+                cout << "选择错误，请再次选择" << endl;
                 break;
         }
     }  
@@ -85,6 +87,7 @@ void ComputerOrderSystem::adminSys()
                 ad.clearOrder();
                 break;
             case 0: // 注销并退回到主菜单
+                system("clear");
                 return;
             default:
                 break;
@@ -142,6 +145,7 @@ void ComputerOrderSystem::stuSys()
     string name;
     if (this->judgeExist(&name, id, pwd, STUFILE))
     {
+        system("clear");
         cout << "欢迎学生" << name << "登录" << endl;
         Student stu(name, id);
         while (1)
@@ -164,6 +168,7 @@ void ComputerOrderSystem::stuSys()
                 stu.cancelOrder();
                 break;
             case 0:
+                system("clear");
                 return;       
             default:
                 break;
@@ -172,7 +177,8 @@ void ComputerOrderSystem::stuSys()
     }
     else
     {
-        cout << "用户名或密码不正确" << endl;
+        system("clear");
+        cout << "用户名或密码不正确,请再次输入" << endl;
     }  
 }
 

@@ -20,7 +20,7 @@ public:
     void showStuMenu();
     void showAppointmenDate();
     void showAppointmenTime();
-    void showAppointmenRoom(unsigned int num[]);
+    void showAppointmenRoom(int choiceDate, int choiceTime, unsigned int num[5][2][3]);
     void showPersonalAppointment(vector<AppointInfo> v);
     ~OrderSystemView();
 };

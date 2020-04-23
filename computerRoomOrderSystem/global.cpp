@@ -46,3 +46,21 @@ int getLogNum()
    return logNum;
 }
 
+/*******************************************
+* 函数名：
+* 功能：等待键盘，等同windo的system("pause")
+* 参数：
+* 返回值：
+********************************************/
+void waitKeyBoard()
+{
+    while (1)
+    {
+        cout << "请输入任意字母继续";
+        char a;
+        cin >> a;
+        break;
+    }
+    system("clear");
+    return;
+}

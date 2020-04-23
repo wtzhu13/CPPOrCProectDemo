@@ -34,20 +34,39 @@ void Student::initStuSys()
 void Student::appointment()
 {
     // 获取预约信息
+    system("clear");
     cout << "请输入申请预约的时间：" << endl;
     osv.showAppointmenDate();
     int choiceDate, choiceTime, choiceRoom;
     cin >> choiceDate;
+    while (choiceDate <=0 || choiceDate >5)
+    {
+        cout << "选择错误，请再次选择：" << endl;
+        cin >> choiceDate;
+    }
+    
     cout << "请输入申请预约的时间段：" << endl;
     osv.showAppointmenTime();
     cin >> choiceTime;
+    while (choiceTime < 1 || choiceTime > 2)
+    {
+        cout << "选择错误，请再次选择：" << endl;
+        cin >> choiceTime;
+    }
+    
     this->getroomMargin();
-    osv.showAppointmenRoom(this->roomMargin);
+    osv.showAppointmenRoom(choiceDate, choiceTime, this->roomMargin);
     cin >> choiceRoom;
+    while (choiceRoom < 1 || choiceRoom > 3)
+    {
+        cout << "选择错误，请再次选择：" << endl;
+        cin >> choiceRoom;
+    }
+    
 
     // 检查相同时间段是否有过预约
     int ret = this->checkSameTimeAppointment(choiceDate, choiceTime, this->id);
-    cout << "相同时间有预约为1：" << ret <<endl;
+    // cout << "相同时间有预约为1：" << ret <<endl;
 
     if (!ret)
     {
@@ -59,6 +78,7 @@ void Student::appointment()
     else
     {
         cout << "您无法预约该时间段" << endl;
+        system("clear");
     } 
 }
 
@@ -91,6 +111,7 @@ int Student::checkSameTimeAppointment(int date, int time, int stuId)
 ********************************************/
 void Student::checkAppointment()
 {
+    system("clear");
     if (this->judgeFileEmpty(ORDERFILE))
     {
         cout << "暂无预约！" << endl;
@@ -100,6 +121,7 @@ void Student::checkAppointment()
     cout << "预约信息：" << id << endl;
     this->getPersonalLog(1);   
     osv.showPersonalAppointment(this->vMyAppointment);
+    waitKeyBoard();
 }
 
 /*******************************************
@@ -119,6 +141,7 @@ void Student::cancelOrder()
     AppointInfo canBeCancleInfo;    // 临时存放可取消的信息结构体
     int countLog = 0;
     
+    system("clear");
     // 获取可以被取消的记录，放进vector容器中
     cout << "您的可取消预约：" << endl;
     for (vector<AppointInfo>::iterator it = this->vMyAppointment.begin();
@@ -165,6 +188,7 @@ void Student::cancelOrder()
             << globalTime[itcancleChoice->time-1] << " "
             << itcancleChoice->roomId << "号机房 "
             << globalState[1] << endl;
+    waitKeyBoard();
 }
 
 /*******************************************
@@ -206,6 +230,7 @@ vector<AppointInfo>::iterator Student::setStateToCancel(int countLog, vector<App
 ********************************************/
 void Student::checkAllAppointment()
 {
+    system("clear");
     if (this->judgeFileEmpty(ORDERFILE))
     {
         cout << "暂无预约！" << endl;
@@ -224,4 +249,5 @@ void Student::checkAllAppointment()
             << "姓名:" << it->stuName << " "
             << globalState[it->state] << endl;
     }  
+    waitKeyBoard();
 }
