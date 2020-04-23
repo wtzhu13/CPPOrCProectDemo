@@ -55,8 +55,16 @@ void Student::appointment()
     }
     
     this->getroomMargin();
+    
     osv.showAppointmenRoom(choiceDate, choiceTime, this->roomMargin);
     cin >> choiceRoom;
+
+    // 如果机房已满则无法预约
+    if (this->roomMargin[choiceDate-1][choiceTime-1][choiceRoom] <= 0)
+    {
+        cout << "您无法预约该时间段" << endl;
+        return;
+    }
     while (choiceRoom < 1 || choiceRoom > 3)
     {
         cout << "选择错误，请再次选择：" << endl;
@@ -70,6 +78,7 @@ void Student::appointment()
 
     if (!ret)
     {
+
         cout << "您已成功申请预约！" << endl;
         logNum ++;
         // 将预约信息保存至本地

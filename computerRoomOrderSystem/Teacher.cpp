@@ -18,6 +18,9 @@ Teacher::~Teacher()
 ********************************************/
 void Teacher::validOrder()
 {
+    this->AllAppointment.clear();
+    vector<AppointInfo> vWaiteValid;
+    
     int num = 1;
     this->getPersonalLog(2);
     system("clear");
@@ -27,6 +30,14 @@ void Teacher::validOrder()
     {
         if (it->state == audit)
         {
+            AppointInfo canBeValid;
+            canBeValid.date = it->date;
+            canBeValid.time = it->time;
+            canBeValid.stuId = it->stuId;
+            canBeValid.stuName = it->stuName;
+            canBeValid.roomId = it->roomId;
+            canBeValid.state = it->state; 
+
             cout << num << ". "
             << globalDate[it->date-1] << " "
             << globalTime[it->time-1] << " "
@@ -34,6 +45,8 @@ void Teacher::validOrder()
             << "ID:" << it->stuId << " "
             << "姓名:" << it->stuName << " "
             << globalState[it->state] << endl;
+
+            vWaiteValid.push_back(canBeValid);
             num++;
         }       
     }
@@ -55,7 +68,7 @@ void Teacher::validOrder()
         cout << "输入错误请再次输入：" << endl;
         cin >> stateChoice;
     }   
-    vector<AppointInfo>::iterator itSetCancle = this->AllAppointment.begin();  
+    vector<AppointInfo>::iterator itSetCancle = vWaiteValid.begin();  
     advance(itSetCancle, choice - 1);  // 提升迭代器，使得只想制定位置
     switch (stateChoice)
     {
@@ -82,7 +95,8 @@ void Teacher::validOrder()
     this->logNum = getLogNum();
 
     // 保存到本地
-    saveLog(this->logNum, itSetCancle->date, itSetCancle->time, 
+    saveLog(++this->logNum, itSetCancle->date, itSetCancle->time, 
             itSetCancle->stuId, itSetCancle->stuName, 
             itSetCancle->roomId, itSetCancle->state);
+    this->AllAppointment.clear();
 }

@@ -182,7 +182,7 @@ void Identity::filterSelfLog(AppointInfo tempAppointInfo)
 ********************************************/
 void Identity::filterAllfLog(AppointInfo tempAppointInfo)
 {
-    
+    // this->AllAppointment.clear();
     int tempFlag = 0;   
     for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
             it != this->AllAppointment.end(); it++) 
