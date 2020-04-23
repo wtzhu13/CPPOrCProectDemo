@@ -116,11 +116,11 @@ void OrderSystemView::showStuMenu()
 {
 	cout << "\t\t ----------------------------------\n";
 	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          1.申请预约              |\n";
+	cout << "\t\t|          1.申请预约               |\n";
 	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          2.查看我的预约          |\n";
+	cout << "\t\t|          2.查看我的预约           |\n";
 	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          3.查看所有预约          |\n";
+	cout << "\t\t|          3.查看所有预约           |\n";
 	cout << "\t\t|                                 |\n";
 	cout << "\t\t|          4.取消预约              |\n";
 	cout << "\t\t|                                 |\n";
@@ -196,4 +196,24 @@ void OrderSystemView::showPersonalAppointment(vector<AppointInfo> v)
                      << it->roomId << "号机房 "
                      << globalState[it->state] << endl;
 	        }   
+}
+
+/*******************************************
+* 函数名：
+* 功能：显示老师菜单
+* 参数：
+* 返回值：
+********************************************/
+void OrderSystemView::showTeacherMenu()
+{
+	cout << "\t\t ----------------------------------\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t|          1.查看所有预约            |\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t|          2.审核预约               |\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t|          0.注销登录               |\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t ----------------------------------\n";
+	cout << "请选择您的操作： " << endl;
 }

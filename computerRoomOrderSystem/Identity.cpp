@@ -93,52 +93,6 @@ void Identity::getAppointmentCount(unsigned int appointment[5][2][3])
     for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
             it != this->AllAppointment.end(); it++)
     {
-            // switch (it->roomId)
-            // {
-            // case 1:
-            //     if (it->state == audit || it->state == success) // 在审核中或者成功预约则为占位
-            //     {
-            //         if (it->time = 1) // 上午
-            //         {
-            //             appointment[0][0]++;
-            //         }
-            //         else              // 下午
-            //         {
-            //             appointment[1][0]++;
-            //         }
-                    
-                    
-            //     }           
-            //     break;
-            // case 2:
-            //     if (it->state == audit || it->state == success)
-            //     {
-            //         if (it->time = 1) // 上午
-            //         {
-            //             appointment[0][1]++;
-            //         }
-            //         else              // 下午
-            //         {
-            //             appointment[1][1]++;
-            //         }
-            //     } 
-            //     break;
-            // case 3:
-            //     if (it->state == audit || it->state == success)
-            //     {
-            //         if (it->time = 1) // 上午
-            //         {
-            //             appointment[0][2]++;
-            //         }
-            //         else              // 下午
-            //         {
-            //             appointment[1][2]++;
-            //         }
-            //     } 
-            //     break;
-            // default:
-            //     break;
-            // }
             if (it->state == audit || it->state == success)
             {
                 appointment[it->date - 1][it->time - 1][it->roomId - 1]++;
@@ -252,3 +206,32 @@ void Identity::filterAllfLog(AppointInfo tempAppointInfo)
     
 }
 
+/*******************************************
+* 函数名：
+* 功能：查看所有人预约
+* 参数：
+* 返回值：
+********************************************/
+void Identity::checkAllAppointment()
+{
+    system("clear");
+    if (this->judgeFileEmpty(ORDERFILE))
+    {
+        cout << "暂无预约！" << endl;
+        return;
+    } 
+    AllAppointment.clear(); 
+    cout << "预约信息：" << endl;
+    this->getPersonalLog(2);
+    for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
+            it != this->AllAppointment.end(); it++)
+    {
+        cout << globalDate[it->date-1] << " "
+            << globalTime[it->time-1] << " "
+            << it->roomId << "号机房 " << " "
+            << "ID:" << it->stuId << " "
+            << "姓名:" << it->stuName << " "
+            << globalState[it->state] << endl;
+    }  
+    waitKeyBoard();
+}

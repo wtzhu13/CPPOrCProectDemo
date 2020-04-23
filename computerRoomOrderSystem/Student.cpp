@@ -222,32 +222,3 @@ vector<AppointInfo>::iterator Student::setStateToCancel(int countLog, vector<App
     return itcancleChoice;
 }
 
-/*******************************************
-* 函数名：
-* 功能：查看所有人预约
-* 参数：
-* 返回值：
-********************************************/
-void Student::checkAllAppointment()
-{
-    system("clear");
-    if (this->judgeFileEmpty(ORDERFILE))
-    {
-        cout << "暂无预约！" << endl;
-        return;
-    } 
-    AllAppointment.clear(); 
-    cout << "预约信息：" << endl;
-    this->getPersonalLog(2);
-    for (vector<AppointInfo>::iterator it = this->AllAppointment.begin();
-            it != this->AllAppointment.end(); it++)
-    {
-        cout << globalDate[it->date-1] << " "
-            << globalTime[it->time-1] << " "
-            << it->roomId << "号机房 " << " "
-            << "ID:" << it->stuId << " "
-            << "姓名:" << it->stuName << " "
-            << globalState[it->state] << endl;
-    }  
-    waitKeyBoard();
-}

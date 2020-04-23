@@ -1,7 +1,9 @@
 #include "Teacher.h"
 
-Teacher::Teacher(/* args */)
+Teacher::Teacher(int id, string name)
 {
+    this->id = id;
+    this->name = name;
 }
 
 Teacher::~Teacher()
@@ -14,7 +16,7 @@ Teacher::~Teacher()
 * 参数：
 * 返回值：
 ********************************************/
-void Teacher::login()
+void Teacher::validOrder()
 {
 
 }

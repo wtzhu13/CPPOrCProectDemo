@@ -8,7 +8,7 @@
 #include "Identity.h"
 using namespace std;
 
-class Student : Identity
+class Student : public Identity
 {
 private:
     
@@ -29,7 +29,7 @@ public:
     // void getPersonalLog(int flag);   // 获取个人记录
     // void filterAllfLog(AppointInfo tempAppointInfo);
     // void filterSelfLog(AppointInfo tempAppointInfo);
-    void checkAllAppointment(); // 查看所有人预约
+    // void checkAllAppointment(); // 查看所有人预约
     void cancelOrder();      // 取消预约
     vector<AppointInfo>::iterator setStateToCancel(int countLog, vector<AppointInfo> & canBeCancle);
     ~Student();

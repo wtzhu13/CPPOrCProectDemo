@@ -5,7 +5,7 @@
 #include "OrderSystemView.h"
 using namespace std;
 
-class Administrator : Identity
+class Administrator : public Identity
 {
 private:
     /* data */

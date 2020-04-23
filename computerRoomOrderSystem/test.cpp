@@ -6,15 +6,49 @@
  
 using namespace std;
 
-void func(int (*a)[3])
+class Base
 {
+private:
+    /* data */
+public:
+    Base(/* args */);
+    void func();
+    ~Base();
+};
 
+Base::Base(/* args */)
+{
 }
- 
-int main(int argc, const char *argv[])
-{
-    int a[2][3] = {1, 2, 3, 4, 5, 6};
-    func(a);
 
+void Base::func(/* args */)
+{
+    cout << "hello" << endl;
+}
+
+Base::~Base()
+{
+}
+
+class Son: public Base
+{
+private:
+    /* data */
+public:
+    Son(/* args */);
+    ~Son();
+};
+
+Son::Son(/* args */)
+{
+}
+
+Son::~Son()
+{
+}
+
+int main(int argc, char const *argv[])
+{
+    Son s;
+    s.func();
     return 0;
 }

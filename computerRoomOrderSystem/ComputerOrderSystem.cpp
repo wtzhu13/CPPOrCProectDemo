@@ -197,12 +197,35 @@ void ComputerOrderSystem::teacherSys()
     int pwd;
     cin >> pwd;
     string name;
-    if (this->judgeExist(& name, id, pwd, TEACHERFILE))
+    if (this->judgeExist(&name, id, pwd, TEACHERFILE))
     {
+        system("clear");
         cout << "欢迎老师" << name << "登录" << endl;
+        Teacher teacher(id, name);
+        while (1)
+        {
+            osv.showTeacherMenu();
+            int choice;
+            cin >> choice;
+            switch (choice)
+            {
+            case 1:
+                teacher.checkAllAppointment();
+                break;
+            case 2:
+                teacher.validOrder();
+                break;
+            case 0:
+                system("clear");
+                return;       
+            default:
+                break;
+            }
+        }        
     }
     else
     {
-        cout << "用户名或密码不正确" << endl;
-    }  
+        system("clear");
+        cout << "用户名或密码不正确,请再次输入" << endl;
+    }   
 }

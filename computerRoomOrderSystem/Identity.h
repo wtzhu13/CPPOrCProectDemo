@@ -26,5 +26,6 @@ public:
     void getPersonalLog(int flag);   // 获取个人记录
     void filterAllfLog(AppointInfo tempAppointInfo);
     void filterSelfLog(AppointInfo tempAppointInfo);
+    void checkAllAppointment();
     ~Identity();
 };

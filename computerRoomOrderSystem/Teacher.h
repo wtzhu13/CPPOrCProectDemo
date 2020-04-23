@@ -4,14 +4,14 @@
 #include "Identity.h"
 using namespace std;
 
-class Teacher
+class Teacher : public Identity
 {
 private:
     /* data */
 public:
     OrderSystemView osv;
-    Teacher(/* args */);
-    void login();
+    Teacher(int id, string name);
+    void validOrder();
     ~Teacher();
 };
 

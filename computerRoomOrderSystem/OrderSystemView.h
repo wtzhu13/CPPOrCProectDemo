@@ -18,6 +18,7 @@ public:
     void showAddUsrMenu();
     void showUsrInfoMenu();
     void showStuMenu();
+    void showTeacherMenu();
     void showAppointmenDate();
     void showAppointmenTime();
     void showAppointmenRoom(int choiceDate, int choiceTime, unsigned int num[5][2][3]);
