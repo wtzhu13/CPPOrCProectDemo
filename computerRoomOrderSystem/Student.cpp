@@ -63,6 +63,7 @@ void Student::appointment()
     if (this->roomMargin[choiceDate-1][choiceTime-1][choiceRoom] <= 0)
     {
         cout << "您无法预约该时间段" << endl;
+        waitKeyBoard();
         return;
     }
     while (choiceRoom < 1 || choiceRoom > 3)
@@ -87,7 +88,7 @@ void Student::appointment()
     else
     {
         cout << "您无法预约该时间段" << endl;
-        system("clear");
+        waitKeyBoard();
     } 
 }
 

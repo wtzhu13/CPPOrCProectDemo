@@ -115,16 +115,16 @@ void OrderSystemView::showUsrInfoMenu()
 void OrderSystemView::showStuMenu()
 {
 	cout << "\t\t ----------------------------------\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t|          1.申 请 预 约             |\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t|          2.查看我的预约            |\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t|          3.查看所有预约            |\n";
+	cout << "\t\t|                                  |\n";
+	cout << "\t\t|          4.取 消 预 约            |\n";
 	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          1.申请预约               |\n";
-	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          2.查看我的预约           |\n";
-	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          3.查看所有预约           |\n";
-	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          4.取消预约              |\n";
-	cout << "\t\t|                                 |\n";
-	cout << "\t\t|          0.注销登录              |\n";
+	cout << "\t\t|          0.注 销 登 录            |\n";
 	cout << "\t\t|                                 |\n";
 	cout << "\t\t ----------------------------------\n";
 	cout << "请选择您的操作： " << endl;
