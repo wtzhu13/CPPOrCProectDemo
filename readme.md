@@ -13,3 +13,15 @@ some projects for you to practice your programming skills which used C or CPP, y
 一个简单的演讲比赛系统，主要通过C++面向对象和STL实现，用于联系STL相关知识
 
 主要功能开始比赛，可以生成参赛人员并给员工打分并显示晋级名单，最终获胜名单保存在本地CSV表格中，可以查看本地记录，并可清楚以往记录。
+
+### IDE
+
+一个简单的C语言IDE工具，里用QT和C语言语法实现。可以完成C的编辑和编译运行功能。
+
+### computerRoomOrderSystem(终端版本)
+
+利用C++基础和STL相关技能打造的一个预约系统，本案例打造的是一款机房预约系统，也可以利用这种架构打造其他的预约系统。
+
+### addressList
+
+利用QT打造的一款简易的通讯录，可以完成通讯录的增删改查，本案例利用了数据库来存储本地数据。
