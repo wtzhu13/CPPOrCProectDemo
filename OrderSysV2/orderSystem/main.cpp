@@ -1,8 +1,9 @@
 #include "widget.h"
 
 #include <QApplication>
-#include "connection.h"
+#include <QDebug>
 #include "dialog.h"
+#include "connection.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,14 +14,15 @@ int main(int argc, char *argv[])
     if(connectDatabase())
     {
         qDebug()<<"连接成功"<<endl;
+        if(login.exec() == QDialog::Accepted){
+            w.show();
+            return a.exec();
+        }
     }
     else
     {
         qDebug()<<"连接失败"<<endl;
     }
-    if(login.exec() == QDialog::Accepted){
-        w.show();
-        return a.exec();
-    }
+
     return 0;
 }

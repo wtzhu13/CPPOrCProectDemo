@@ -11,9 +11,9 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -22,38 +22,42 @@ class Ui_Widget
 {
 public:
     QPushButton *pushButton;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
-    QLabel *label;
-    QLabel *label_2;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_roomInfo;
+    QPushButton *pushButton_5;
+    QTableView *tableView;
 
     void setupUi(QWidget *Widget)
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QString::fromUtf8("Widget"));
-        Widget->resize(455, 262);
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        Widget->resize(922, 527);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Widget->sizePolicy().hasHeightForWidth());
         Widget->setSizePolicy(sizePolicy);
         Widget->setMinimumSize(QSize(455, 262));
-        Widget->setMaximumSize(QSize(455, 462));
+        Widget->setMaximumSize(QSize(65535, 65535));
         pushButton = new QPushButton(Widget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(170, 190, 112, 32));
-        lineEdit = new QLineEdit(Widget);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(130, 80, 231, 21));
-        lineEdit_2 = new QLineEdit(Widget);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(130, 130, 231, 21));
-        label = new QLabel(Widget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(80, 80, 58, 16));
-        label_2 = new QLabel(Widget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(80, 130, 58, 16));
+        pushButton->setGeometry(QRect(60, 470, 112, 32));
+        pushButton_2 = new QPushButton(Widget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setGeometry(QRect(220, 470, 112, 32));
+        pushButton_3 = new QPushButton(Widget);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setGeometry(QRect(380, 470, 112, 32));
+        pushButton_roomInfo = new QPushButton(Widget);
+        pushButton_roomInfo->setObjectName(QString::fromUtf8("pushButton_roomInfo"));
+        pushButton_roomInfo->setGeometry(QRect(530, 470, 112, 32));
+        pushButton_5 = new QPushButton(Widget);
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+        pushButton_5->setGeometry(QRect(680, 470, 112, 32));
+        tableView = new QTableView(Widget);
+        tableView->setObjectName(QString::fromUtf8("tableView"));
+        tableView->setGeometry(QRect(10, 10, 901, 451));
 
         retranslateUi(Widget);
 
@@ -63,9 +67,11 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "OrderSystem", nullptr));
-        pushButton->setText(QApplication::translate("Widget", "\347\231\273\345\275\225", nullptr));
-        label->setText(QApplication::translate("Widget", "\347\224\250\346\210\267\345\220\215", nullptr));
-        label_2->setText(QApplication::translate("Widget", "\345\257\206  \347\240\201", nullptr));
+        pushButton->setText(QApplication::translate("Widget", "\346\237\245\350\257\242\347\224\250\346\210\267", nullptr));
+        pushButton_2->setText(QApplication::translate("Widget", "\346\267\273\345\212\240\347\224\250\346\210\267", nullptr));
+        pushButton_3->setText(QApplication::translate("Widget", "\345\210\240\351\231\244\347\224\250\346\210\267", nullptr));
+        pushButton_roomInfo->setText(QApplication::translate("Widget", "\346\237\245\347\234\213\346\234\272\346\210\277\344\277\241\346\201\257", nullptr));
+        pushButton_5->setText(QApplication::translate("Widget", "\346\270\205\347\251\272\351\242\204\347\272\246", nullptr));
     } // retranslateUi
 
 };

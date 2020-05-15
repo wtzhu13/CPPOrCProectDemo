@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {  
     ui->setupUi(this);
     model = new QSqlTableModel(this);
-    model->setTable("phoneNum");
+    model->setTable("phonenum");
     model->select();
 //    model->removeColumn(0); //不显示id属性列,如果这时添加记录，则该属性的值添加不上
     // 设置编辑策略

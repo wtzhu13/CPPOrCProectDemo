@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.12.0, 2020-05-13T17:15:01. -->
+<!-- Written by QtCreator 4.12.0, 2020-05-15T20:04:30. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -308,8 +308,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/study/language_C/addressList/addressList/addressList.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/study/language_C/addressList/addressList/addressList.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">addressList2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/study/CPPOrCProectDemo/addressList/addressList/addressList.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/study/CPPOrCProectDemo/addressList/addressList/addressList.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

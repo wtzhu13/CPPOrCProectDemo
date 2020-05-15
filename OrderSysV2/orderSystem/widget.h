@@ -2,6 +2,14 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QDebug>
+#include <QtWidgets/QMessageBox>
+#include <QSqlDatabase>
+#include <QDebug>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QString>
+#include <QSqlTableModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -18,7 +26,10 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_pushButton_roomInfo_clicked();
+
 private:
     Ui::Widget *ui;
+    QSqlTableModel *model;
 };
 #endif // WIDGET_H
