@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include <QDebug>
+#include <QtWidgets/QMessageBox>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -23,5 +24,5 @@ Widget::~Widget()
 ************************************************/
 void Widget::on_pushButton_clicked()
 {
-    qDebug() << "登录";
+    qDebug() << "HELLO";
 }

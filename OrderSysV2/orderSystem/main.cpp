@@ -2,12 +2,13 @@
 
 #include <QApplication>
 #include "connection.h"
-
+#include "dialog.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Widget w;
+    Dialog login;
     qDebug() << "hello";
     if(connectDatabase())
     {
@@ -17,6 +18,9 @@ int main(int argc, char *argv[])
     {
         qDebug()<<"连接失败"<<endl;
     }
-    w.show();
-    return a.exec();
+    if(login.exec() == QDialog::Accepted){
+        w.show();
+        return a.exec();
+    }
+    return 0;
 }

@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include <QSqlError>
+#include "globalConfig.h"
 
 /************************************************
 * 函数名：connectDatabase()
@@ -16,11 +17,11 @@
 bool connectDatabase()
 {
     QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");   //主机名称，如localhost
-    db.setDatabaseName("addresslist");    //数据库名称
-    db.setPort(3306);              //数据库端口号
-    db.setUserName("root");        //用户名称
-    db.setPassword("123456");      //用户密码
+    db.setHostName(dataBaseIP);   //主机名称，如localhost
+    db.setDatabaseName(dataBase);    //数据库名称
+    db.setPort(dataBasePort);              //数据库端口号
+    db.setUserName(dataBaseUser);        //用户名称
+    db.setPassword(dataBasePWD);      //用户密码
     db.open();
     if(db.isOpen())
     {
