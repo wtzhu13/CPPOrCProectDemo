@@ -28,6 +28,12 @@ private slots:
 
     void on_pushButton_roomInfo_clicked();
 
+    void on_pushButton_addUser_clicked();
+
+    void on_pushButton_delUser_clicked();
+
+    void on_pushButton_clearOrder_clicked();
+
 private:
     Ui::Widget *ui;
     QSqlTableModel *model;

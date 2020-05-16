@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>922</width>
-    <height>527</height>
+    <width>581</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,8 +34,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>470</y>
+     <x>100</x>
+     <y>440</y>
      <width>112</width>
      <height>32</height>
     </rect>
@@ -44,11 +44,11 @@
     <string>查询用户</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="pushButton_addUser">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>470</y>
+     <x>210</x>
+     <y>440</y>
      <width>112</width>
      <height>32</height>
     </rect>
@@ -57,11 +57,11 @@
     <string>添加用户</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="pushButton_delUser">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>470</y>
+     <x>320</x>
+     <y>440</y>
      <width>112</width>
      <height>32</height>
     </rect>
@@ -73,8 +73,8 @@
   <widget class="QPushButton" name="pushButton_roomInfo">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>470</y>
+     <x>280</x>
+     <y>480</y>
      <width>112</width>
      <height>32</height>
     </rect>
@@ -83,11 +83,11 @@
     <string>查看机房信息</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="pushButton_clearOrder">
    <property name="geometry">
     <rect>
-     <x>680</x>
-     <y>470</y>
+     <x>160</x>
+     <y>480</y>
      <width>112</width>
      <height>32</height>
     </rect>
@@ -99,10 +99,10 @@
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>901</width>
-     <height>451</height>
+     <x>30</x>
+     <y>20</y>
+     <width>511</width>
+     <height>401</height>
     </rect>
    </property>
   </widget>

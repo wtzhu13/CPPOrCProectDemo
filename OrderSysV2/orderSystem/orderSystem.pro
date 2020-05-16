@@ -18,16 +18,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     dialog.cpp \
     main.cpp \
+    student.cpp \
+    teacher.cpp \
     widget.cpp
 
 HEADERS += \
     connection.h \
     dialog.h \
     globalConfig.h \
+    student.h \
+    teacher.h \
     widget.h
 
 FORMS += \
     dialog.ui \
+    student.ui \
+    teacher.ui \
     widget.ui
 
 QT += sql

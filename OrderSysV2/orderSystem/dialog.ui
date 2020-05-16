@@ -34,8 +34,8 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>70</y>
+     <x>190</x>
+     <y>90</y>
      <width>113</width>
      <height>20</height>
     </rect>
@@ -44,18 +44,21 @@
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>110</y>
+     <x>190</x>
+     <y>130</y>
      <width>113</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
    </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>80</y>
+     <x>120</x>
+     <y>100</y>
      <width>54</width>
      <height>12</height>
     </rect>
@@ -67,8 +70,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>110</y>
+     <x>120</x>
+     <y>130</y>
      <width>54</width>
      <height>12</height>
     </rect>
@@ -80,14 +83,52 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>170</y>
-     <width>75</width>
-     <height>23</height>
+     <x>150</x>
+     <y>210</y>
+     <width>121</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>登录</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>160</y>
+     <width>113</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>学生</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>老师</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>管理员</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>170</y>
+     <width>58</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>用户身份</string>
    </property>
   </widget>
  </widget>

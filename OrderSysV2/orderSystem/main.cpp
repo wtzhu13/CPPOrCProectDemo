@@ -1,5 +1,4 @@
 #include "widget.h"
-
 #include <QApplication>
 #include <QDebug>
 #include "dialog.h"
@@ -8,13 +7,14 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Widget w;
+
     Dialog login;
     qDebug() << "hello";
     if(connectDatabase())
     {
         qDebug()<<"连接成功"<<endl;
         if(login.exec() == QDialog::Accepted){
+            Widget w;
             w.show();
             return a.exec();
         }
@@ -24,5 +24,5 @@ int main(int argc, char *argv[])
         qDebug()<<"连接失败"<<endl;
     }
 
-    return 0;
+    return a.exec();
 }

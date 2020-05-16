@@ -52,10 +52,14 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../orderSystem/main.cpp \
-		../orderSystem/widget.cpp moc_widget.cpp
-OBJECTS       = main.o \
+SOURCES       = ../orderSystem/dialog.cpp \
+		../orderSystem/main.cpp \
+		../orderSystem/widget.cpp moc_dialog.cpp \
+		moc_widget.cpp
+OBJECTS       = dialog.o \
+		main.o \
 		widget.o \
+		moc_dialog.o \
 		moc_widget.o
 DIST          = /Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/bigfish/Qt/5.12.2/clang_64/mkspecs/qdevice.pri \
@@ -228,7 +232,11 @@ DIST          = /Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/spec_pre.prf 
 		/Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/exceptions.prf \
 		/Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/yacc.prf \
 		/Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/lex.prf \
-		../orderSystem/orderSystem.pro ../orderSystem/widget.h ../orderSystem/main.cpp \
+		../orderSystem/orderSystem.pro ../orderSystem/connection.h \
+		../orderSystem/dialog.h \
+		../orderSystem/globalConfig.h \
+		../orderSystem/widget.h ../orderSystem/dialog.cpp \
+		../orderSystem/main.cpp \
 		../orderSystem/widget.cpp
 QMAKE_TARGET  = orderSystem
 DESTDIR       = 
@@ -248,7 +256,7 @@ include /Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-orderSystem.app/Contents/MacOS/orderSystem: ui_widget.h $(OBJECTS)  
+orderSystem.app/Contents/MacOS/orderSystem: ui_dialog.h ui_widget.h $(OBJECTS)  
 	@test -d orderSystem.app/Contents/MacOS/ || mkdir -p orderSystem.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -635,9 +643,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../orderSystem/widget.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../orderSystem/main.cpp ../orderSystem/widget.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../orderSystem/widget.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../orderSystem/connection.h ../orderSystem/dialog.h ../orderSystem/globalConfig.h ../orderSystem/widget.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../orderSystem/dialog.cpp ../orderSystem/main.cpp ../orderSystem/widget.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../orderSystem/dialog.ui ../orderSystem/widget.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -672,12 +680,31 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Users/bigfish/Qt/5.12.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_widget.cpp
+compiler_moc_header_make_all: moc_dialog.cpp moc_widget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_widget.cpp
+	-$(DEL_FILE) moc_dialog.cpp moc_widget.cpp
+moc_dialog.cpp: ../orderSystem/dialog.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		moc_predefs.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/bin/moc
+	/Users/bigfish/Qt/5.12.2/clang_64/bin/moc $(DEFINES) --include /Users/bigfish/Documents/wtzhu/C/CPPOrCProectDemo/OrderSysV2/build-orderSystem-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/Users/bigfish/Qt/5.12.2/clang_64/mkspecs/macx-clang -I/Users/bigfish/Documents/wtzhu/C/CPPOrCProectDemo/OrderSysV2/orderSystem -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtGui.framework/Headers -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/bigfish/Qt/5.12.2/clang_64/lib ../orderSystem/dialog.h -o moc_dialog.cpp
+
 moc_widget.cpp: ../orderSystem/widget.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		moc_predefs.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/bin/moc
 	/Users/bigfish/Qt/5.12.2/clang_64/bin/moc $(DEFINES) --include /Users/bigfish/Documents/wtzhu/C/CPPOrCProectDemo/OrderSysV2/build-orderSystem-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/Users/bigfish/Qt/5.12.2/clang_64/mkspecs/macx-clang -I/Users/bigfish/Documents/wtzhu/C/CPPOrCProectDemo/OrderSysV2/orderSystem -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtGui.framework/Headers -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers -I/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/bigfish/Qt/5.12.2/clang_64/lib ../orderSystem/widget.h -o moc_widget.cpp
@@ -686,9 +713,13 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_widget.h
+compiler_uic_make_all: ui_dialog.h ui_widget.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_widget.h
+	-$(DEL_FILE) ui_dialog.h ui_widget.h
+ui_dialog.h: ../orderSystem/dialog.ui \
+		/Users/bigfish/Qt/5.12.2/clang_64/bin/uic
+	/Users/bigfish/Qt/5.12.2/clang_64/bin/uic ../orderSystem/dialog.ui -o ui_dialog.h
+
 ui_widget.h: ../orderSystem/widget.ui \
 		/Users/bigfish/Qt/5.12.2/clang_64/bin/uic
 	/Users/bigfish/Qt/5.12.2/clang_64/bin/uic ../orderSystem/widget.ui -o ui_widget.h
@@ -705,11 +736,21 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
+dialog.o: ../orderSystem/dialog.cpp ../orderSystem/dialog.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_dialog.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlquery.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialog.o ../orderSystem/dialog.cpp
+
 main.o: ../orderSystem/main.cpp ../orderSystem/widget.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -717,16 +758,40 @@ main.o: ../orderSystem/main.cpp ../orderSystem/widget.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlError \
-		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlerror.h
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../orderSystem/dialog.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../orderSystem/connection.h \
+		../orderSystem/globalConfig.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../orderSystem/main.cpp
 
 widget.o: ../orderSystem/widget.cpp ../orderSystem/widget.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		ui_widget.h \
 		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		/Users/bigfish/Qt/5.12.2/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		ui_widget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o widget.o ../orderSystem/widget.cpp
+
+moc_dialog.o: moc_dialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialog.o moc_dialog.cpp
 
 moc_widget.o: moc_widget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_widget.o moc_widget.cpp
