@@ -28,6 +28,7 @@ public:
     QLabel *label_2;
     QPushButton *pushButton;
     QComboBox *comboBox;
+    QLabel *label_3;
 
     void setupUi(QDialog *Dialog)
     {
@@ -56,13 +57,16 @@ public:
         label_2->setGeometry(QRect(120, 130, 54, 12));
         pushButton = new QPushButton(Dialog);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(150, 170, 121, 31));
+        pushButton->setGeometry(QRect(150, 210, 121, 31));
         comboBox = new QComboBox(Dialog);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(150, 40, 91, 32));
+        comboBox->setGeometry(QRect(180, 170, 113, 31));
+        label_3 = new QLabel(Dialog);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(120, 170, 58, 16));
 
         retranslateUi(Dialog);
 
@@ -79,6 +83,7 @@ public:
         comboBox->setItemText(1, QApplication::translate("Dialog", "\350\200\201\345\270\210", nullptr));
         comboBox->setItemText(2, QApplication::translate("Dialog", "\347\256\241\347\220\206\345\221\230", nullptr));
 
+        label_3->setText(QApplication::translate("Dialog", "\347\224\250\346\210\267\350\272\253\344\273\275", nullptr));
     } // retranslateUi
 
 };

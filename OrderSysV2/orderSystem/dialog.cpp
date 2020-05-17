@@ -1,9 +1,5 @@
 #include "dialog.h"
 #include "ui_dialog.h"
-#include <QtWidgets/QMessageBox>
-#include <QDebug>
-#include <QString>
-#include <QSqlQuery>
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -50,9 +46,11 @@ void Dialog::on_pushButton_clicked()
     }
 }
 
-//void Dialog::on_comboBox_currentIndexChanged(const QString &arg1)
-//{
-//    QString str = ui->com_index_string->currentText();
-//    qDebug()<<"Text:"<< str;
 
-//}
+
+void Dialog::on_comboBox_currentIndexChanged(int index)
+{
+    index = ui->comboBox->currentIndex();
+    globalIndex = 1;
+    qDebug() << index;
+}

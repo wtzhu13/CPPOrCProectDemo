@@ -7,13 +7,6 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
     qDebug() << "all";
-//    model = new QSqlTableModel(this);
-//    model->setTable("user_info");
-//    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-//    model->select();
-//    model->removeColumn(0); //不显示id属性列,如果这时添加记录，则该属性的值添加不上
-//    ui->tableView->setModel(model);
-
 }
 
 Widget::~Widget()

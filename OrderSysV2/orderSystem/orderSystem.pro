@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     dialog.cpp \
+    global.cpp \
     main.cpp \
     student.cpp \
     teacher.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     connection.h \
     dialog.h \
+    global.h \
     globalConfig.h \
     student.h \
     teacher.h \

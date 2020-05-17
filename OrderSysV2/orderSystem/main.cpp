@@ -3,6 +3,9 @@
 #include <QDebug>
 #include "dialog.h"
 #include "connection.h"
+#include "student.h"
+#include "teacher.h"
+#include "global.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,9 +17,26 @@ int main(int argc, char *argv[])
     {
         qDebug()<<"连接成功"<<endl;
         if(login.exec() == QDialog::Accepted){
-            Widget w;
-            w.show();
-            return a.exec();
+            switch (globalIndex) {
+                case 0:
+                    Widget w;
+                    w.show();
+                    return a.exec();
+                break;
+//                case 1:
+//                    Student stu;
+//                    stu.show();
+//                    return a.exec();
+//                break;
+//                case 2:
+//                    Teacher teacher;
+//                    teacher.show();
+//                    return a.exec();
+//                break;
+//                default:
+//                    breack;
+            }
+
         }
     }
     else

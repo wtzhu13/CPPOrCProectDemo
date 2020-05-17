@@ -2,6 +2,11 @@
 #define DIALOG_H
 
 #include <QDialog>
+#include <QtWidgets/QMessageBox>
+#include <QDebug>
+#include <QString>
+#include <QSqlQuery>
+#include "global.h"
 
 namespace Ui {
 class Dialog;
@@ -17,6 +22,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    
+    void on_comboBox_currentIndexChanged(int index);
 
 private:
     Ui::Dialog *ui;
