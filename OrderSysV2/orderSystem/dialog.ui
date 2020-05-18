@@ -103,47 +103,6 @@
     <string>登录</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>190</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>学生</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>老师</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>管理员</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>190</y>
-     <width>58</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>用户身份</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="loginTitle">
    <property name="geometry">
     <rect>

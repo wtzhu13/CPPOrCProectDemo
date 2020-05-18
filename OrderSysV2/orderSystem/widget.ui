@@ -116,7 +116,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>确认修改</string>
+    <string>保存修改</string>
    </property>
   </widget>
  </widget>
