@@ -34,8 +34,11 @@ private slots:
 
     void on_pushButton_clearOrder_clicked();
 
+    void on_pushButton_modifyUserInfo_clicked();
+
 private:
     Ui::Widget *ui;
     QSqlTableModel *model;
+    QSqlTableModel *roomModel;
 };
 #endif // WIDGET_H

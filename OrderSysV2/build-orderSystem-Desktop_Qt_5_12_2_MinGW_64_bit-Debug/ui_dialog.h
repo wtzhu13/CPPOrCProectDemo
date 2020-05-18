@@ -55,9 +55,11 @@ public:
         label = new QLabel(Dialog);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(120, 110, 54, 12));
+        label->setAlignment(Qt::AlignCenter);
         label_2 = new QLabel(Dialog);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(120, 150, 54, 12));
+        label_2->setAlignment(Qt::AlignCenter);
         pushButton = new QPushButton(Dialog);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(150, 230, 121, 31));
@@ -70,9 +72,10 @@ public:
         label_3 = new QLabel(Dialog);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(120, 190, 58, 16));
+        label_3->setAlignment(Qt::AlignCenter);
         loginTitle = new QLabel(Dialog);
         loginTitle->setObjectName(QString::fromUtf8("loginTitle"));
-        loginTitle->setGeometry(QRect(150, 20, 151, 71));
+        loginTitle->setGeometry(QRect(130, 40, 141, 31));
         QFont font;
         font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font.setPointSize(9);
@@ -80,6 +83,10 @@ public:
         font.setItalic(false);
         font.setWeight(50);
         loginTitle->setFont(font);
+        loginTitle->setScaledContents(false);
+        loginTitle->setMargin(10);
+#ifndef QT_NO_SHORTCUT
+#endif // QT_NO_SHORTCUT
 
         retranslateUi(Dialog);
 
@@ -90,7 +97,7 @@ public:
     {
         Dialog->setWindowTitle(QApplication::translate("Dialog", "\347\231\273\345\275\225", nullptr));
         label->setText(QApplication::translate("Dialog", "\347\224\250\346\210\267\345\220\215", nullptr));
-        label_2->setText(QApplication::translate("Dialog", "\345\257\206\347\240\201", nullptr));
+        label_2->setText(QApplication::translate("Dialog", "\345\257\206    \347\240\201", nullptr));
         pushButton->setText(QApplication::translate("Dialog", "\347\231\273\345\275\225", nullptr));
         comboBox->setItemText(0, QApplication::translate("Dialog", "\345\255\246\347\224\237", nullptr));
         comboBox->setItemText(1, QApplication::translate("Dialog", "\350\200\201\345\270\210", nullptr));

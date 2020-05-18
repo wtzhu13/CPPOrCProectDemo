@@ -70,6 +70,9 @@
    <property name="text">
     <string>用户名</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -81,7 +84,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>密码</string>
+    <string>密    码</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
@@ -134,14 +140,17 @@
    <property name="text">
     <string>用户身份</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="loginTitle">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>20</y>
-     <width>151</width>
-     <height>71</height>
+     <x>130</x>
+     <y>40</y>
+     <width>141</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -155,6 +164,15 @@
    </property>
    <property name="text">
     <string>欢迎使用预约系统</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="margin">
+    <number>10</number>
+   </property>
+   <property name="buddy">
+    <cstring></cstring>
    </property>
   </widget>
  </widget>

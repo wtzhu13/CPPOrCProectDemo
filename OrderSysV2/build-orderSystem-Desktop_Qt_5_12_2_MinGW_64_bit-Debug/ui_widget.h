@@ -27,6 +27,7 @@ public:
     QPushButton *pushButton_roomInfo;
     QPushButton *pushButton_clearOrder;
     QTableView *tableView;
+    QPushButton *pushButton_modifyUserInfo;
 
     void setupUi(QWidget *Widget)
     {
@@ -51,13 +52,16 @@ public:
         pushButton_delUser->setGeometry(QRect(320, 440, 112, 32));
         pushButton_roomInfo = new QPushButton(Widget);
         pushButton_roomInfo->setObjectName(QString::fromUtf8("pushButton_roomInfo"));
-        pushButton_roomInfo->setGeometry(QRect(280, 480, 112, 32));
+        pushButton_roomInfo->setGeometry(QRect(320, 470, 112, 32));
         pushButton_clearOrder = new QPushButton(Widget);
         pushButton_clearOrder->setObjectName(QString::fromUtf8("pushButton_clearOrder"));
-        pushButton_clearOrder->setGeometry(QRect(160, 480, 112, 32));
+        pushButton_clearOrder->setGeometry(QRect(210, 470, 112, 32));
         tableView = new QTableView(Widget);
         tableView->setObjectName(QString::fromUtf8("tableView"));
         tableView->setGeometry(QRect(30, 20, 511, 401));
+        pushButton_modifyUserInfo = new QPushButton(Widget);
+        pushButton_modifyUserInfo->setObjectName(QString::fromUtf8("pushButton_modifyUserInfo"));
+        pushButton_modifyUserInfo->setGeometry(QRect(100, 470, 112, 32));
 
         retranslateUi(Widget);
 
@@ -72,6 +76,7 @@ public:
         pushButton_delUser->setText(QApplication::translate("Widget", "\345\210\240\351\231\244\347\224\250\346\210\267", nullptr));
         pushButton_roomInfo->setText(QApplication::translate("Widget", "\346\237\245\347\234\213\346\234\272\346\210\277\344\277\241\346\201\257", nullptr));
         pushButton_clearOrder->setText(QApplication::translate("Widget", "\346\270\205\347\251\272\351\242\204\347\272\246", nullptr));
+        pushButton_modifyUserInfo->setText(QApplication::translate("Widget", "\347\241\256\350\256\244\344\277\256\346\224\271", nullptr));
     } // retranslateUi
 
 };
