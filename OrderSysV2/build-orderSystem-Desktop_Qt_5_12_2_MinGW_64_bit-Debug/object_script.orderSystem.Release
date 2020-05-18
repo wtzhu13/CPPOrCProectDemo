@@ -1,0 +1,10 @@
+release/dialog.o
+release/global.o
+release/main.o
+release/student.o
+release/teacher.o
+release/widget.o
+release/moc_dialog.o
+release/moc_student.o
+release/moc_teacher.o
+release/moc_widget.o

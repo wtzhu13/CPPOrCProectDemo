@@ -51,6 +51,6 @@ void Dialog::on_pushButton_clicked()
 void Dialog::on_comboBox_currentIndexChanged(int index)
 {
     index = ui->comboBox->currentIndex();
-    globalIndex = 1;
+    globalIndex = index;
     qDebug() << index;
 }

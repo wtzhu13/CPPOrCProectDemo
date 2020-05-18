@@ -1,0 +1,10 @@
+debug/dialog.o
+debug/global.o
+debug/main.o
+debug/student.o
+debug/teacher.o
+debug/widget.o
+debug/moc_dialog.o
+debug/moc_student.o
+debug/moc_teacher.o
+debug/moc_widget.o

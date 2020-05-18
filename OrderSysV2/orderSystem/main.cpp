@@ -18,23 +18,26 @@ int main(int argc, char *argv[])
         qDebug()<<"连接成功"<<endl;
         if(login.exec() == QDialog::Accepted){
             switch (globalIndex) {
-                case 0:
+                case 0:{
+                    Student stu;
+                    stu.show();
+                    return a.exec();
+                }
+                break;
+                case 1:{
+                    Teacher teacher;
+                    teacher.show();
+                    return a.exec();
+                }
+                break;
+                case 2:{
                     Widget w;
                     w.show();
                     return a.exec();
+                }
                 break;
-//                case 1:
-//                    Student stu;
-//                    stu.show();
-//                    return a.exec();
-//                break;
-//                case 2:
-//                    Teacher teacher;
-//                    teacher.show();
-//                    return a.exec();
-//                break;
-//                default:
-//                    breack;
+                default:
+                    break;
             }
 
         }

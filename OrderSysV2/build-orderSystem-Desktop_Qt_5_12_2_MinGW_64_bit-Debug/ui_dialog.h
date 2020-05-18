@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -26,6 +27,9 @@ public:
     QLabel *label;
     QLabel *label_2;
     QPushButton *pushButton;
+    QComboBox *comboBox;
+    QLabel *label_3;
+    QLabel *loginTitle;
 
     void setupUi(QDialog *Dialog)
     {
@@ -39,21 +43,43 @@ public:
         Dialog->setSizePolicy(sizePolicy);
         Dialog->setMinimumSize(QSize(400, 300));
         Dialog->setMaximumSize(QSize(400, 300));
+        Dialog->setStyleSheet(QString::fromUtf8("font: 9pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
+""));
         lineEdit = new QLineEdit(Dialog);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(150, 70, 113, 20));
+        lineEdit->setGeometry(QRect(190, 110, 113, 20));
         lineEdit_2 = new QLineEdit(Dialog);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(150, 110, 113, 20));
+        lineEdit_2->setGeometry(QRect(190, 150, 113, 20));
+        lineEdit_2->setEchoMode(QLineEdit::Password);
         label = new QLabel(Dialog);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(80, 80, 54, 12));
+        label->setGeometry(QRect(120, 110, 54, 12));
         label_2 = new QLabel(Dialog);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(80, 110, 54, 12));
+        label_2->setGeometry(QRect(120, 150, 54, 12));
         pushButton = new QPushButton(Dialog);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(130, 170, 75, 23));
+        pushButton->setGeometry(QRect(150, 230, 121, 31));
+        comboBox = new QComboBox(Dialog);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        comboBox->setGeometry(QRect(190, 190, 113, 20));
+        label_3 = new QLabel(Dialog);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(120, 190, 58, 16));
+        loginTitle = new QLabel(Dialog);
+        loginTitle->setObjectName(QString::fromUtf8("loginTitle"));
+        loginTitle->setGeometry(QRect(150, 20, 151, 71));
+        QFont font;
+        font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
+        font.setPointSize(9);
+        font.setBold(false);
+        font.setItalic(false);
+        font.setWeight(50);
+        loginTitle->setFont(font);
 
         retranslateUi(Dialog);
 
@@ -66,6 +92,12 @@ public:
         label->setText(QApplication::translate("Dialog", "\347\224\250\346\210\267\345\220\215", nullptr));
         label_2->setText(QApplication::translate("Dialog", "\345\257\206\347\240\201", nullptr));
         pushButton->setText(QApplication::translate("Dialog", "\347\231\273\345\275\225", nullptr));
+        comboBox->setItemText(0, QApplication::translate("Dialog", "\345\255\246\347\224\237", nullptr));
+        comboBox->setItemText(1, QApplication::translate("Dialog", "\350\200\201\345\270\210", nullptr));
+        comboBox->setItemText(2, QApplication::translate("Dialog", "\347\256\241\347\220\206\345\221\230", nullptr));
+
+        label_3->setText(QApplication::translate("Dialog", "\347\224\250\346\210\267\350\272\253\344\273\275", nullptr));
+        loginTitle->setText(QApplication::translate("Dialog", "\346\254\242\350\277\216\344\275\277\347\224\250\351\242\204\347\272\246\347\263\273\347\273\237", nullptr));
     } // retranslateUi
 
 };
