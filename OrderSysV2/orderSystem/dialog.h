@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QString>
 #include <QSqlQuery>
+#include <QCryptographicHash>
 #include "global.h"
 
 namespace Ui {

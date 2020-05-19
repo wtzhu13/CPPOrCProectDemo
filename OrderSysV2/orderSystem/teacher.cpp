@@ -6,6 +6,7 @@ Teacher::Teacher(QWidget *parent) :
     ui(new Ui::Teacher)
 {
     ui->setupUi(this);
+    this->setWindowTitle(QString("欢迎 %1 使用预约系统").arg(userName));
 }
 
 Teacher::~Teacher()

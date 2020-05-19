@@ -10,6 +10,7 @@
 #include <QSqlError>
 #include <QString>
 #include <QSqlTableModel>
+#include "global.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -40,5 +41,6 @@ private:
     Ui::Widget *ui;
     QSqlTableModel *model;
     QSqlTableModel *roomModel;
+    QSqlTableModel *orderModel;
 };
 #endif // WIDGET_H

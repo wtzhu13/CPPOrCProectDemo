@@ -9,6 +9,7 @@ Widget::Widget(QWidget *parent)
     qDebug() << "all";
     model = new QSqlTableModel(this);
     model->setTable("user_info");   // 设置查询表
+    this->setWindowTitle(QString("欢迎 %1 使用预约系统").arg(userName));
 }
 
 Widget::~Widget()
@@ -16,7 +17,7 @@ Widget::~Widget()
     delete ui;
     delete model;
     delete roomModel;
-
+    delete orderModel;
 }
 
 /************************************************
@@ -117,6 +118,22 @@ void Widget::on_pushButton_delUser_clicked()
 ************************************************/
 void Widget::on_pushButton_clearOrder_clicked()
 {
+    QSqlQuery query;
+    // 删除操作前给出提示信息，方便确认
+    QMessageBox:: StandardButton result = QMessageBox::information(NULL, "Title", "确认清空预约记录？",
+                             QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    switch (result) {
+        case QMessageBox::Yes:
+            qDebug()<<"Yes";
+            query.exec("delete from order_list");
+            QMessageBox::information(NULL, "Title", "已清空预约!");
+            break;
+        case QMessageBox::No:
+            qDebug()<<"NO";
+            break;
+        default:
+            break;
+    }
 
 }
 

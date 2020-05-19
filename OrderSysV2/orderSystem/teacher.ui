@@ -16,14 +16,40 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>130</y>
+     <x>30</x>
+     <y>20</y>
      <width>58</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
     <string>teacher</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_checkAllOrder">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>110</y>
+     <width>112</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查看所有预约</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>150</y>
+     <width>112</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>审核预约</string>
    </property>
   </widget>
  </widget>
