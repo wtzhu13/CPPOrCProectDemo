@@ -23,7 +23,7 @@ Dialog::~Dialog()
 void Dialog::on_pushButton_clicked()
 {
     qDebug()<<"login";
-    QSqlQuery query;
+
     QString userPWD;    // 对话框中的密码
     QString truePWD;    // 数据库中的密码
     QString identity;
@@ -32,14 +32,15 @@ void Dialog::on_pushButton_clicked()
     userPWD = ui->lineEdit_2->text();
 
     // 从数据库中获取密码
-    query.prepare("select pwd,identity from user_info where name = ?");
-    QString user_name = ui->lineEdit->text();
-    query.addBindValue(user_name);
+    QSqlQuery query;
+    query.prepare("select pwd,identity,name from user_info where user_id = ?");
+    QString user_id = ui->lineEdit->text();
+    query.addBindValue(user_id);
     query.exec();
     query.next();
     truePWD = query.value(0).toString();
     identity = query.value(1).toString();
-
+    QString user_name = query.value(2).toString();
     // 对密码进行MD5加密
     QString pwdMD5;
     QByteArray str;

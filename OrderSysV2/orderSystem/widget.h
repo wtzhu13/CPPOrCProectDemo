@@ -10,6 +10,7 @@
 #include <QSqlError>
 #include <QString>
 #include <QSqlTableModel>
+#include <QCryptographicHash>
 #include "global.h"
 
 QT_BEGIN_NAMESPACE
@@ -37,10 +38,14 @@ private slots:
 
     void on_pushButton_modifyUserInfo_clicked();
 
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::Widget *ui;
     QSqlTableModel *model;
     QSqlTableModel *roomModel;
     QSqlTableModel *orderModel;
+    QString identity = "student";
+    int identityID = 0;
 };
 #endif // WIDGET_H

@@ -76,12 +76,82 @@ void Widget::on_pushButton_roomInfo_clicked()
 ************************************************/
 void Widget::on_pushButton_addUser_clicked()
 {
-    // 获得表的行数
-    int rowNum = model->rowCount();
-    // 添加一行
-    model->insertRow(rowNum);
-    model->setData(model->index(rowNum,0),rowNum+1);
+    QString id = ui->lineEdit_id->text();
+    QString name = ui->lineEdit_naem->text();
+    QString pwd = ui->lineEdit_pwd->text();
 
+    // 判断用户信息是否全
+    if(id == "" || name == "" || pwd == ""){
+        QMessageBox::information(NULL, "Title", "用户信息不全！");
+        return;
+    }
+
+    // 判断用户ID的长度是否符合要求
+    switch (identityID) {
+        case 0:
+            // 检查学生ID
+            if(id.length() != 9){
+                QMessageBox::information(NULL, "Title", "用户ID错误！");
+                return;
+            }
+        break;
+        case 1:
+            // 检查教师ID
+            if(id.length() != 3){
+                QMessageBox::information(NULL, "Title", "用户ID错误！");
+                return;
+            }
+        break;
+        case 2:
+            // 检查管理员ID
+            if(id.length() != 1){
+                QMessageBox::information(NULL, "Title", "用户ID错误！");
+                return;
+            }
+        break;
+        default:
+        break;
+    }
+
+    if(pwd.length() != 6){
+        QMessageBox::information(NULL, "Title", "请设置6位密码！");
+        return;
+    }
+
+    qDebug() << id << name << pwd << identity;
+
+    // MD5对密码进行加密
+    QString pwdMD5;
+    QByteArray str;
+    str = QCryptographicHash::hash(pwd.toLatin1(), QCryptographicHash::Md5);
+    pwdMD5.append(str.toHex());
+
+    QString str1 = QString("insert into user_info values('%1', '%2', '%3', '%4')").arg(id)
+            .arg(name).arg(pwdMD5).arg(identity);
+    qDebug() << str1;
+
+    // 判断用户名是否已经存在
+    QSqlQuery query;
+    query.exec(QString("select name from user_info where user_id = %1").arg(id));
+    query.next();
+    QString nameFlag = query.value(0).toString();
+    if(nameFlag != ""){
+        QMessageBox::information(NULL, "Title", "该用户已存在");
+        qDebug() << "该用户已存在";
+        return;
+    }
+    else{
+        bool flag = query.exec(str1);
+        if(flag){
+            QMessageBox::information(NULL, "Title", "添加用户成功");
+            ui->lineEdit_id->setText("");
+            ui->lineEdit_naem->setText("");
+            ui->lineEdit_pwd->setText("");
+        }
+        else{
+            QMessageBox::information(NULL, "Title", "数据库发生错误");
+        }
+    }
 }
 
 /************************************************
@@ -158,4 +228,17 @@ void Widget::on_pushButton_modifyUserInfo_clicked()
        QMessageBox::warning(this, tr("tableModel"),
        tr("数据库错误: %1").arg(model->lastError().text()));
     }
+}
+
+/************************************************
+* 函数名：Widget::on_comboBox_currentIndexChanged(int index)
+* 参数：无
+* 返回值：无
+* 描述：身份下拉框选择
+************************************************/
+void Widget::on_comboBox_currentIndexChanged(int index)
+{
+    index = ui->comboBox->currentIndex();
+    identityID = index;
+    identity = ui->comboBox->currentText();
 }
