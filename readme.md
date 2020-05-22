@@ -25,3 +25,7 @@ some projects for you to practice your programming skills which used C or CPP, y
 ### addressList
 
 利用QT打造的一款简易的通讯录，可以完成通讯录的增删改查，本案例利用了数据库来存储本地数据。
+
+### OrderSystemV2(UI版本)
+
+利用C++基础和STL相关技能打造的一个预约系统，本案例打造的是一款机房预约系统，也可以利用这种架构打造其他的预约系统。与终端版本的区别在于该版本基于QT设计UI界面，并利用Mysql数据库存放本地数据。

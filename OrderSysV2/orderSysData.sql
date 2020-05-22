@@ -1,5 +1,5 @@
-# 创建日期表
-eate table if not exists date_info (
+﻿# 创建日期表
+create table if not exists date_info (
     date_id int primary key auto_increment not null,
     date_str varchar(10) not null
 );
