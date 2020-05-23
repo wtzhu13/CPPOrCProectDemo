@@ -30,18 +30,6 @@ class Ui_Widget
 public:
     QFrame *frame;
     QTableView *tableView;
-    QGroupBox *groupBox;
-    QGridLayout *gridLayout_2;
-    QComboBox *comboBox;
-    QLineEdit *lineEdit_id;
-    QLineEdit *lineEdit_naem;
-    QLabel *label_4;
-    QSpacerItem *horizontalSpacer;
-    QLabel *label;
-    QLineEdit *lineEdit_pwd;
-    QLabel *label_3;
-    QLabel *label_2;
-    QSpacerItem *horizontalSpacer_2;
     QFrame *frame_2;
     QGridLayout *gridLayout;
     QPushButton *pushButton;
@@ -50,6 +38,19 @@ public:
     QPushButton *pushButton_roomInfo;
     QPushButton *pushButton_addUser;
     QPushButton *pushButton_clearOrder;
+    QFrame *frame_3;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_2;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *horizontalSpacer;
+    QComboBox *comboBox;
+    QLabel *label_4;
+    QLabel *label_2;
+    QLabel *label;
+    QLabel *label_3;
+    QLineEdit *lineEdit_id;
+    QLineEdit *lineEdit_pwd;
+    QLineEdit *lineEdit_naem;
 
     void setupUi(QWidget *Widget)
     {
@@ -71,65 +72,9 @@ public:
         tableView = new QTableView(frame);
         tableView->setObjectName(QString::fromUtf8("tableView"));
         tableView->setGeometry(QRect(10, 10, 521, 251));
-        groupBox = new QGroupBox(Widget);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(20, 310, 261, 181));
-        gridLayout_2 = new QGridLayout(groupBox);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        comboBox = new QComboBox(groupBox);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-
-        gridLayout_2->addWidget(comboBox, 3, 2, 1, 1);
-
-        lineEdit_id = new QLineEdit(groupBox);
-        lineEdit_id->setObjectName(QString::fromUtf8("lineEdit_id"));
-
-        gridLayout_2->addWidget(lineEdit_id, 0, 2, 1, 1);
-
-        lineEdit_naem = new QLineEdit(groupBox);
-        lineEdit_naem->setObjectName(QString::fromUtf8("lineEdit_naem"));
-
-        gridLayout_2->addWidget(lineEdit_naem, 1, 2, 1, 1);
-
-        label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_2->addWidget(label_4, 3, 1, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer, 3, 0, 1, 1);
-
-        label = new QLabel(groupBox);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout_2->addWidget(label, 0, 1, 1, 1);
-
-        lineEdit_pwd = new QLineEdit(groupBox);
-        lineEdit_pwd->setObjectName(QString::fromUtf8("lineEdit_pwd"));
-
-        gridLayout_2->addWidget(lineEdit_pwd, 2, 2, 1, 1);
-
-        label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout_2->addWidget(label_3, 2, 1, 1, 1);
-
-        label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout_2->addWidget(label_2, 1, 1, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer_2, 3, 3, 1, 1);
-
         frame_2 = new QFrame(Widget);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setGeometry(QRect(290, 330, 261, 161));
+        frame_2->setGeometry(QRect(290, 300, 271, 201));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
         gridLayout = new QGridLayout(frame_2);
@@ -164,6 +109,67 @@ public:
 
         gridLayout->addWidget(pushButton_clearOrder, 2, 1, 1, 1);
 
+        frame_3 = new QFrame(Widget);
+        frame_3->setObjectName(QString::fromUtf8("frame_3"));
+        frame_3->setGeometry(QRect(20, 300, 271, 201));
+        frame_3->setFrameShape(QFrame::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Raised);
+        groupBox = new QGroupBox(frame_3);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setGeometry(QRect(10, 10, 251, 181));
+        gridLayout_2 = new QGridLayout(groupBox);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_2, 3, 3, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer, 3, 0, 1, 1);
+
+        comboBox = new QComboBox(groupBox);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        gridLayout_2->addWidget(comboBox, 3, 2, 1, 1);
+
+        label_4 = new QLabel(groupBox);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout_2->addWidget(label_4, 3, 1, 1, 1);
+
+        label_2 = new QLabel(groupBox);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout_2->addWidget(label_2, 1, 1, 1, 1);
+
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        gridLayout_2->addWidget(label, 0, 1, 1, 1);
+
+        label_3 = new QLabel(groupBox);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout_2->addWidget(label_3, 2, 1, 1, 1);
+
+        lineEdit_id = new QLineEdit(groupBox);
+        lineEdit_id->setObjectName(QString::fromUtf8("lineEdit_id"));
+
+        gridLayout_2->addWidget(lineEdit_id, 0, 2, 1, 1);
+
+        lineEdit_pwd = new QLineEdit(groupBox);
+        lineEdit_pwd->setObjectName(QString::fromUtf8("lineEdit_pwd"));
+
+        gridLayout_2->addWidget(lineEdit_pwd, 2, 2, 1, 1);
+
+        lineEdit_naem = new QLineEdit(groupBox);
+        lineEdit_naem->setObjectName(QString::fromUtf8("lineEdit_naem"));
+
+        gridLayout_2->addWidget(lineEdit_naem, 1, 2, 1, 1);
+
 
         retranslateUi(Widget);
 
@@ -173,21 +179,21 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "OrderSystem", nullptr));
-        groupBox->setTitle(QApplication::translate("Widget", "\346\267\273\345\212\240\347\224\250\346\210\267\344\277\241\346\201\257", nullptr));
-        comboBox->setItemText(0, QApplication::translate("Widget", "student", nullptr));
-        comboBox->setItemText(1, QApplication::translate("Widget", "teacher", nullptr));
-        comboBox->setItemText(2, QApplication::translate("Widget", "admin", nullptr));
-
-        label_4->setText(QApplication::translate("Widget", "\350\272\253\344\273\275", nullptr));
-        label->setText(QApplication::translate("Widget", "\345\255\246\345\217\267", nullptr));
-        label_3->setText(QApplication::translate("Widget", "\345\257\206\347\240\201", nullptr));
-        label_2->setText(QApplication::translate("Widget", "\345\247\223\345\220\215", nullptr));
         pushButton->setText(QApplication::translate("Widget", "\346\237\245\350\257\242\347\224\250\346\210\267", nullptr));
         pushButton_modifyUserInfo->setText(QApplication::translate("Widget", "\344\277\256\346\224\271\347\224\250\346\210\267\344\277\241\346\201\257", nullptr));
         pushButton_delUser->setText(QApplication::translate("Widget", "\345\210\240\351\231\244\347\224\250\346\210\267", nullptr));
         pushButton_roomInfo->setText(QApplication::translate("Widget", "\346\237\245\347\234\213\346\234\272\346\210\277\344\277\241\346\201\257", nullptr));
         pushButton_addUser->setText(QApplication::translate("Widget", "\346\267\273\345\212\240\347\224\250\346\210\267", nullptr));
         pushButton_clearOrder->setText(QApplication::translate("Widget", "\346\270\205\347\251\272\351\242\204\347\272\246", nullptr));
+        groupBox->setTitle(QApplication::translate("Widget", "\346\267\273\345\212\240\347\224\250\346\210\267\344\277\241\346\201\257", nullptr));
+        comboBox->setItemText(0, QApplication::translate("Widget", "student", nullptr));
+        comboBox->setItemText(1, QApplication::translate("Widget", "teacher", nullptr));
+        comboBox->setItemText(2, QApplication::translate("Widget", "admin", nullptr));
+
+        label_4->setText(QApplication::translate("Widget", "\350\272\253\344\273\275", nullptr));
+        label_2->setText(QApplication::translate("Widget", "\345\247\223\345\220\215", nullptr));
+        label->setText(QApplication::translate("Widget", "\345\255\246\345\217\267", nullptr));
+        label_3->setText(QApplication::translate("Widget", "\345\257\206\347\240\201", nullptr));
     } // retranslateUi
 
 };
