@@ -13,176 +13,237 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton_applyOrder">
+  <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>40</y>
-     <width>112</width>
-     <height>32</height>
+     <x>20</x>
+     <y>0</y>
+     <width>571</width>
+     <height>171</height>
     </rect>
    </property>
-   <property name="text">
-    <string>申请预约</string>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
    </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QTableWidget" name="tableWidget_roomMargin">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>311</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>机房ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>机房号</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>座位余量</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="pushButton_applyOrder">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>120</y>
+      <width>112</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>申请预约</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>10</y>
+      <width>168</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>预约日期</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="comboBox_orderDate">
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>周一</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>周二</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>周三</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>周四</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>周五</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>预约时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="comboBox_orderTime">
+       <item>
+        <property name="text">
+         <string>上午</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>下午</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>预约机房</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="comboBox_orderRoom">
+       <item>
+        <property name="text">
+         <string>1号机房</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2号机房</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>3号机房</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
-  <widget class="QComboBox" name="comboBox_orderDate">
+  <widget class="QFrame" name="frame_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>40</y>
-     <width>91</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>周一</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>周二</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>周三</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>周四</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>周五</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="comboBox_orderTime">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>40</y>
-     <width>91</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>上午</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>下午</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="comboBox_orderRoom">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>40</y>
-     <width>91</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>1号机房</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>2号机房</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>3号机房</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>20</y>
-     <width>58</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>预约日期</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>20</y>
-     <width>58</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>预约时间</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>20</y>
-     <width>58</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>预约机房</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_checkSelfOrder">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
-     <y>110</y>
-     <width>112</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>查看自己预约</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_cancleOrder">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
-     <y>240</y>
-     <width>112</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>取消预约预约</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_checkAllOrder">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
+     <x>20</x>
      <y>170</y>
-     <width>112</width>
-     <height>32</height>
+     <width>571</width>
+     <height>281</height>
     </rect>
    </property>
-   <property name="text">
-    <string>查看所有预约</string>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
    </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="pushButton_cancleOrder">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>250</y>
+      <width>112</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>取消预约预约</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_checkAllOrder">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>250</y>
+      <width>112</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>查看所有预约</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="tableView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>551</width>
+      <height>231</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_checkSelfOrder">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>250</y>
+      <width>112</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>查看自己预约</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

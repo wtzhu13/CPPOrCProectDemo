@@ -50,3 +50,23 @@ create table if not exists order_info(
     foreign key(order_time) references time_info(time_id) on delete cascade on update cascade,
     foreign key(order_room) references room_info(room_id) on delete cascade on update cascade
 );
+
+# 修改一下room_info表格，增加一个字段，座位余量字段
+alter table room_info add room_margin int not null;
+update room_info set room_margin = 20 where room_id = 1;
+mysql> update room_info set room_margin = 50 where room_id = 2;
+mysql> update room_info set room_margin = 100 where room_id = 3;
+
+# 修改预约表,添加一览状态栏
+alter table order_info add state_id int not null;
+
+# 新建一个预约状态表
+create table if not exists state_info (
+    state_id int primary key auto_increment not null,
+    state_str varchar(10) not null
+);
+
+insert into state_info values(1, "待审核"),(2,"通过")(3,"不通过");
+
+# 给预约表添加外健
+alter table order_info add foreign key (state_id) references state_info(state_id) on delete cascade on update cascade;

@@ -35,6 +35,7 @@ void Dialog::on_pushButton_clicked()
     QSqlQuery query;
     query.prepare("select pwd,identity,name from user_info where user_id = ?");
     QString user_id = ui->lineEdit->text();
+    userID = user_id;
     query.addBindValue(user_id);
     query.exec();
     query.next();
