@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QSqlQuery>
 #include <QTableWidget>
+#include <QtWidgets/QMessageBox>
+#include <fstream>
 #include "global.h"
 
 namespace Ui {
@@ -35,6 +37,8 @@ private slots:
 
     void getRoomInfo();
 
+    void on_pushButton_applyOrder_checkMargin_clicked();
+
 private:
     Ui::Student *ui;
     int orderDateIndex = 0;
@@ -46,6 +50,8 @@ private:
     int roomID;
     QString roomStr;
     int roomMargin;
+    int roomMaxNum;
+    int margin[3];
 };
 
 #endif // STUDENT_H

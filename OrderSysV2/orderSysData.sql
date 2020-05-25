@@ -54,8 +54,8 @@ create table if not exists order_info(
 # 修改一下room_info表格，增加一个字段，座位余量字段
 alter table room_info add room_margin int not null;
 update room_info set room_margin = 20 where room_id = 1;
-mysql> update room_info set room_margin = 50 where room_id = 2;
-mysql> update room_info set room_margin = 100 where room_id = 3;
+update room_info set room_margin = 50 where room_id = 2;
+update room_info set room_margin = 100 where room_id = 3;
 
 # 修改预约表,添加一览状态栏
 alter table order_info add state_id int not null;

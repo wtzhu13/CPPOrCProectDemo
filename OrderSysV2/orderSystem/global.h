@@ -7,4 +7,12 @@ extern int globalIndex;
 extern QString userName;
 extern QString userID;
 
+class GlobalFunc
+{
+public:
+    GlobalFunc();
+    ~GlobalFunc();
+    static void saveLog();
+};
+
 #endif // GLOBAL_H

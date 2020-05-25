@@ -19,7 +19,7 @@
      <x>20</x>
      <y>0</y>
      <width>571</width>
-     <height>171</height>
+     <height>161</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -33,7 +33,7 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>311</width>
+      <width>321</width>
       <height>131</height>
      </rect>
     </property>
@@ -68,34 +68,33 @@
      </property>
     </column>
    </widget>
-   <widget class="QPushButton" name="pushButton_applyOrder">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>120</y>
-      <width>112</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>申请预约</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>370</x>
       <y>10</y>
-      <width>168</width>
-      <height>121</height>
+      <width>191</width>
+      <height>111</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>预约日期</string>
-       </property>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="comboBox_orderRoom">
+       <item>
+        <property name="text">
+         <string>1号机房</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2号机房</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>3号机房</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="0" column="1">
@@ -130,6 +129,13 @@
        </item>
       </widget>
      </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>预约日期</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -158,35 +164,42 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox_orderRoom">
-       <item>
-        <property name="text">
-         <string>1号机房</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2号机房</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>3号机房</string>
-        </property>
-       </item>
-      </widget>
-     </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton_applyOrder">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>130</y>
+      <width>89</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>申请预约</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_applyOrder_checkMargin">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>130</y>
+      <width>89</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>查看机房余量</string>
+    </property>
    </widget>
   </widget>
   <widget class="QFrame" name="frame_2">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>170</y>
+     <y>160</y>
      <width>571</width>
-     <height>281</height>
+     <height>291</height>
     </rect>
    </property>
    <property name="frameShape">
