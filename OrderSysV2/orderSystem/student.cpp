@@ -174,11 +174,17 @@ void Student::on_pushButton_cancleOrder_clicked()
     int curRow = ui->tableView->currentIndex().row();
     QAbstractItemModel *model = ui->tableView->model ();
     QModelIndex index = model->index(curRow,1);
-    QString data = model->data(index).toString();
-    qDebug() << data;
+    QString user_id = model->data(index).toString();
+    index = model->index(curRow,2);
+    QString order_date = model->data(index).toString();
+    index = model->index(curRow,3);
+    QString order_time = model->data(index).toString();
+    index = model->index(curRow,4);
+    QString order_room = model->data(index).toString();
+    qDebug() << user_id << order_date << order_time << order_room;
 
     // 如果ID不是当前用户的则表明实在查看所有预约时选择取消，且选中的是别人的数据
-    if(data != userID){
+    if(user_id != userID){
         QMessageBox::information(NULL, "Title", "只能取消自己的预约信息！");
         return;
     }
@@ -195,10 +201,10 @@ void Student::on_pushButton_cancleOrder_clicked()
         // 否则提交， 在数据库中删除该行
         QSqlQuery query;
         QString queryStr = QString("delete from order_info where user_id = '%1' and order_date = %2"
-                                   "and order_time = %3 and order_room = %4").arg(userID).arg(orderDateIndex + 1)
+                                   " and order_time = %3 and order_room = %4").arg(userID).arg(orderDateIndex + 1)
                 .arg(orderTimeIndex + 1).arg(orderRoomIndex + 1);
         qDebug() << queryStr;
-        query.exec(queryStr);
+//        query.exec(queryStr);
     }
 
 }
