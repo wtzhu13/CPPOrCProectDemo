@@ -1,3 +1,18 @@
+/******************************************************************************
+
+  Copyright (C), 2020, Fred
+
+ ******************************************************************************
+  File Name     : widget.cpp
+  Version       : v1.0
+  Author        : wtzhu_13/Fred
+  Created       : 2020/05
+  Description   : this file was private for orderSystem
+  History       :
+  1.Date        :
+    Author      :
+    Modification: Created file
+******************************************************************************/
 #include "widget.h"
 #include "ui_widget.h"
 
@@ -56,7 +71,7 @@ void Widget::on_pushButton_roomInfo_clicked()
     roomModel->setTable("room_info");   // 设置查询表
     roomModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
     roomModel->select();
-    // model->removeColumn(0); //不显示id属性列,如果这时添加记录，则该属性的值添加不上
+    model->removeColumn(3); //不显示座位余量
     ui->tableView->setModel(roomModel);
 
     QSqlQuery query;
@@ -193,11 +208,16 @@ void Widget::on_pushButton_clearOrder_clicked()
     QMessageBox:: StandardButton result = QMessageBox::information(NULL, "Title", "确认清空预约记录？",
                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     switch (result) {
-        case QMessageBox::Yes:
+        case QMessageBox::Yes:{
             qDebug()<<"Yes";
-            query.exec("delete from order_list");
+            query.exec("delete from order_info");
             QMessageBox::information(NULL, "Title", "已清空预约!");
+            QSqlQuery queryRoom;
+            queryRoom.exec("update room_info set room_margin = 20 where room_id = 1");
+            queryRoom.exec("update room_info set room_margin = 50 where room_id = 2");
+            queryRoom.exec("update room_info set room_margin = 100 where room_id = 3");
             break;
+            }
         case QMessageBox::No:
             qDebug()<<"NO";
             break;

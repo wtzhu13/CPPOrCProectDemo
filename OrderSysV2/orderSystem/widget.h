@@ -1,3 +1,18 @@
+/******************************************************************************
+
+  Copyright (C), 2020, Fred
+
+ ******************************************************************************
+  File Name     : widget.h
+  Version       : v1.0
+  Author        : wtzhu_13/Fred
+  Created       : 2020/05
+  Description   : this file was private for orderSystem
+  History       :
+  1.Date        :
+    Author      :
+    Modification: Created file
+******************************************************************************/
 #ifndef WIDGET_H
 #define WIDGET_H
 
