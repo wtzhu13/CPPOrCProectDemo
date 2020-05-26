@@ -75,10 +75,14 @@ void Student::on_pushButton_applyOrder_clicked()
         if(exec_flag){
             qDebug() << "添加成功";
             // 预约成功则需要把机房余量减掉一个
-            margin[orderRoomIndex]--;
+            margin[orderTimeIndex][orderRoomIndex]--;
             // 将机房余量数据写入数据库
             QSqlQuery queryRoomInfo;
-            bool roomFlag = queryRoomInfo.exec(QString("update room_info set room_margin = %1 where room_id = %2").arg(margin[orderRoomIndex]).arg(orderRoomIndex+1));
+            QString queryStr = QString("update room_info set room_margin_am = %1, "
+                                       "room_margin_pm = %2 where room_id = %3")
+                               .arg(margin[0][orderRoomIndex]).arg(margin[1][orderRoomIndex]).arg(orderRoomIndex+1);
+            qDebug() << queryStr;
+            bool roomFlag = queryRoomInfo.exec(queryStr);
             if(roomFlag){
                 qDebug() << "OK";
             }
@@ -90,6 +94,7 @@ void Student::on_pushButton_applyOrder_clicked()
             QMessageBox::information(NULL, "Title", "预约成功！");
             // 把操作存放到日志文件中
             GlobalFunc::saveLog(LOGFILEPATH, orderInfoStr);
+            on_pushButton_checkSelfOrder_clicked();
         }
         else {
             qDebug() << "添加失败";
@@ -171,6 +176,7 @@ void Student::on_pushButton_checkAllOrder_clicked()
 ************************************************/
 void Student::on_pushButton_cancleOrder_clicked()
 {
+    // 获取选中行的数据
     int curRow = ui->tableView->currentIndex().row();
     QAbstractItemModel *model = ui->tableView->model ();
     QModelIndex index = model->index(curRow,1);
@@ -189,6 +195,12 @@ void Student::on_pushButton_cancleOrder_clicked()
         return;
     }
 
+    // 将获取行的内容装换为id便于后续操作
+    int date_id = getID(QString("select date_id from date_info where date_str = '%1'").arg(order_date));
+    int time_id = getID(QString("select time_id from time_info where time_str = '%1'").arg(order_time));
+    int room_id = getID(QString("select room_id from room_info where room_name = '%1'").arg(order_room));
+    qDebug() << date_id << time_id << room_id;
+
     int ok = QMessageBox::warning(this,tr("确认取消该预约？"),
     tr("确认取消该预约？ "),QMessageBox::Yes, QMessageBox::No);
     if(ok == QMessageBox::No)
@@ -200,11 +212,41 @@ void Student::on_pushButton_cancleOrder_clicked()
     {
         // 否则提交， 在数据库中删除该行
         QSqlQuery query;
-        QString queryStr = QString("delete from order_info where user_id = '%1' and order_date = %2"
-                                   " and order_time = %3 and order_room = %4").arg(userID).arg(orderDateIndex + 1)
-                .arg(orderTimeIndex + 1).arg(orderRoomIndex + 1);
+        QString queryStr = QString("delete from order_info where user_id = '%1' "
+                                   "and order_date = %2 "
+                                   "and order_time = %3 "
+                                   "and order_room = %4")
+                .arg(userID).arg(date_id).arg(time_id).arg(room_id);
         qDebug() << queryStr;
-//        query.exec(queryStr);
+        query.exec(queryStr);
+
+        // 机房对应的余量增加
+        margin[time_id-1][room_id-1]++;
+        // 将机房余量数据写入数据库
+        QSqlQuery queryRoomInfo;
+        QString queryStrRoomInfo = QString("update room_info set room_margin_am = %1, "
+                                   "room_margin_pm = %2 where room_id = %3")
+                           .arg(margin[0][room_id-1]).arg(margin[1][room_id-1]).arg(room_id);
+        qDebug() << queryStrRoomInfo;
+        bool roomFlag = queryRoomInfo.exec(queryStrRoomInfo);
+        if(roomFlag){
+            qDebug() << "OK";
+        }
+        else {
+            qDebug() << "数据库错误";
+        }
+        getRoomInfo();
+
+        // 更新一下显示
+        on_pushButton_checkSelfOrder_clicked();
+
+        // 取消的记录记录到本地日志
+        QDateTime current_date_time =QDateTime::currentDateTime();
+        QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+        QString logInfoStr = current_date + "," + userID + "," + userName + "," + order_date + ","
+                + order_time +  "," +  order_room +  "," +  QString("取消") + "\n";
+        qDebug() << logInfoStr;
+        GlobalFunc::saveLog(LOGFILEPATH, logInfoStr);
     }
 
 }
@@ -269,20 +311,23 @@ void Student::getRoomInfo()
         roomID = query.value(0).toInt();
         roomStr = query.value(1).toString();
         roomMaxNum = query.value(2).toInt();
-        roomMargin = query.value(3).toInt();
+        roomMarginAM = query.value(3).toInt();
+        roomMarginPM = query.value(4).toInt();
         // 将数据放到表格中
         ui->tableWidget_roomMargin->setItem(row, 0, new QTableWidgetItem(QString::number(roomID, 10)));
         ui->tableWidget_roomMargin->setItem(row, 1, new QTableWidgetItem(roomStr));
-        ui->tableWidget_roomMargin->setItem(row, 2, new QTableWidgetItem(QString::number(roomMargin, 10)));
+        ui->tableWidget_roomMargin->setItem(row, 2, new QTableWidgetItem(QString::number(roomMarginAM, 10)));
+        ui->tableWidget_roomMargin->setItem(row, 3, new QTableWidgetItem(QString::number(roomMarginPM, 10)));
 //        qDebug() << roomID;
 //        qDebug() << roomStr;
 //        qDebug() << roomMargin;
-        margin[row] = roomMargin;
+        margin[0][row] = roomMarginAM;
+        margin[1][row] = roomMarginPM;
         row++;
     }
     // 显示表格内容
     ui->tableWidget_roomMargin->show();
-    qDebug() << margin[0] << margin[1] << margin[2];
+    qDebug() << margin[0][0] << margin[0][1] << margin[0][2]<< margin[1][0] << margin[1][1] << margin[1][2];
 }
 
 /************************************************
@@ -294,4 +339,19 @@ void Student::getRoomInfo()
 void Student::on_pushButton_applyOrder_checkMargin_clicked()
 {
     getRoomInfo();
+}
+
+/************************************************
+* 函数名：int Student::getID(QString str)
+* 参数：无
+* 返回值：ID
+* 描述：获取数据对应的ID
+************************************************/
+int Student::getID(QString str)
+{
+    QSqlQuery queryID;
+    queryID.exec(str);
+    queryID.next();
+    int date_id = queryID.value(0).toInt();
+    return date_id;
 }

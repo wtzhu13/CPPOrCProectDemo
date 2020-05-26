@@ -71,7 +71,14 @@ insert into state_info values(1, "待审核"),(2,"通过")(3,"不通过");
 -- # 给预约表添加外健
 alter table order_info add foreign key (state_id) references state_info(state_id) on delete cascade on update cascade;
 
+-- 机房余量需要区分上午和下午，所以修改一下机房表
+alter table room_info change room_margin room_margin_am int not null;
+alter table room_info add room_margin_pm int not null;
+update room_info set room_margin_pm = 20 where room_id = 1;
+update room_info set room_margin_pm = 50 where room_id = 2;
+update room_info set room_margin_pm = 100 where room_id = 3;
+
 -- # 测试期间恢复房间余量
--- update room_info set room_margin = 20 where room_id = 1;
--- update room_info set room_margin = 50 where room_id = 2;
--- update room_info set room_margin = 100 where room_id = 3;
+update room_info set room_margin_am = 20 where room_id = 1;
+update room_info set room_margin_am = 50 where room_id = 2;
+update room_info set room_margin_am = 100 where room_id = 3;

@@ -56,6 +56,8 @@ private slots:
 
     void on_pushButton_applyOrder_checkMargin_clicked();
 
+    int getID(QString str);
+
 private:
     Ui::Student *ui;
     int orderDateIndex = 0;
@@ -66,9 +68,10 @@ private:
     QString orderRoom = "1号机房";
     int roomID;
     QString roomStr;
-    int roomMargin;
+    int roomMarginAM;
+    int roomMarginPM;
     int roomMaxNum;
-    int margin[3];
+    int margin[2][3];
 };
 
 #endif // STUDENT_H
