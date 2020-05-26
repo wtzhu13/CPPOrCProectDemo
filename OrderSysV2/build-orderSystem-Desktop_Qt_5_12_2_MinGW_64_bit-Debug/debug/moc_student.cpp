@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Student_t {
-    QByteArrayData data[14];
-    char stringdata0[348];
+    QByteArrayData data[21];
+    char stringdata0[432];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,7 +44,14 @@ QT_MOC_LITERAL(9, 239, 41), // "on_comboBox_orderRoom_current..."
 QT_MOC_LITERAL(10, 281, 11), // "getRoomInfo"
 QT_MOC_LITERAL(11, 293, 44), // "on_pushButton_applyOrder_chec..."
 QT_MOC_LITERAL(12, 338, 5), // "getID"
-QT_MOC_LITERAL(13, 344, 3) // "str"
+QT_MOC_LITERAL(13, 344, 3), // "str"
+QT_MOC_LITERAL(14, 348, 13), // "getRoomMargin"
+QT_MOC_LITERAL(15, 362, 4), // "int&"
+QT_MOC_LITERAL(16, 367, 12), // "roomMarginAM"
+QT_MOC_LITERAL(17, 380, 12), // "roomMarginPM"
+QT_MOC_LITERAL(18, 393, 3), // "row"
+QT_MOC_LITERAL(19, 397, 14), // "updateRoomInfo"
+QT_MOC_LITERAL(20, 412, 19) // "updateRoomInfoTable"
 
     },
     "Student\0on_pushButton_applyOrder_clicked\0"
@@ -55,7 +62,9 @@ QT_MOC_LITERAL(13, 344, 3) // "str"
     "index\0on_comboBox_orderTime_currentIndexChanged\0"
     "on_comboBox_orderRoom_currentIndexChanged\0"
     "getRoomInfo\0on_pushButton_applyOrder_checkMargin_clicked\0"
-    "getID\0str"
+    "getID\0str\0getRoomMargin\0int&\0roomMarginAM\0"
+    "roomMarginPM\0row\0updateRoomInfo\0"
+    "updateRoomInfoTable"
 };
 #undef QT_MOC_LITERAL
 
@@ -65,7 +74,7 @@ static const uint qt_meta_data_Student[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -73,16 +82,19 @@ static const uint qt_meta_data_Student[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   64,    2, 0x08 /* Private */,
-       3,    0,   65,    2, 0x08 /* Private */,
-       4,    0,   66,    2, 0x08 /* Private */,
-       5,    0,   67,    2, 0x08 /* Private */,
-       6,    1,   68,    2, 0x08 /* Private */,
-       8,    1,   71,    2, 0x08 /* Private */,
-       9,    1,   74,    2, 0x08 /* Private */,
-      10,    0,   77,    2, 0x08 /* Private */,
-      11,    0,   78,    2, 0x08 /* Private */,
-      12,    1,   79,    2, 0x08 /* Private */,
+       1,    0,   79,    2, 0x08 /* Private */,
+       3,    0,   80,    2, 0x08 /* Private */,
+       4,    0,   81,    2, 0x08 /* Private */,
+       5,    0,   82,    2, 0x08 /* Private */,
+       6,    1,   83,    2, 0x08 /* Private */,
+       8,    1,   86,    2, 0x08 /* Private */,
+       9,    1,   89,    2, 0x08 /* Private */,
+      10,    0,   92,    2, 0x08 /* Private */,
+      11,    0,   93,    2, 0x08 /* Private */,
+      12,    1,   94,    2, 0x08 /* Private */,
+      14,    3,   97,    2, 0x08 /* Private */,
+      19,    0,  104,    2, 0x08 /* Private */,
+      20,    0,  105,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -95,6 +107,9 @@ static const uint qt_meta_data_Student[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Int, QMetaType::QString,   13,
+    QMetaType::Void, 0x80000000 | 15, 0x80000000 | 15, QMetaType::Int,   16,   17,   18,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -116,6 +131,9 @@ void Student::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 8: _t->on_pushButton_applyOrder_checkMargin_clicked(); break;
         case 9: { int _r = _t->getID((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 10: _t->getRoomMargin((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 11: _t->updateRoomInfo(); break;
+        case 12: _t->updateRoomInfoTable(); break;
         default: ;
         }
     }
@@ -150,13 +168,13 @@ int Student::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 10;
+        _id -= 13;
     }
     return _id;
 }

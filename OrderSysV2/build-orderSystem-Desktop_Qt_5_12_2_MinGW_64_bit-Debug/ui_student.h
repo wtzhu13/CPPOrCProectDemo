@@ -43,6 +43,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton_applyOrder_checkMargin;
     QPushButton *pushButton_applyOrder;
+    QLabel *label_4;
     QFrame *frame_2;
     QVBoxLayout *verticalLayout;
     QTableView *tableView;
@@ -84,10 +85,10 @@ public:
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
         tableWidget_roomMargin->setVerticalHeaderItem(2, __qtablewidgetitem6);
         tableWidget_roomMargin->setObjectName(QString::fromUtf8("tableWidget_roomMargin"));
-        tableWidget_roomMargin->setGeometry(QRect(10, 20, 421, 141));
+        tableWidget_roomMargin->setGeometry(QRect(10, 40, 421, 121));
         widget = new QWidget(frame);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(440, 20, 191, 101));
+        widget->setGeometry(QRect(440, 10, 191, 111));
         gridLayout = new QGridLayout(widget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         label = new QLabel(widget);
@@ -146,6 +147,10 @@ public:
 
         horizontalLayout->addWidget(pushButton_applyOrder);
 
+        label_4 = new QLabel(frame);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(10, 10, 131, 21));
+        label_4->setStyleSheet(QString::fromUtf8("font: 12pt \"Adobe Arabic\";"));
         frame_2 = new QFrame(Student);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
         frame_2->setGeometry(QRect(20, 160, 631, 311));
@@ -229,6 +234,7 @@ public:
 
         pushButton_applyOrder_checkMargin->setText(QApplication::translate("Student", "\346\237\245\347\234\213\346\234\272\346\210\277\344\275\231\351\207\217", nullptr));
         pushButton_applyOrder->setText(QApplication::translate("Student", "\347\224\263\350\257\267\351\242\204\347\272\246", nullptr));
+        label_4->setText(QApplication::translate("Student", "\345\221\250\344\270\200\347\232\204\346\234\272\346\210\277\344\277\241\346\201\257\357\274\232", nullptr));
         pushButton_checkSelfOrder->setText(QApplication::translate("Student", "\346\237\245\347\234\213\350\207\252\345\267\261\351\242\204\347\272\246", nullptr));
         pushButton_checkAllOrder->setText(QApplication::translate("Student", "\346\237\245\347\234\213\346\211\200\346\234\211\351\242\204\347\272\246", nullptr));
         pushButton_cancleOrder->setText(QApplication::translate("Student", "\345\217\226\346\266\210\351\242\204\347\272\246\351\242\204\347\272\246", nullptr));

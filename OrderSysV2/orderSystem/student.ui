@@ -32,9 +32,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
+      <y>40</y>
       <width>421</width>
-      <height>141</height>
+      <height>121</height>
      </rect>
     </property>
     <row>
@@ -77,9 +77,9 @@
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>20</y>
+      <y>10</y>
       <width>191</width>
-      <height>101</height>
+      <height>111</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -196,6 +196,22 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Adobe Arabic&quot;;</string>
+    </property>
+    <property name="text">
+     <string>周一的机房信息：</string>
+    </property>
    </widget>
   </widget>
   <widget class="QFrame" name="frame_2">

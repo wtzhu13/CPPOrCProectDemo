@@ -22,6 +22,7 @@ Student::Student(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle(QString("欢迎 %1 使用预约系统").arg(userName));
+    updateRoomInfoTable();
     getRoomInfo();
 }
 
@@ -38,18 +39,10 @@ Student::~Student()
 ************************************************/
 void Student::on_pushButton_applyOrder_clicked()
 {
-//    qDebug() << userName;
-//    qDebug() << userID;
-//    qDebug() << orderDate;
-//    qDebug() << orderTime;
-//    qDebug() << orderRoom;
-//    qDebug() << orderDateIndex;
-//    qDebug() << orderTimeIndex;
-//    qDebug() << orderRoomIndex;
-
     // 获取系统时间，存日志的时候需要
     QDateTime current_date_time =QDateTime::currentDateTime();
     QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+    // 拼接日志信息
     QString orderInfoStr = current_date + "," + userID + "," + userName + "," + orderDate + ","
             + orderTime +  "," +  orderRoom +  "," +  QString("待审核") + "\n";
     qDebug() << orderInfoStr;
@@ -75,25 +68,14 @@ void Student::on_pushButton_applyOrder_clicked()
         if(exec_flag){
             qDebug() << "添加成功";
             // 预约成功则需要把机房余量减掉一个
-            margin[orderTimeIndex][orderRoomIndex]--;
-            // 将机房余量数据写入数据库
-            QSqlQuery queryRoomInfo;
-            QString queryStr = QString("update room_info set room_margin_am = %1, "
-                                       "room_margin_pm = %2 where room_id = %3")
-                               .arg(margin[0][orderRoomIndex]).arg(margin[1][orderRoomIndex]).arg(orderRoomIndex+1);
-            qDebug() << queryStr;
-            bool roomFlag = queryRoomInfo.exec(queryStr);
-            if(roomFlag){
-                qDebug() << "OK";
-            }
-            else {
-                qDebug() << "数据库错误";
-            }
-            getRoomInfo();
-            // 更新界面表格数据
+            margin[orderDateIndex][orderTimeIndex][orderRoomIndex]--;
+            // 跟新数据库
+            updateRoomInfo();
+            // 提示信息
             QMessageBox::information(NULL, "Title", "预约成功！");
             // 把操作存放到日志文件中
             GlobalFunc::saveLog(LOGFILEPATH, orderInfoStr);
+            // 显示一下自己的预约情况
             on_pushButton_checkSelfOrder_clicked();
         }
         else {
@@ -221,21 +203,9 @@ void Student::on_pushButton_cancleOrder_clicked()
         query.exec(queryStr);
 
         // 机房对应的余量增加
-        margin[time_id-1][room_id-1]++;
+        margin[date_id-1][time_id-1][room_id-1]++;
         // 将机房余量数据写入数据库
-        QSqlQuery queryRoomInfo;
-        QString queryStrRoomInfo = QString("update room_info set room_margin_am = %1, "
-                                   "room_margin_pm = %2 where room_id = %3")
-                           .arg(margin[0][room_id-1]).arg(margin[1][room_id-1]).arg(room_id);
-        qDebug() << queryStrRoomInfo;
-        bool roomFlag = queryRoomInfo.exec(queryStrRoomInfo);
-        if(roomFlag){
-            qDebug() << "OK";
-        }
-        else {
-            qDebug() << "数据库错误";
-        }
-        getRoomInfo();
+        updateRoomInfo();
 
         // 更新一下显示
         on_pushButton_checkSelfOrder_clicked();
@@ -262,6 +232,7 @@ void Student::on_comboBox_orderDate_currentIndexChanged(int index)
     index = ui->comboBox_orderDate->currentIndex();
     orderDateIndex = index;
     orderDate = ui->comboBox_orderDate->currentText();
+    getRoomInfo();
 }
 
 /************************************************
@@ -300,6 +271,7 @@ void Student::on_comboBox_orderRoom_currentIndexChanged(int index)
 ************************************************/
 void Student::getRoomInfo()
 {
+    ui->label_4->setText(QString("%1机房信息：").arg(orderDate));
     int row = 0;
     QSqlQuery query;
     bool flag = query.exec("select * from room_info");
@@ -311,23 +283,19 @@ void Student::getRoomInfo()
         roomID = query.value(0).toInt();
         roomStr = query.value(1).toString();
         roomMaxNum = query.value(2).toInt();
-        roomMarginAM = query.value(3).toInt();
-        roomMarginPM = query.value(4).toInt();
+        getRoomMargin(roomMarginAM, roomMarginPM, row);
+        qDebug() << tableName;
         // 将数据放到表格中
         ui->tableWidget_roomMargin->setItem(row, 0, new QTableWidgetItem(QString::number(roomID, 10)));
         ui->tableWidget_roomMargin->setItem(row, 1, new QTableWidgetItem(roomStr));
         ui->tableWidget_roomMargin->setItem(row, 2, new QTableWidgetItem(QString::number(roomMarginAM, 10)));
         ui->tableWidget_roomMargin->setItem(row, 3, new QTableWidgetItem(QString::number(roomMarginPM, 10)));
-//        qDebug() << roomID;
-//        qDebug() << roomStr;
-//        qDebug() << roomMargin;
-        margin[0][row] = roomMarginAM;
-        margin[1][row] = roomMarginPM;
+        margin[orderDateIndex][0][row] = roomMarginAM;
+        margin[orderDateIndex][1][row] = roomMarginPM;
         row++;
     }
     // 显示表格内容
     ui->tableWidget_roomMargin->show();
-    qDebug() << margin[0][0] << margin[0][1] << margin[0][2]<< margin[1][0] << margin[1][1] << margin[1][2];
 }
 
 /************************************************
@@ -354,4 +322,78 @@ int Student::getID(QString str)
     queryID.next();
     int date_id = queryID.value(0).toInt();
     return date_id;
+}
+
+/************************************************
+* 函数名：Student::getRoomMargin(int &roomMarginAM, int &roomMarginPM, int row)
+* 参数：上午余量引用，下午余量引用
+* 返回值：无
+* 描述：获取不同时间段余量
+************************************************/
+void Student::getRoomMargin(int &roomMarginAM, int &roomMarginPM, int row)
+{
+    // 获取不同时间段机房余量数据
+    updateRoomInfoTable();
+    QSqlQuery queryTemp;
+    QString queryStr = QString("select * from %1 where room_id = %2").arg(tableName).arg(row+1);
+    qDebug() << queryStr;
+    queryTemp.exec(queryStr);
+    queryTemp.next();
+    roomMarginAM = queryTemp.value(1).toInt();
+    roomMarginPM = queryTemp.value(2).toInt();
+}
+
+/************************************************
+* 函数名：Student::updateRoomInfo()
+* 参数：
+* 返回值：无
+* 描述：更新机房信息
+************************************************/
+void Student::updateRoomInfo()
+{
+    // 将机房余量数据写入数据库
+    QSqlQuery queryRoomInfo;
+    QString queryStr = QString("update %1 set room_margin_am = %2, "
+                               "room_margin_pm = %3 where room_id = %4")
+                       .arg(tableName).arg(margin[orderDateIndex][0][orderRoomIndex]).arg(margin[orderDateIndex][1][orderRoomIndex]).arg(orderRoomIndex+1);
+    qDebug() << queryStr;
+    bool roomFlag = queryRoomInfo.exec(queryStr);
+    if(roomFlag){
+        qDebug() << "OK";
+    }
+    else {
+        qDebug() << "数据库错误";
+    }
+    // 更新界面表格数据
+    getRoomInfo();
+
+}
+
+/************************************************
+* 函数名：void Student::updateRoomInfoTable()
+* 参数：
+* 返回值：无
+* 描述：更新信息表对应的表名
+************************************************/
+void Student::updateRoomInfoTable()
+{
+    // 判断需要查询的表名
+    switch (orderDateIndex) {
+    case 0:
+        tableName = "monday_room_margin";
+        break;
+    case 1:
+        tableName = "tuesday_room_margin";
+        break;
+    case 2:
+        tableName = "wednesday_room_margin";
+        break;
+    case 3:
+        tableName = "thursday_room_margin";
+        break;
+    case 4:
+        tableName = "friday_room_margin";
+        break;
+
+    }
 }

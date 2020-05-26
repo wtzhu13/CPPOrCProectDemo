@@ -78,7 +78,58 @@ update room_info set room_margin_pm = 20 where room_id = 1;
 update room_info set room_margin_pm = 50 where room_id = 2;
 update room_info set room_margin_pm = 100 where room_id = 3;
 
--- # 测试期间恢复房间余量
-update room_info set room_margin_am = 20 where room_id = 1;
-update room_info set room_margin_am = 50 where room_id = 2;
-update room_info set room_margin_am = 100 where room_id = 3;
+-- 房间余量数据表还得更改，余量需要单独放置在记账表格中
+-- 删除原先的余量列
+alter table room_info drop room_margin_am;
+alter table room_info drop room_margin_pm;
+-- 周一
+create table if not exists monday_room_margin(
+    room_id int not null,
+    room_margin_am int not null,
+    room_margin_pm int not null,
+    foreign key(room_id) references room_info(room_id) on delete cascade on update cascade
+);
+insert into monday_room_margin values(1, 20, 20);
+insert into monday_room_margin values(2, 50, 50);
+insert into monday_room_margin values(3, 100, 100);
+-- 周二
+create table if not exists tuesday_room_margin(
+    room_id int not null,
+    room_margin_am int not null,
+    room_margin_pm int not null,
+    foreign key(room_id) references room_info(room_id) on delete cascade on update cascade
+);
+insert into tuesday_room_margin values(1, 20, 20);
+insert into tuesday_room_margin values(2, 50, 50);
+insert into tuesday_room_margin values(3, 100, 100);
+-- 周三
+create table if not exists wednesday_room_margin(
+    room_id int not null,
+    room_margin_am int not null,
+    room_margin_pm int not null,
+    foreign key(room_id) references room_info(room_id) on delete cascade on update cascade
+);
+insert into wednesday_room_margin values(1, 20, 20);
+insert into wednesday_room_margin values(2, 50, 50);
+insert into wednesday_room_margin values(3, 100, 100);
+-- 周四
+create table if not exists thursday_room_margin(
+    room_id int not null,
+    room_margin_am int not null,
+    room_margin_pm int not null,
+    foreign key(room_id) references room_info(room_id) on delete cascade on update cascade
+);
+insert into thursday_room_margin values(1, 20, 20);
+insert into thursday_room_margin values(2, 50, 50);
+insert into thursday_room_margin values(3, 100, 100);
+-- 周五
+create table if not exists friday_room_margin(
+    room_id int not null,
+    room_margin_am int not null,
+    room_margin_pm int not null,
+    foreign key(room_id) references room_info(room_id) on delete cascade on update cascade
+);
+insert into friday_room_margin values(1, 20, 20);
+insert into friday_room_margin values(2, 50, 50);
+insert into friday_room_margin values(3, 100, 100);
+

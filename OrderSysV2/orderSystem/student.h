@@ -58,6 +58,12 @@ private slots:
 
     int getID(QString str);
 
+    void getRoomMargin(int &roomMarginAM, int &roomMarginPM, int row);
+
+    void updateRoomInfo();
+
+    void updateRoomInfoTable();
+
 private:
     Ui::Student *ui;
     int orderDateIndex = 0;
@@ -71,7 +77,8 @@ private:
     int roomMarginAM;
     int roomMarginPM;
     int roomMaxNum;
-    int margin[2][3];
+    int margin[5][2][3];
+    QString tableName;
 };
 
 #endif // STUDENT_H
