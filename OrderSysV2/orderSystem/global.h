@@ -18,6 +18,7 @@
 #include <QString>
 #include <QtDebug>
 #include <QFile>
+#include <QSqlRelationalTableModel>
 
 extern int globalIndex;
 extern QString userName;

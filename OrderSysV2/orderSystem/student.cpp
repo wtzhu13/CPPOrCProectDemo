@@ -93,30 +93,7 @@ void Student::on_pushButton_applyOrder_clicked()
 ************************************************/
 void Student::on_pushButton_checkSelfOrder_clicked()
 {
-    QSqlRelationalTableModel *selfOrderModel;
-    selfOrderModel = new QSqlRelationalTableModel(this);
-    selfOrderModel->setEditStrategy(QSqlTableModel::OnFieldChange);  // 属性变化时写入数据库
-    // 设置操作的表
-    selfOrderModel->setTable("order_info");
-    // 设置显示外键对应的内容
-    selfOrderModel->setRelation(2, QSqlRelation("date_info", "date_id", "date_str"));
-    selfOrderModel->setRelation(3, QSqlRelation("time_info", "time_id", "time_str"));
-    selfOrderModel->setRelation(4, QSqlRelation("room_info", "room_id", "room_name"));
-    selfOrderModel->setRelation(5, QSqlRelation("state_info", "state_id", "state_str"));
-
-    // 设置表字段的显示
-    selfOrderModel->setHeaderData(0, Qt::Horizontal, QObject::tr("预约ID"));
-    selfOrderModel->setHeaderData(1, Qt::Horizontal, QObject::tr("用户ID"));
-    selfOrderModel->setHeaderData(2, Qt::Horizontal, QObject::tr("日期（工作日）"));
-    selfOrderModel->setHeaderData(3, Qt::Horizontal, QObject::tr("时间"));
-    selfOrderModel->setHeaderData(4, Qt::Horizontal, QObject::tr("机房"));
-    selfOrderModel->setHeaderData(5, Qt::Horizontal, QObject::tr("状态"));
-
-    // 添加筛选的内容
-    selfOrderModel->setFilter(QObject::tr("user_id = %1").arg(userID));
-
-    selfOrderModel->select();
-    ui->tableView->setModel(selfOrderModel);
+    showOrderInfo(1);
 }
 
 /************************************************
@@ -127,27 +104,7 @@ void Student::on_pushButton_checkSelfOrder_clicked()
 ************************************************/
 void Student::on_pushButton_checkAllOrder_clicked()
 {
-    QSqlRelationalTableModel *allOrderModel;
-    allOrderModel = new QSqlRelationalTableModel(this);
-    allOrderModel->setEditStrategy(QSqlTableModel::OnFieldChange);  // 属性变化时写入数据库
-    // 设置操作的表
-    allOrderModel->setTable("order_info");
-    // 设置显示外键对应的内容
-    allOrderModel->setRelation(2, QSqlRelation("date_info", "date_id", "date_str"));
-    allOrderModel->setRelation(3, QSqlRelation("time_info", "time_id", "time_str"));
-    allOrderModel->setRelation(4, QSqlRelation("room_info", "room_id", "room_name"));
-    allOrderModel->setRelation(5, QSqlRelation("state_info", "state_id", "state_str"));
-
-    // 设置表字段的显示
-    allOrderModel->setHeaderData(0, Qt::Horizontal, QObject::tr("预约ID"));
-    allOrderModel->setHeaderData(1, Qt::Horizontal, QObject::tr("用户ID"));
-    allOrderModel->setHeaderData(2, Qt::Horizontal, QObject::tr("日期（工作日）"));
-    allOrderModel->setHeaderData(3, Qt::Horizontal, QObject::tr("时间"));
-    allOrderModel->setHeaderData(4, Qt::Horizontal, QObject::tr("机房"));
-    allOrderModel->setHeaderData(5, Qt::Horizontal, QObject::tr("状态"));
-    // 添加筛选的内容
-    allOrderModel->select();
-    ui->tableView->setModel(allOrderModel);
+    showOrderInfo(0);
 }
 
 /************************************************
@@ -355,7 +312,8 @@ void Student::updateRoomInfo()
     QSqlQuery queryRoomInfo;
     QString queryStr = QString("update %1 set room_margin_am = %2, "
                                "room_margin_pm = %3 where room_id = %4")
-                       .arg(tableName).arg(margin[orderDateIndex][0][orderRoomIndex]).arg(margin[orderDateIndex][1][orderRoomIndex]).arg(orderRoomIndex+1);
+                       .arg(tableName).arg(margin[orderDateIndex][0][orderRoomIndex])
+                        .arg(margin[orderDateIndex][1][orderRoomIndex]).arg(orderRoomIndex+1);
     qDebug() << queryStr;
     bool roomFlag = queryRoomInfo.exec(queryStr);
     if(roomFlag){
@@ -396,4 +354,38 @@ void Student::updateRoomInfoTable()
         break;
 
     }
+}
+
+/************************************************
+* 函数名：Student::showOrderInfo(int lookFlag)
+* 参数：无
+* 返回值：无
+* 描述：显示预约信息
+************************************************/
+void Student::showOrderInfo(int lookFlag)
+{
+    QSqlRelationalTableModel *orderModel;
+    orderModel = new QSqlRelationalTableModel(this);
+    orderModel->setEditStrategy(QSqlTableModel::OnFieldChange);  // 属性变化时写入数据库
+    // 设置操作的表
+    orderModel->setTable("order_info");
+    // 设置显示外键对应的内容
+    orderModel->setRelation(2, QSqlRelation("date_info", "date_id", "date_str"));
+    orderModel->setRelation(3, QSqlRelation("time_info", "time_id", "time_str"));
+    orderModel->setRelation(4, QSqlRelation("room_info", "room_id", "room_name"));
+    orderModel->setRelation(5, QSqlRelation("state_info", "state_id", "state_str"));
+
+    // 设置表字段的显示
+    orderModel->setHeaderData(0, Qt::Horizontal, QObject::tr("预约ID"));
+    orderModel->setHeaderData(1, Qt::Horizontal, QObject::tr("用户ID"));
+    orderModel->setHeaderData(2, Qt::Horizontal, QObject::tr("日期（工作日）"));
+    orderModel->setHeaderData(3, Qt::Horizontal, QObject::tr("时间"));
+    orderModel->setHeaderData(4, Qt::Horizontal, QObject::tr("机房"));
+    orderModel->setHeaderData(5, Qt::Horizontal, QObject::tr("状态"));
+    if(lookFlag != 0){
+        // 添加筛选的内容relTblAl_5表示第五个关联
+        orderModel->setFilter(QObject::tr("user_id = %1").arg(userID));
+    }
+    orderModel->select();
+    ui->tableView->setModel(orderModel);
 }

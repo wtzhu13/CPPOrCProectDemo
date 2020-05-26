@@ -37,3 +37,5 @@ void GlobalFunc::saveLog(QString filePath, QString fileText)
     file.write(fileText.toUtf8());
     file.close();
 }
+
+

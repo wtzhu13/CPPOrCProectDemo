@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Student_t {
-    QByteArrayData data[21];
-    char stringdata0[432];
+    QByteArrayData data[23];
+    char stringdata0[455];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,7 +51,9 @@ QT_MOC_LITERAL(16, 367, 12), // "roomMarginAM"
 QT_MOC_LITERAL(17, 380, 12), // "roomMarginPM"
 QT_MOC_LITERAL(18, 393, 3), // "row"
 QT_MOC_LITERAL(19, 397, 14), // "updateRoomInfo"
-QT_MOC_LITERAL(20, 412, 19) // "updateRoomInfoTable"
+QT_MOC_LITERAL(20, 412, 19), // "updateRoomInfoTable"
+QT_MOC_LITERAL(21, 432, 13), // "showOrderInfo"
+QT_MOC_LITERAL(22, 446, 8) // "lookflag"
 
     },
     "Student\0on_pushButton_applyOrder_clicked\0"
@@ -64,7 +66,8 @@ QT_MOC_LITERAL(20, 412, 19) // "updateRoomInfoTable"
     "getRoomInfo\0on_pushButton_applyOrder_checkMargin_clicked\0"
     "getID\0str\0getRoomMargin\0int&\0roomMarginAM\0"
     "roomMarginPM\0row\0updateRoomInfo\0"
-    "updateRoomInfoTable"
+    "updateRoomInfoTable\0showOrderInfo\0"
+    "lookflag"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +77,7 @@ static const uint qt_meta_data_Student[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -82,19 +85,20 @@ static const uint qt_meta_data_Student[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x08 /* Private */,
-       3,    0,   80,    2, 0x08 /* Private */,
-       4,    0,   81,    2, 0x08 /* Private */,
-       5,    0,   82,    2, 0x08 /* Private */,
-       6,    1,   83,    2, 0x08 /* Private */,
-       8,    1,   86,    2, 0x08 /* Private */,
-       9,    1,   89,    2, 0x08 /* Private */,
-      10,    0,   92,    2, 0x08 /* Private */,
-      11,    0,   93,    2, 0x08 /* Private */,
-      12,    1,   94,    2, 0x08 /* Private */,
-      14,    3,   97,    2, 0x08 /* Private */,
-      19,    0,  104,    2, 0x08 /* Private */,
-      20,    0,  105,    2, 0x08 /* Private */,
+       1,    0,   84,    2, 0x08 /* Private */,
+       3,    0,   85,    2, 0x08 /* Private */,
+       4,    0,   86,    2, 0x08 /* Private */,
+       5,    0,   87,    2, 0x08 /* Private */,
+       6,    1,   88,    2, 0x08 /* Private */,
+       8,    1,   91,    2, 0x08 /* Private */,
+       9,    1,   94,    2, 0x08 /* Private */,
+      10,    0,   97,    2, 0x08 /* Private */,
+      11,    0,   98,    2, 0x08 /* Private */,
+      12,    1,   99,    2, 0x08 /* Private */,
+      14,    3,  102,    2, 0x08 /* Private */,
+      19,    0,  109,    2, 0x08 /* Private */,
+      20,    0,  110,    2, 0x08 /* Private */,
+      21,    1,  111,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -110,6 +114,7 @@ static const uint qt_meta_data_Student[] = {
     QMetaType::Void, 0x80000000 | 15, 0x80000000 | 15, QMetaType::Int,   16,   17,   18,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   22,
 
        0        // eod
 };
@@ -134,6 +139,7 @@ void Student::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 10: _t->getRoomMargin((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 11: _t->updateRoomInfo(); break;
         case 12: _t->updateRoomInfoTable(); break;
+        case 13: _t->showOrderInfo((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -168,13 +174,13 @@ int Student::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 14)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }

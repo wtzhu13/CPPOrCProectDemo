@@ -60,6 +60,13 @@ public:
         if (Student->objectName().isEmpty())
             Student->setObjectName(QString::fromUtf8("Student"));
         Student->resize(662, 480);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(Student->sizePolicy().hasHeightForWidth());
+        Student->setSizePolicy(sizePolicy);
+        Student->setMinimumSize(QSize(662, 480));
+        Student->setMaximumSize(QSize(662, 480));
         frame = new QFrame(Student);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setGeometry(QRect(20, 0, 631, 161));

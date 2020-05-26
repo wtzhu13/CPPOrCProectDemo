@@ -64,6 +64,8 @@ private slots:
 
     void updateRoomInfoTable();
 
+    void showOrderInfo(int lookflag);
+
 private:
     Ui::Student *ui;
     int orderDateIndex = 0;
