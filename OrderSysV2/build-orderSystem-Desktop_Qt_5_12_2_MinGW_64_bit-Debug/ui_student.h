@@ -14,6 +14,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -30,7 +31,6 @@ class Ui_Student
 {
 public:
     QFrame *frame;
-    QTableWidget *tableWidget_roomMargin;
     QWidget *widget;
     QGridLayout *gridLayout;
     QLabel *label;
@@ -43,7 +43,8 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton_applyOrder_checkMargin;
     QPushButton *pushButton_applyOrder;
-    QLabel *label_4;
+    QGroupBox *groupBox;
+    QTableWidget *tableWidget_roomMargin;
     QFrame *frame_2;
     QVBoxLayout *verticalLayout;
     QTableView *tableView;
@@ -59,43 +60,22 @@ public:
     {
         if (Student->objectName().isEmpty())
             Student->setObjectName(QString::fromUtf8("Student"));
-        Student->resize(662, 480);
+        Student->resize(688, 480);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Student->sizePolicy().hasHeightForWidth());
         Student->setSizePolicy(sizePolicy);
-        Student->setMinimumSize(QSize(662, 480));
-        Student->setMaximumSize(QSize(662, 480));
+        Student->setMinimumSize(QSize(688, 480));
+        Student->setMaximumSize(QSize(688, 480));
         frame = new QFrame(Student);
         frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setGeometry(QRect(20, 0, 631, 161));
+        frame->setGeometry(QRect(20, 0, 661, 161));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
-        tableWidget_roomMargin = new QTableWidget(frame);
-        if (tableWidget_roomMargin->columnCount() < 4)
-            tableWidget_roomMargin->setColumnCount(4);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget_roomMargin->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget_roomMargin->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget_roomMargin->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget_roomMargin->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        if (tableWidget_roomMargin->rowCount() < 3)
-            tableWidget_roomMargin->setRowCount(3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget_roomMargin->setVerticalHeaderItem(0, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget_roomMargin->setVerticalHeaderItem(1, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget_roomMargin->setVerticalHeaderItem(2, __qtablewidgetitem6);
-        tableWidget_roomMargin->setObjectName(QString::fromUtf8("tableWidget_roomMargin"));
-        tableWidget_roomMargin->setGeometry(QRect(10, 40, 421, 121));
         widget = new QWidget(frame);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(440, 10, 191, 111));
+        widget->setGeometry(QRect(440, 10, 221, 111));
         gridLayout = new QGridLayout(widget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         label = new QLabel(widget);
@@ -141,7 +121,7 @@ public:
 
         widget_2 = new QWidget(frame);
         widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        widget_2->setGeometry(QRect(440, 120, 191, 41));
+        widget_2->setGeometry(QRect(440, 120, 221, 41));
         horizontalLayout = new QHBoxLayout(widget_2);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         pushButton_applyOrder_checkMargin = new QPushButton(widget_2);
@@ -154,13 +134,33 @@ public:
 
         horizontalLayout->addWidget(pushButton_applyOrder);
 
-        label_4 = new QLabel(frame);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(10, 10, 131, 21));
-        label_4->setStyleSheet(QString::fromUtf8("font: 12pt \"Adobe Arabic\";"));
+        groupBox = new QGroupBox(frame);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setGeometry(QRect(10, 9, 421, 151));
+        tableWidget_roomMargin = new QTableWidget(groupBox);
+        if (tableWidget_roomMargin->columnCount() < 4)
+            tableWidget_roomMargin->setColumnCount(4);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_roomMargin->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_roomMargin->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_roomMargin->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget_roomMargin->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        if (tableWidget_roomMargin->rowCount() < 3)
+            tableWidget_roomMargin->setRowCount(3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidget_roomMargin->setVerticalHeaderItem(0, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        tableWidget_roomMargin->setVerticalHeaderItem(1, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        tableWidget_roomMargin->setVerticalHeaderItem(2, __qtablewidgetitem6);
+        tableWidget_roomMargin->setObjectName(QString::fromUtf8("tableWidget_roomMargin"));
+        tableWidget_roomMargin->setGeometry(QRect(0, 20, 431, 131));
         frame_2 = new QFrame(Student);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setGeometry(QRect(20, 160, 631, 311));
+        frame_2->setGeometry(QRect(20, 160, 661, 311));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
         verticalLayout = new QVBoxLayout(frame_2);
@@ -209,20 +209,6 @@ public:
     void retranslateUi(QWidget *Student)
     {
         Student->setWindowTitle(QApplication::translate("Student", "Form", nullptr));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget_roomMargin->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("Student", "\346\234\272\346\210\277ID", nullptr));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_roomMargin->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("Student", "\346\234\272\346\210\277\345\217\267", nullptr));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_roomMargin->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("Student", "\344\270\212\345\215\210\344\275\231\351\207\217", nullptr));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_roomMargin->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("Student", "\344\270\213\345\215\210\344\275\231\351\207\217", nullptr));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_roomMargin->verticalHeaderItem(0);
-        ___qtablewidgetitem4->setText(QApplication::translate("Student", "1", nullptr));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget_roomMargin->verticalHeaderItem(1);
-        ___qtablewidgetitem5->setText(QApplication::translate("Student", "2", nullptr));
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_roomMargin->verticalHeaderItem(2);
-        ___qtablewidgetitem6->setText(QApplication::translate("Student", "3", nullptr));
         label->setText(QApplication::translate("Student", "\351\242\204\347\272\246\346\227\245\346\234\237", nullptr));
         label_2->setText(QApplication::translate("Student", "\351\242\204\347\272\246\346\227\266\351\227\264", nullptr));
         label_3->setText(QApplication::translate("Student", "\351\242\204\347\272\246\346\234\272\346\210\277", nullptr));
@@ -241,7 +227,21 @@ public:
 
         pushButton_applyOrder_checkMargin->setText(QApplication::translate("Student", "\346\237\245\347\234\213\346\234\272\346\210\277\344\275\231\351\207\217", nullptr));
         pushButton_applyOrder->setText(QApplication::translate("Student", "\347\224\263\350\257\267\351\242\204\347\272\246", nullptr));
-        label_4->setText(QApplication::translate("Student", "\345\221\250\344\270\200\347\232\204\346\234\272\346\210\277\344\277\241\346\201\257\357\274\232", nullptr));
+        groupBox->setTitle(QApplication::translate("Student", "\345\221\250\344\270\200\346\234\272\346\210\277\344\275\231\351\207\217", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_roomMargin->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("Student", "\346\234\272\346\210\277ID", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_roomMargin->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("Student", "\346\234\272\346\210\277\345\217\267", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_roomMargin->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("Student", "\344\270\212\345\215\210\344\275\231\351\207\217", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_roomMargin->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("Student", "\344\270\213\345\215\210\344\275\231\351\207\217", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_roomMargin->verticalHeaderItem(0);
+        ___qtablewidgetitem4->setText(QApplication::translate("Student", "1", nullptr));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget_roomMargin->verticalHeaderItem(1);
+        ___qtablewidgetitem5->setText(QApplication::translate("Student", "2", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_roomMargin->verticalHeaderItem(2);
+        ___qtablewidgetitem6->setText(QApplication::translate("Student", "3", nullptr));
         pushButton_checkSelfOrder->setText(QApplication::translate("Student", "\346\237\245\347\234\213\350\207\252\345\267\261\351\242\204\347\272\246", nullptr));
         pushButton_checkAllOrder->setText(QApplication::translate("Student", "\346\237\245\347\234\213\346\211\200\346\234\211\351\242\204\347\272\246", nullptr));
         pushButton_cancleOrder->setText(QApplication::translate("Student", "\345\217\226\346\266\210\351\242\204\347\272\246\351\242\204\347\272\246", nullptr));

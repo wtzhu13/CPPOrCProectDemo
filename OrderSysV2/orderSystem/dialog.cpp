@@ -44,14 +44,14 @@ void Dialog::on_pushButton_clicked()
     QString identity;
 
     // 获取对话框中的密码
-//    userPWD = ui->lineEdit_2->text();
-    userPWD = "123456";
+    userPWD = ui->lineEdit_2->text();
+//    userPWD = "123456";
 
     // 从数据库中获取密码
     QSqlQuery query;
     query.prepare("select pwd,identity,name from user_info where user_id = ?");
-//    QString user_id = ui->lineEdit->text();
-    QString user_id = "101";
+    QString user_id = ui->lineEdit->text();
+//    QString user_id = "101";
     userID = user_id;
     query.addBindValue(user_id);
     query.exec();

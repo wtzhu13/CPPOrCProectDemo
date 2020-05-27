@@ -33,7 +33,7 @@ private slots:
 
     void updateOrderState(int order_id, int stateID);
 
-    void updateRoomMarginInfo();
+    void updateRoomMarginInfo(int date_id, int time_id, int room_id);
 
     int getID(QString str);
 

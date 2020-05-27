@@ -63,9 +63,15 @@ void Teacher::on_pushButton_clicked()
     QString order_state = model->data(index).toString();
     index = model->index(curRow,0);
     int order_id = model->data(index).toInt();
-    qDebug() << order_id << user_id << order_date << order_time << order_room <<order_state;
+
+    int date_id = getID(QString("select date_id from date_info where date_str = '%1'").arg(order_date));
+    int time_id = getID(QString("select time_id from time_info where time_str = '%1'").arg(order_time));
+    int room_id = getID(QString("select room_id from room_info where room_name = '%1'").arg(order_room));
+
+    qDebug() << order_id << user_id << date_id << time_id << room_id <<order_state;
+
     if(order_state != "待审核"){
-        QMessageBox::information(NULL, "Title", "该记录已审核！");
+        QMessageBox::information(NULL, "Title", "该记录非待审核记录！");
         return;
     }
     int ok = QMessageBox::information(this,tr("通过申请？"),
@@ -76,7 +82,7 @@ void Teacher::on_pushButton_clicked()
         int stateID = 3;
         updateOrderState(order_id, stateID);
         // 房间余量要更新
-
+        updateRoomMarginInfo(date_id, time_id, room_id);
     }
     else
     {
@@ -87,10 +93,55 @@ void Teacher::on_pushButton_clicked()
 }
 
 /************************************************
+* 函数名：Teacher::updateRoomMarginInfo()
+* 参数：无
+* 返回值：无
+* 描述：更新机房余量信息
+************************************************/
+void Teacher::updateRoomMarginInfo(int date_id, int time_id, int room_id)
+{
+
+    QString tableName;
+    switch (date_id) {
+    case 1:
+        tableName = "monday_room_margin";
+        break;
+    case 2:
+        tableName = "tuesday_room_margin";
+        break;
+    case 3:
+        tableName = "wednesday_room_margin";
+        break;
+    case 4:
+        tableName = "thursday_room_margin";
+        break;
+    case 5:
+        tableName = "friday_room_margin";
+        break;
+    }
+    QString timeName;
+    switch (time_id) {
+    case 1:
+        timeName = "room_margin_am";
+        break;
+    case 2:
+        timeName = "room_margin_pm";
+        break;
+    }
+    QSqlQuery queryMargin;
+    queryMargin.exec(QString("select %1 from %2 where room_id = %3").arg(timeName).arg(tableName).arg(room_id));
+    queryMargin.next();
+    int orgMargin = queryMargin.value(0).toInt();
+    qDebug() << orgMargin;
+    orgMargin++;
+    queryMargin.exec(QString("update %1 set %2 = %3 where room_id = %4").arg(tableName).arg(timeName).arg(orgMargin).arg(room_id));
+}
+
+/************************************************
 * 函数名：Teacher::on_pushButton_checkOrder_clicked()
 * 参数：无
 * 返回值：无
-* 描述：审核预约
+* 描述：更新数据库中预约状态
 ************************************************/
 void Teacher::updateOrderState(int order_id, int stateID)
 {
@@ -115,17 +166,6 @@ int Teacher::getID(QString str)
     queryID.next();
     int date_id = queryID.value(0).toInt();
     return date_id;
-}
-
-/************************************************
-* 函数名：Teacher::updateRoomMarginInfo()
-* 参数：无
-* 返回值：无
-* 描述：更新机房余量信息
-************************************************/
-void Teacher::updateRoomMarginInfo()
-{
-
 }
 
 /************************************************

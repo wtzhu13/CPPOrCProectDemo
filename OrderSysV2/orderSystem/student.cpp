@@ -228,7 +228,9 @@ void Student::on_comboBox_orderRoom_currentIndexChanged(int index)
 ************************************************/
 void Student::getRoomInfo()
 {
-    ui->label_4->setText(QString("%1机房信息：").arg(orderDate));
+//    ui->label_4->setText(QString("%1机房信息：").arg(orderDate));
+    ui->groupBox->setTitle(QString("%1机房信息：").arg(orderDate));
+
     int row = 0;
     QSqlQuery query;
     bool flag = query.exec("select * from room_info");
