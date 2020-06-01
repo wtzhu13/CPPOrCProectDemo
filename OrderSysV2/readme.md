@@ -4,7 +4,7 @@
 
 ### 登录界面处事窗口
 
-![](D:\study\CPPOrCProectDemo\configImages\login_ui.png)
+![](..\configImages\login_ui.png)
 
 - 在用户ID处输入用户ID，没用选择用户名是因为可能存在同名学生，使用ID这种唯一标识更有区分性。
 - 用户在密码区输入密码，且以密文形式展示，便于保密。
@@ -14,7 +14,7 @@
 
 ### 登录异常
 
-![](D:\study\CPPOrCProectDemo\configImages\login_err.png)
+![](..\configImages\login_err.png)
 
 当用户名或者密码错误是，会有弹窗提示。
 
@@ -30,7 +30,7 @@
 
 本案例直接使用QT自带的拖拽的方式设计界面，具体用到的空间如下：
 
-![](D:\study\CPPOrCProectDemo\configImages\ui_design.png)
+![](..\configImages\ui_design.png)
 
 如图所以，将箭头左侧位置的空间拖到右侧区域并放置好位置即可，至于美观性这个有兴趣的可以后续研究。
 
@@ -106,3 +106,242 @@ void Dialog::on_pushButton_clicked()
 ```
 
 **需要注意的是：在这之前需要保证数据库连接正常，然后需要把代码中对应的表改成自己的表，不然运行结果就是一场的。**
+
+
+
+
+
+# QT手把手打造预约系统——管理员
+
+## 管理员界面介绍
+
+![](..\configImages\adminUI.png)
+
+- 点击查询用户会在框中显示用户信息。
+- 修改用户信息直接在显示的表格中修改后点击该按钮即可。
+- 删除用户，选中表格中的用户，点击即可删除。
+- 查询机房信息，点击即可完成。
+- 添加用户，先在左侧填写好相关信息，然后点击添加即可。
+- 清空预约，点击即可完成清空，按照需求，管理员可以每周清空一次。
+
+
+
+## 页面UI设计
+
+![](..\configImages\adminUIDesign.png)
+
+除了使用登录界面的几个控件外，本界面多了如图的两个控件，还是拖到指定位置即可。
+
+## 功能逻辑实现
+
+1. 查询用户，通过`QSqlTableModel`操作数据库，省去SQL语句。
+
+   ```C++
+   /************************************************
+   * 函数名：Widget::on_pushButton_clicked()
+   * 参数：无
+   * 返回值：无
+   * 描述：查询用户信息按钮
+   ************************************************/
+   void Widget::on_pushButton_clicked()
+   {
+       model = new QSqlTableModel(this);
+       model->setTable("user_info");   // 设置查询表
+       model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+       model->select();
+       // model->removeColumn(0); //不显示id属性列,如果这时添加记录，则该属性的值添加不上
+       ui->tableView->setModel(model);
+   }
+   ```
+
+   - 首先创建一个连接，并制定需要操作的表。
+   - 设置model的属性，并执行select()方法查询该表中全部类容。
+   - 通过`ui->tableView->setModel(model);`方法直接显示表格中的类容。
+
+2. 查看机房信息，同查询用户信息一样，使用`QSqlTableModel`来操作数据库。
+
+   ```C++
+   /************************************************
+   * 函数名：Widget::on_pushButton_roomInfo_clicked()
+   * 参数：无
+   * 返回值：无
+   * 描述：查询机房信息
+   ************************************************/
+   void Widget::on_pushButton_roomInfo_clicked()
+   {
+       roomModel = new QSqlTableModel(this);
+       roomModel->setTable("room_info");   // 设置查询表
+       roomModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+       roomModel->select();
+       ui->tableView->setModel(roomModel);
+   }
+   ```
+
+3. 添加用户，通过`QSqlQuery`来执行SQL语句操作数据库。
+
+   ```C++
+   /************************************************
+   * 函数名：Widget::on_pushButton_addUser_clicked()
+   * 参数：无
+   * 返回值：无
+   * 描述：添加用户
+   ************************************************/
+   void Widget::on_pushButton_addUser_clicked()
+   {
+       QString id = ui->lineEdit_id->text();
+       QString name = ui->lineEdit_naem->text();
+       QString pwd = ui->lineEdit_pwd->text();
+   
+       // 判断用户信息是否全
+       if(id == "" || name == "" || pwd == ""){
+           QMessageBox::information(NULL, "Title", "用户信息不全！");
+           return;
+       }
+   
+       // 判断用户ID的长度是否符合要求
+       switch (identityID) {
+           case 0:
+               // 检查学生ID
+               if(id.length() != 9){
+                   QMessageBox::information(NULL, "Title", "用户ID错误！");
+                   return;
+               }
+           break;
+           case 1:
+               // 检查教师ID
+               if(id.length() != 3){
+                   QMessageBox::information(NULL, "Title", "用户ID错误！");
+                   return;
+               }
+           break;
+           case 2:
+               // 检查管理员ID
+               if(id.length() != 1){
+                   QMessageBox::information(NULL, "Title", "用户ID错误！");
+                   return;
+               }
+           break;
+           default:
+           break;
+       }
+   
+       if(pwd.length() != 6){
+           QMessageBox::information(NULL, "Title", "请设置6位密码！");
+           return;
+       }
+   
+       qDebug() << id << name << pwd << identity;
+   
+       // MD5对密码进行加密
+       QString pwdMD5;
+       QByteArray str;
+       str = QCryptographicHash::hash(pwd.toLatin1(), QCryptographicHash::Md5);
+       pwdMD5.append(str.toHex());
+   
+       QString str1 = QString("insert into user_info values('%1', '%2', '%3', '%4')").arg(id)
+               .arg(name).arg(pwdMD5).arg(identity);
+       qDebug() << str1;
+   
+       // 判断用户名是否已经存在
+       QSqlQuery query;
+       query.exec(QString("select name from user_info where user_id = %1").arg(id));
+       query.next();
+       QString nameFlag = query.value(0).toString();
+       if(nameFlag != ""){
+           QMessageBox::information(NULL, "Title", "该用户已存在");
+           qDebug() << "该用户已存在";
+           return;
+       }
+       else{
+           bool flag = query.exec(str1);
+           if(flag){
+               QMessageBox::information(NULL, "Title", "添加用户成功");
+               ui->lineEdit_id->setText("");
+               ui->lineEdit_naem->setText("");
+               ui->lineEdit_pwd->setText("");
+           }
+           else{
+               QMessageBox::information(NULL, "Title", "数据库发生错误");
+           }
+       }
+   }
+   ```
+
+   - 从页面获取需要添加的用户的ID、姓名和密码。
+   - 检查三份信息是否齐全，不全则提示用户补全。
+   - 检查用户ID的长度，三种身份的ID长度不同，需要检查。
+   - 检查密码长度，设置密码长度为6。
+   - 对密码进行MD5加密。
+   - 判断用户在数据库中是否已经存在，如果不存在则是新用户可以直接添加到数据库。
+
+4. 删除用户
+
+   ```C++
+   /************************************************
+   * 函数名：Widget::on_pushButton_delUser_clicked()
+   * 参数：无
+   * 返回值：无
+   * 描述：删除用户
+   ************************************************/
+   void Widget::on_pushButton_delUser_clicked()
+   {
+       // 获取选中的行
+       int curRow = ui->tableView->currentIndex().row();
+       // 删除该行
+       model->removeRow(curRow);
+       int ok = QMessageBox::warning(this,tr("删除当前行!"),
+       tr("你确定删除当前行吗？ "),QMessageBox::Yes, QMessageBox::No);
+       if(ok == QMessageBox::No)
+       {
+           // 如果不删除， 则撤销
+           model->revertAll();
+       }
+       else
+       {
+           // 否则提交， 在数据库中删除该行
+           model->submitAll();
+       }
+   }
+   ```
+
+   - 获取选中的行。
+   - 通过`model->removeRow(curRow)`删除选中的行。
+   - 删除时通过弹出对话框提醒用户是否删除，如果删除就直接执行提交。
+
+5. 清楚预约信息，通过`QSqlQuery`执行SQL语句删除预约信息。
+
+   ```C++
+   /************************************************
+   * 函数名：Widget::on_pushButton_clearOrder_clicked()
+   * 参数：无
+   * 返回值：无
+   * 描述：清除预约信息
+   ************************************************/
+   void Widget::on_pushButton_clearOrder_clicked()
+   {
+       QSqlQuery query;
+       // 删除操作前给出提示信息，方便确认
+       QMessageBox:: StandardButton result = QMessageBox::information(NULL, "Title", "确认清空预约记录？",
+                                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+       switch (result) {
+           case QMessageBox::Yes:{
+               qDebug()<<"Yes";
+               query.exec("delete from order_info");
+               QMessageBox::information(NULL, "Title", "已清空预约!");
+               QSqlQuery queryRoom;
+               queryRoom.exec("update room_info set room_margin = 20 where room_id = 1");
+               queryRoom.exec("update room_info set room_margin = 50 where room_id = 2");
+               queryRoom.exec("update room_info set room_margin = 100 where room_id = 3");
+               break;
+               }
+           case QMessageBox::No:
+               qDebug()<<"NO";
+               break;
+           default:
+               break;
+       }
+   }
+   ```
+
+   
+
