@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mypushbutton.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    mypushbutton.h
 
 FORMS += \
     mainwindow.ui
