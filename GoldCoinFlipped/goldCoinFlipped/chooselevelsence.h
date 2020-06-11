@@ -15,6 +15,9 @@ public:
     explicit ChooseLevelSence(QWidget *parent = nullptr);
     ~ChooseLevelSence();
 
+private slots:
+    void on_actionquit_triggered();
+
 private:
     Ui::ChooseLevelSence *ui;
 };

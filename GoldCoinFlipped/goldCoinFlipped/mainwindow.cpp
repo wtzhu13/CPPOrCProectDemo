@@ -17,13 +17,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 连接信号槽
     connect(startBtn, &MyPushButton::clicked, [=](){
-        qDebug() << "开始游戏~";
-        startBtn->zoom();
-        startBtn->zoom(UP);
+    qDebug() << "开始游戏~";
+    startBtn->zoom();
+    startBtn->zoom(UP);
 
+    // 延时执行
+    QTimer::singleShot(200, this, [=](){
         // 隐藏当前页面，打开新的页面
         this->hide();
         chooseSence->show();
+        });
     });
 }
 

@@ -12,3 +12,8 @@ ChooseLevelSence::~ChooseLevelSence()
 {
     delete ui;
 }
+
+void ChooseLevelSence::on_actionquit_triggered()
+{
+    this->close();
+}

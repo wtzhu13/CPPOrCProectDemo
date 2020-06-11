@@ -25,6 +25,7 @@ MyPushButton::MyPushButton(QString normalImg, QString pressImg)
 
 void MyPushButton::zoom(int direstion)
 {
+    qDebug() << "action";
     QPropertyAnimation *action = new QPropertyAnimation(this, "geometry");
     // 设置时间间隔
     action->setDuration(200);
