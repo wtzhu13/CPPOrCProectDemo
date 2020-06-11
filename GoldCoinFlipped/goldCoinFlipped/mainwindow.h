@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "mypushbutton.h"
+#include "chooselevelsence.h"
 
 #define UP 1
 #define DOWN 0
@@ -24,5 +25,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    ChooseLevelSence *chooseSence;
 };
 #endif // MAINWINDOW_H
