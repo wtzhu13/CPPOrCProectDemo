@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 #include "mypushbutton.h"
 #include "chooselevelsence.h"
 #include <QTimer>

@@ -17,15 +17,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 连接信号槽
     connect(startBtn, &MyPushButton::clicked, [=](){
-        qDebug() << "开始游戏~";
-        startBtn->zoom();
-        startBtn->zoom(UP);
+    qDebug() << "开始游戏~";
+    startBtn->zoom();
+    startBtn->zoom(UP);
 
+<<<<<<< HEAD
         // 添加一个演示，是动画更明显
         QTimer::singleShot(500, this, [=](){
             // 隐藏当前页面，打开新的页面
             this->hide();
             chooseSence->show();
+=======
+    // 延时执行
+    QTimer::singleShot(200, this, [=](){
+        // 隐藏当前页面，打开新的页面
+        this->hide();
+        chooseSence->show();
+>>>>>>> 82b4db95078715168c4b2025ceebdeb00974d618
         });
     });
 }

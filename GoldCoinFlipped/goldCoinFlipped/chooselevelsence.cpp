@@ -24,6 +24,7 @@ ChooseLevelSence::~ChooseLevelSence()
 
 void ChooseLevelSence::on_actionquit_triggered()
 {
+<<<<<<< HEAD
     exit(0);
 }
 
@@ -38,4 +39,7 @@ void ChooseLevelSence::paintEvent(QPaintEvent *)
     pix.load(":/src/Title.png");
     painter.drawPixmap((this->width() - pix.width())*0.5, 30, pix.width(), pix.height(), pix);
 
+=======
+    this->close();
+>>>>>>> 82b4db95078715168c4b2025ceebdeb00974d618
 }

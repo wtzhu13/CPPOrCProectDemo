@@ -23,6 +23,9 @@ public:
 private slots:
     void on_actionquit_triggered();
 
+private slots:
+    void on_actionquit_triggered();
+
 private:
     Ui::ChooseLevelSence *ui;
 };
