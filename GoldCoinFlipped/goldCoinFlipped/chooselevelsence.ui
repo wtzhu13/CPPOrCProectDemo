@@ -37,7 +37,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/src/OtherSceneBg.png);</string>
+    <string notr="true"/>
    </property>
   </widget>
   <widget class="QMenuBar" name="menubar">

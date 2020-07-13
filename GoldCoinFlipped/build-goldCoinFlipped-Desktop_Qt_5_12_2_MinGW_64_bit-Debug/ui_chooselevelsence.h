@@ -47,7 +47,7 @@ public:
         actionquit->setObjectName(QString::fromUtf8("actionquit"));
         centralwidget = new QWidget(ChooseLevelSence);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        centralwidget->setStyleSheet(QString::fromUtf8("border-image: url(:/src/OtherSceneBg.png);"));
+        centralwidget->setStyleSheet(QString::fromUtf8(""));
         ChooseLevelSence->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ChooseLevelSence);
         menubar->setObjectName(QString::fromUtf8("menubar"));

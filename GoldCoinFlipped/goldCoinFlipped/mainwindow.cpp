@@ -21,9 +21,12 @@ MainWindow::MainWindow(QWidget *parent)
         startBtn->zoom();
         startBtn->zoom(UP);
 
-        // 隐藏当前页面，打开新的页面
-        this->hide();
-        chooseSence->show();
+        // 添加一个演示，是动画更明显
+        QTimer::singleShot(500, this, [=](){
+            // 隐藏当前页面，打开新的页面
+            this->hide();
+            chooseSence->show();
+        });
     });
 }
 

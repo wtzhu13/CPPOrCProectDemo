@@ -14,6 +14,10 @@ public:
     MyPushButton(QString normalImg, QString pressImg = "");
     void zoom(int direstion = 0);
 
+    // 重写按钮的按下和释放
+    void mousePressEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+
     QString normalImgPath;
     QString pressImgPath;
 

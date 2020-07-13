@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "mypushbutton.h"
 #include "chooselevelsence.h"
+#include <QTimer>
 
 #define UP 1
 #define DOWN 0
