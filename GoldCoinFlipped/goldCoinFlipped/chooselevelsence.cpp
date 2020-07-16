@@ -13,8 +13,44 @@ ChooseLevelSence::ChooseLevelSence(QWidget *parent) :
 
     // 点击返回按键的链接
     connect(backBtn, &MyPushButton::clicked, [=](){
-        qDebug() << "fanhui";
+        // 发送返回信号
+        QTimer::singleShot(200, this, [=](){
+           emit chooseScenseBack();
+        });
     });
+
+    // 创建选择关卡按钮
+    for (int i=0;i < 20; i++) {
+        MyPushButton *menuBtn = new MyPushButton(":/src/LevelIcon.png");
+        menuBtn->setParent(this);
+        menuBtn->move(25 + i%4 * 70, 130 + i/4 * 70);
+
+        // 设置每个按钮上的关卡数字
+        QLabel *label = new QLabel();
+        label->setParent(this);
+        label->setFixedSize(menuBtn->width(), menuBtn->height());
+        label->setText(QString::number(i+1));
+        label->move(25 + i%4 * 70, 130 + i/4 * 70);
+        // 设置label文字对齐方式，水平居中，垂直居中
+        label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+        // 当label覆盖在按键上时，覆盖了按钮的点击事件导致按键接收不到点击，需要设置鼠标穿透
+        label->setAttribute(Qt::WA_TransparentForMouseEvents);
+
+        PlaySence *pPlaySence = new PlaySence();
+
+        connect(menuBtn, &MyPushButton::clicked, [=](){
+            qDebug() << i + 1;
+            this->hide();
+            pPlaySence->show();
+        });
+
+        // 链接返回信号
+        connect(pPlaySence, &PlaySence::backLevelSence, [=](){
+            this->show();
+            pPlaySence->hide();
+        });
+    }
 }
 
 ChooseLevelSence::~ChooseLevelSence()
@@ -24,7 +60,6 @@ ChooseLevelSence::~ChooseLevelSence()
 
 void ChooseLevelSence::on_actionquit_triggered()
 {
-<<<<<<< HEAD
     exit(0);
 }
 
@@ -38,8 +73,4 @@ void ChooseLevelSence::paintEvent(QPaintEvent *)
     // 加载标题
     pix.load(":/src/Title.png");
     painter.drawPixmap((this->width() - pix.width())*0.5, 30, pix.width(), pix.height(), pix);
-
-=======
-    this->close();
->>>>>>> 82b4db95078715168c4b2025ceebdeb00974d618
 }

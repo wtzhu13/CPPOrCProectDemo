@@ -1,0 +1,10 @@
+debug/chooselevelsence.o
+debug/main.o
+debug/mainwindow.o
+debug/mypushbutton.o
+debug/playsence.o
+debug/qrc_res.o
+debug/moc_chooselevelsence.o
+debug/moc_mainwindow.o
+debug/moc_mypushbutton.o
+debug/moc_playsence.o

@@ -4,7 +4,10 @@
 #include <QMainWindow>
 #include <QPainter>
 #include <QDebug>
+#include <QTimer>
+#include <QLabel>
 #include "mypushbutton.h"
+#include "playsence.h"
 
 namespace Ui {
 class ChooseLevelSence;
@@ -23,8 +26,10 @@ public:
 private slots:
     void on_actionquit_triggered();
 
-private slots:
-    void on_actionquit_triggered();
+signals:
+    // 写一个自定义信号，告诉主场景，点击返回
+    void chooseScenseBack();
+
 
 private:
     Ui::ChooseLevelSence *ui;

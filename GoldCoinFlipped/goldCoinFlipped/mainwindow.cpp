@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     startBtn->move(this->width()*0.5-startBtn->width()*0.5, this->height()*0.7);
 
     // 创建一个新界面的对象
-    chooseSence = new ChooseLevelSence();
+    ChooseLevelSence *chooseSence = new ChooseLevelSence();
 
     // 连接信号槽
     connect(startBtn, &MyPushButton::clicked, [=](){
@@ -21,20 +21,19 @@ MainWindow::MainWindow(QWidget *parent)
     startBtn->zoom();
     startBtn->zoom(UP);
 
-<<<<<<< HEAD
-        // 添加一个演示，是动画更明显
-        QTimer::singleShot(500, this, [=](){
-            // 隐藏当前页面，打开新的页面
-            this->hide();
-            chooseSence->show();
-=======
     // 延时执行
     QTimer::singleShot(200, this, [=](){
         // 隐藏当前页面，打开新的页面
         this->hide();
         chooseSence->show();
->>>>>>> 82b4db95078715168c4b2025ceebdeb00974d618
         });
+    });
+
+    // 监听返回信号
+    connect(chooseSence, &ChooseLevelSence::chooseScenseBack, [=](){
+        // 显示主场景，隐藏关卡场景
+        this->show();
+        chooseSence->hide();
     });
 }
 

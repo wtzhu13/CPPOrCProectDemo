@@ -19,16 +19,19 @@ SOURCES += \
     chooselevelsence.cpp \
     main.cpp \
     mainwindow.cpp \
-    mypushbutton.cpp
+    mypushbutton.cpp \
+    playsence.cpp
 
 HEADERS += \
     chooselevelsence.h \
     mainwindow.h \
-    mypushbutton.h
+    mypushbutton.h \
+    playsence.h
 
 FORMS += \
     chooselevelsence.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    playsence.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
