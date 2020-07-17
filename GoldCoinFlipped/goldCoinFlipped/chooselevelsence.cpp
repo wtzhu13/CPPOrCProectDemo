@@ -37,19 +37,18 @@ ChooseLevelSence::ChooseLevelSence(QWidget *parent) :
         // 当label覆盖在按键上时，覆盖了按钮的点击事件导致按键接收不到点击，需要设置鼠标穿透
         label->setAttribute(Qt::WA_TransparentForMouseEvents);
 
-        PlaySence *pPlaySence = new PlaySence();
-
         connect(menuBtn, &MyPushButton::clicked, [=](){
             qDebug() << i + 1;
             this->hide();
+            PlaySence *pPlaySence = new PlaySence(i+1);
             pPlaySence->show();
-        });
 
-        // 链接返回信号
-        connect(pPlaySence, &PlaySence::backLevelSence, [=](){
-            this->show();
-            pPlaySence->hide();
-        });
+            // 链接返回信号
+            connect(pPlaySence, &PlaySence::backLevelSence, [=](){
+                this->show();
+                delete pPlaySence;
+            });
+        });    
     }
 }
 

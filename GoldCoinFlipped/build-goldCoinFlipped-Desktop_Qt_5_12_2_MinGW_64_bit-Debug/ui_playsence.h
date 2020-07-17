@@ -10,6 +10,7 @@
 #define UI_PLAYSENCE_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -37,6 +38,9 @@ public:
         PlaySence->setSizePolicy(sizePolicy);
         PlaySence->setMinimumSize(QSize(320, 588));
         PlaySence->setMaximumSize(QSize(320, 588));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/src/Coin0001.png"), QSize(), QIcon::Normal, QIcon::Off);
+        PlaySence->setWindowIcon(icon);
         centralwidget = new QWidget(PlaySence);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         PlaySence->setCentralWidget(centralwidget);
@@ -55,7 +59,7 @@ public:
 
     void retranslateUi(QMainWindow *PlaySence)
     {
-        PlaySence->setWindowTitle(QApplication::translate("PlaySence", "MainWindow", nullptr));
+        PlaySence->setWindowTitle(QApplication::translate("PlaySence", "\345\274\200\345\247\213\344\275\240\347\232\204\350\241\250\346\274\224", nullptr));
     } // retranslateUi
 
 };

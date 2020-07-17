@@ -66,7 +66,7 @@ public:
 
     void retranslateUi(QMainWindow *ChooseLevelSence)
     {
-        ChooseLevelSence->setWindowTitle(QApplication::translate("ChooseLevelSence", "MainWindow", nullptr));
+        ChooseLevelSence->setWindowTitle(QApplication::translate("ChooseLevelSence", "\345\205\263\345\215\241", nullptr));
         actionquit->setText(QApplication::translate("ChooseLevelSence", "\351\200\200\345\207\272", nullptr));
         menu->setTitle(QApplication::translate("ChooseLevelSence", "\346\216\247\345\210\266", nullptr));
     } // retranslateUi

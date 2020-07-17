@@ -1,6 +1,11 @@
 #include "mypushbutton.h"
 
-
+/*******************************************
+* 函数名：MyPushButton::MyPushButton
+* 功能：自定义构造函数
+* 参数：按钮需要加载的图片
+* 返回值：
+********************************************/
 MyPushButton::MyPushButton(QString normalImg, QString pressImg)
 {
     this->normalImgPath = normalImg;
@@ -23,6 +28,12 @@ MyPushButton::MyPushButton(QString normalImg, QString pressImg)
     this->setIconSize(QSize(pix.width(), height()));
 }
 
+/*******************************************
+* 函数名：MyPushButton::zoom
+* 功能：跳动的动画效果，开始游戏按钮的效果
+* 参数：按钮跳动的方向
+* 返回值：
+********************************************/
 void MyPushButton::zoom(int direstion)
 {
     qDebug() << "action";
@@ -48,7 +59,12 @@ void MyPushButton::zoom(int direstion)
 
 }
 
-//  实现返回按键的动画效果
+/*******************************************
+* 函数名：MyPushButton::mousePressEvent
+* 功能：拦截鼠标点击事件，针对返回按钮设置的动画效果
+* 参数：鼠标事件
+* 返回值：
+********************************************/
 void MyPushButton::mousePressEvent(QMouseEvent *e)
 {
     if(this->pressImgPath != ""){
@@ -71,6 +87,12 @@ void MyPushButton::mousePressEvent(QMouseEvent *e)
     return QPushButton::mousePressEvent(e);
 }
 
+/*******************************************
+* 函数名：MyPushButton::mousePressEvent
+* 功能：拦截鼠标释放事件，针对返回按钮设置的动画效果
+* 参数：鼠标事件
+* 返回值：
+********************************************/
 void MyPushButton::mouseReleaseEvent(QMouseEvent *e)
 {
     if(this->pressImgPath != ""){
