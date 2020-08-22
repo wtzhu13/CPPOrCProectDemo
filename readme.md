@@ -29,3 +29,15 @@ some projects for you to practice your programming skills which used C or CPP, y
 ### OrderSystemV2(UI版本)
 
 利用C++基础和STL相关技能打造的一个预约系统，本案例打造的是一款机房预约系统，也可以利用这种架构打造其他的预约系统。与终端版本的区别在于该版本基于QT设计UI界面，并利用Mysql数据库存放本地数据。
+
+### expenditureSys
+
+一款简易简易的终端版本的收支系统。
+
+### GoldCoinFlipped
+
+一块基于QT打造的简易的单机游戏。可以利用改项目熟悉QT的API的使用，设计简单的按键的信号糟链接，定时器的使用，动画效果的使用，还有C++中STL的使用，相对而言比较综合，可以当做QT的综合小项目使用。
+
+### serialAssistant
+
+一块基于QT打造的简易的串口助手，可以直接用于串口调试。可以熟悉QT的串口功能。
