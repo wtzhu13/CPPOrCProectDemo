@@ -41,10 +41,12 @@ ChooseLevelSence::ChooseLevelSence(QWidget *parent) :
             qDebug() << i + 1;
             this->hide();
             PlaySence *pPlaySence = new PlaySence(i+1);
+            pPlaySence->setGeometry(this->geometry());
             pPlaySence->show();
 
             // 链接返回信号
             connect(pPlaySence, &PlaySence::backLevelSence, [=](){
+                this->setGeometry(pPlaySence->geometry());
                 this->show();
                 delete pPlaySence;
             });

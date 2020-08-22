@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer::singleShot(200, this, [=](){
         // 隐藏当前页面，打开新的页面
         this->hide();
+        chooseSence->setGeometry(this->geometry());
         chooseSence->show();
         });
     });
@@ -32,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 监听返回信号
     connect(chooseSence, &ChooseLevelSence::chooseScenseBack, [=](){
         // 显示主场景，隐藏关卡场景
+        this->setGeometry(chooseSence->geometry());
         this->show();
         chooseSence->hide();
     });

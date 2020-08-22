@@ -1,0 +1,14 @@
+release/chooselevelsence.o
+release/dataconfig.o
+release/main.o
+release/mainwindow.o
+release/mycoin.o
+release/mypushbutton.o
+release/playsence.o
+release/qrc_res.o
+release/moc_chooselevelsence.o
+release/moc_dataconfig.o
+release/moc_mainwindow.o
+release/moc_mycoin.o
+release/moc_mypushbutton.o
+release/moc_playsence.o

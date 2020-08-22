@@ -17,14 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     chooselevelsence.cpp \
+    dataconfig.cpp \
     main.cpp \
     mainwindow.cpp \
+    mycoin.cpp \
     mypushbutton.cpp \
     playsence.cpp
 
 HEADERS += \
     chooselevelsence.h \
+    dataconfig.h \
     mainwindow.h \
+    mycoin.h \
     mypushbutton.h \
     playsence.h
 

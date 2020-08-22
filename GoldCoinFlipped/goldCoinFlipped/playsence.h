@@ -8,6 +8,8 @@
 #include <QLabel>
 
 #include "mypushbutton.h"
+#include "mycoin.h"
+#include "dataconfig.h"
 
 namespace Ui {
 class PlaySence;
@@ -24,7 +26,9 @@ public:
     void paintEvent(QPaintEvent *);
 
     int levelSence;
-
+    int gameArray[4][4];
+    Mycoin *coinBtn[4][4];
+    bool isWin = true;
 signals:
     void backLevelSence();
 
