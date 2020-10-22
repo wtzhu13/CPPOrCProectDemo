@@ -1,0 +1,191 @@
+C51 COMPILER V9.00   MAIN                                                                  10/22/2020 19:26:30 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\obj\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main\main.c BROWSE DEBUG OBJECTEXTEND PRINT(.\main.lst) OBJECT(.\obj\mai
+                    -n.obj)
+
+line level    source
+
+   1          /*******************************************************************************
+   2           * All rights reserved, Copyright (C) wtzhu                                             
+   3           * -----------------------------------------------------------------------------
+   4           * [File Name]:                         main.c
+   5           * [Description]:                   串口通过PWM控制舵机
+   6           *                              
+   7           * [Author]:                              wtzhu 
+   8           * [Date Of Creation]:          202010
+   9           * [Note]: 
+  10           *
+  11           * ------------------------------------------------------------------------------
+  12           * Date                                 Author                          Modifications
+  13           * ------------------------------------------------------------------------------
+  14           * 202010                         wtzhu                     Created
+  15           *******************************************************************************/
+  16          #include<reg51.h>
+  17          
+  18          #define uint unsigned int
+  19          #define uchar unsigned char
+  20          #define OPEN  1
+  21          #define CLOSE 0
+  22          #define HIGH  1
+  23          #define LOW   0
+  24          
+  25          sbit SEV_PWM = P2^0;  // PWM1     竖直方向舵机
+  26          sbit SEH_PWM = P2^4;  // PWM2     水平方向舵机
+  27          uint count = 0;
+  28           
+  29          uint command;
+  30          uchar flag = 0;           // 串口中断响应标志
+  31          uint SEV_count; 
+  32          uint SEH_count;
+  33          
+  34           
+  35          /*******************************************
+  36          * 函数名：
+  37          * 功能：初始化
+  38          * 参数：
+  39          * 返回值：
+  40          ********************************************/ 
+  41          void com_init()
+  42          {
+  43   1              TMOD = 0x21;            // 定时器0工作方式1,定时器1工作方式2
+  44   1          TH1 = 0xfd;                 // 设置波特率9600
+  45   1          TL1 = 0xfd;
+  46   1              ET1 = CLOSE;            // 关闭定时器1中断
+  47   1          TR1 = OPEN;                 // 打开定时器1
+  48   1                      
+  49   1          TH0 = (65536 - 100)/256;
+  50   1          TL0 = (65536 - 100)%256;
+  51   1          ET0 = OPEN; 
+  52   1              TR0 = OPEN;
+  53   1                      
+  54   1          SM0 = 0;                    // 设置串口模式
+C51 COMPILER V9.00   MAIN                                                                  10/22/2020 19:26:30 PAGE 2   
+
+  55   1          SM1 = 1;
+  56   1          REN = OPEN;
+  57   1              ES = OPEN;
+  58   1          EA = OPEN;
+  59   1      
+  60   1              SEV_count = 10;
+  61   1              SEH_count = 10;
+  62   1      }
+  63          
+  64          /*******************************************
+  65          * 函数名：
+  66          * 功能：主函数
+  67          * 参数：
+  68          * 返回值：
+  69          ********************************************/
+  70          void main()
+  71          {
+  72   1              com_init();
+  73   1              while(1)
+  74   1              {
+  75   2                              if(flag == 1)
+  76   2                              {
+  77   3                                      flag = 0;
+  78   3                                      ES = CLOSE;
+  79   3                                      SBUF = command;
+  80   3                                      while(!TI);
+  81   3                                      TI = 0;
+  82   3                                      ES = OPEN;
+  83   3                                      // 根据串口信息的方向移动
+  84   3                                      switch (command)
+  85   3                                      {
+  86   4                                      case 'w':
+  87   4                                              {
+  88   5                                                      SEV_count--;
+  89   5                                                      if (SEV_count <= 5) SEV_count = 5;
+  90   5                                                      break;
+  91   5                                              }
+  92   4                                      case 's':
+  93   4                                              {
+  94   5                                                      SEV_count++;
+  95   5                                                      if (SEV_count >= 15) SEV_count = 15;
+  96   5                                                      break;
+  97   5                                              }
+  98   4                                      case 'a':
+  99   4                                              {
+ 100   5                                                      SEH_count--;
+ 101   5                                                      if (SEH_count <= 5) SEH_count = 5;
+ 102   5                                                      break;
+ 103   5                                              }
+ 104   4                                      case 'd':
+ 105   4                                              {
+ 106   5                                                      SEH_count++;
+ 107   5                                                      if (SEH_count <= 15) SEH_count = 15;
+ 108   5                                                      break;
+ 109   5                                              }
+ 110   4                                      case 'r':
+ 111   4                                              {
+ 112   5                                                      SEV_count = 10;
+ 113   5                                                      SEH_count = 10;
+ 114   5                                                      break;
+ 115   5                                              }       
+ 116   4                                      default:
+C51 COMPILER V9.00   MAIN                                                                  10/22/2020 19:26:30 PAGE 3   
+
+ 117   4                                              break;
+ 118   4                                      }
+ 119   3                              }
+ 120   2                              
+ 121   2              }                       
+ 122   1      }
+ 123          
+ 124          /*******************************************
+ 125          * 函数名：
+ 126          * 功能：定时器0中断
+ 127          * 参数：
+ 128          * 返回值：
+ 129          ********************************************/
+ 130          void tim0() interrupt 1
+ 131          {
+ 132   1      //      TR0 = CLOSE;
+ 133   1              TH0 = (65536 - 100)/256;
+ 134   1        TL0 = (65536 - 100)%256;
+ 135   1      
+ 136   1              // 舵机1
+ 137   1              SEH_PWM = count <= SEH_count ? HIGH : LOW;
+ 138   1      
+ 139   1              // 舵机2
+ 140   1              SEV_PWM = count <= SEV_count ? HIGH : LOW;
+ 141   1      
+ 142   1              count++;
+ 143   1              if(count >= 200) count = 0;
+ 144   1      
+ 145   1      //      TR0 = OPEN;
+ 146   1      }
+ 147          
+ 148          /*******************************************
+ 149          * 函数名：
+ 150          * 功能：
+ 151          * 参数：
+ 152          * 返回值：
+ 153          ********************************************/
+ 154          void uart_ser() interrupt 4
+ 155          {
+ 156   1              if (RI == 0)
+ 157   1              {
+ 158   2                      return;
+ 159   2              }
+ 160   1              RI = CLOSE;
+ 161   1              command = SBUF;
+ 162   1              flag = 1;
+ 163   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    314    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

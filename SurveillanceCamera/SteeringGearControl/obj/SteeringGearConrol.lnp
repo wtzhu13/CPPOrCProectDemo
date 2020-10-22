@@ -1,0 +1,3 @@
+".\obj\main.obj" 
+TO ".\obj\SteeringGearConrol" 
+PRINT(".\SteeringGearConrol.m51") RAMSIZE(256) 

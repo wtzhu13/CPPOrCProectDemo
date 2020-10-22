@@ -1,0 +1,192 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/22/2020  19:26:30  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\obj\main.obj TO .\obj\SteeringGearConrol PRINT (.\SteeringGearConrol.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\obj\main.obj (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\obj\SteeringGearConrol (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0009H     UNIT         ?DT?MAIN
+            IDATA   0011H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0008H     UNIT         ?C_INITSEG
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     0015H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     00ABH     UNIT         ?PR?MAIN?MAIN
+            CODE    00D1H     008CH     UNIT         ?C_C51STARTUP
+            CODE    015DH     0046H     UNIT         ?PR?TIM0?MAIN
+            CODE    01A3H     002EH     UNIT         ?PR?COM_INIT?MAIN
+            CODE    01D1H     001BH     UNIT         ?PR?UART_SER?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\obj\SteeringGearConrol (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?COM_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\obj\SteeringGearConrol (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/22/2020  19:26:30  PAGE 2
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  B:00A8H.4       PUBLIC        ES
+  B:0098H.0       PUBLIC        RI
+  D:0008H         PUBLIC        flag
+  B:0098H.1       PUBLIC        TI
+  C:0026H         PUBLIC        main
+  D:0009H         PUBLIC        count
+  D:0099H         PUBLIC        SBUF
+  D:0089H         PUBLIC        TMOD
+  B:00A0H.4       PUBLIC        SEH_PWM
+  B:00A0H.0       PUBLIC        SEV_PWM
+  B:00A8H.1       PUBLIC        ET0
+  B:00A8H.3       PUBLIC        ET1
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  B:0098H.7       PUBLIC        SM0
+  D:008AH         PUBLIC        TL0
+  B:0098H.6       PUBLIC        SM1
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  C:01A3H         PUBLIC        com_init
+  B:0088H.6       PUBLIC        TR1
+  D:000BH         PUBLIC        command
+  B:0098H.4       PUBLIC        REN
+  C:01D1H         PUBLIC        uart_ser
+  D:000DH         PUBLIC        SEH_count
+  C:015DH         PUBLIC        tim0
+  D:000FH         PUBLIC        SEV_count
+  -------         PROC          COM_INIT
+  C:01A3H         LINE#         41
+  C:01A3H         LINE#         42
+  C:01A3H         LINE#         43
+  C:01A6H         LINE#         44
+  C:01A9H         LINE#         45
+  C:01ACH         LINE#         46
+  C:01AEH         LINE#         47
+  C:01B0H         LINE#         49
+  C:01B3H         LINE#         50
+  C:01B6H         LINE#         51
+  C:01B8H         LINE#         52
+  C:01BAH         LINE#         54
+  C:01BCH         LINE#         55
+  C:01BEH         LINE#         56
+  C:01C0H         LINE#         57
+  C:01C2H         LINE#         58
+  C:01C4H         LINE#         60
+  C:01CAH         LINE#         61
+  C:01D0H         LINE#         62
+  -------         ENDPROC       COM_INIT
+  -------         PROC          MAIN
+  C:0026H         LINE#         70
+  C:0026H         LINE#         71
+  C:0026H         LINE#         72
+  C:0029H         LINE#         73
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/22/2020  19:26:30  PAGE 3
+
+
+  C:0029H         LINE#         74
+  C:0029H         LINE#         75
+  C:002EH         LINE#         76
+  C:002EH         LINE#         77
+  C:0031H         LINE#         78
+  C:0033H         LINE#         79
+  C:0036H         LINE#         80
+  C:0039H         LINE#         81
+  C:003BH         LINE#         82
+  C:003DH         LINE#         84
+  C:0056H         LINE#         85
+  C:0056H         LINE#         86
+  C:0056H         LINE#         87
+  C:0056H         LINE#         88
+  C:005EH         LINE#         89
+  C:006FH         LINE#         90
+  C:0071H         LINE#         91
+  C:0071H         LINE#         92
+  C:0071H         LINE#         93
+  C:0071H         LINE#         94
+  C:0079H         LINE#         95
+  C:0088H         LINE#         96
+  C:008AH         LINE#         97
+  C:008AH         LINE#         98
+  C:008AH         LINE#         99
+  C:008AH         LINE#         100
+  C:0092H         LINE#         101
+  C:00A3H         LINE#         102
+  C:00A5H         LINE#         103
+  C:00A5H         LINE#         104
+  C:00A5H         LINE#         105
+  C:00A5H         LINE#         106
+  C:00ADH         LINE#         107
+  C:00BFH         LINE#         108
+  C:00C2H         LINE#         109
+  C:00C2H         LINE#         110
+  C:00C2H         LINE#         111
+  C:00C2H         LINE#         112
+  C:00C8H         LINE#         113
+  C:00CEH         LINE#         114
+  -------         ENDPROC       MAIN
+  -------         PROC          TIM0
+  C:015DH         LINE#         130
+  C:0161H         LINE#         133
+  C:0164H         LINE#         134
+  C:0167H         LINE#         137
+  C:0177H         LINE#         140
+  C:0187H         LINE#         142
+  C:018FH         LINE#         143
+  C:019EH         LINE#         146
+  -------         ENDPROC       TIM0
+  -------         PROC          UART_SER
+  C:01D1H         LINE#         154
+  C:01D8H         LINE#         156
+  C:01DBH         LINE#         157
+  C:01DBH         LINE#         159
+  C:01DBH         LINE#         160
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/22/2020  19:26:30  PAGE 4
+
+
+  C:01DDH         LINE#         161
+  C:01E4H         LINE#         162
+  C:01E7H         LINE#         163
+  -------         ENDPROC       UART_SER
+  -------         ENDMOD        MAIN
+
+Program Size: data=18.0 xdata=0 code=471
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
